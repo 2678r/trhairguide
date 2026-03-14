@@ -1,414 +1,744 @@
-export default function TRHairGuidePrototype() {
-  const clinics = [
-    {
-      official_name: "ÖZEL ASMED TIP MERKEZİ",
-      clinic_name: "ASMED",
-      brand_group: "ASMED",
-      clinic_id: "CL_ASMED",
-      lead_doctor: "Koray Erdoğan",
-      facility_type: "Medical Center",
-      district: "Ataşehir",
-      hair_transplant_type: "FUE",
-      target_market: "international",
-      hair_related: "high",
-      hair_visibility: "core",
-      clinic_model: "doctor_clinic",
-      doctor_involvement: "doctor_incision",
-      website: "https://www.hairtransplantfue.org/",
-      medical_tourism_license: "yes",
-      instagram_followers: 22000,
-      google_rating: 4.5,
-      google_reviews: 352,
-      price_main: "€8000–€12000",
-      price_notes: "高端 FUE，医生品牌型",
-      hiv_source: "unknown",
-      last_checked: "2026-03",
-    },
-    {
-      official_name: "ÖZEL ESTEWORLD ATAŞEHİR POLİKLİNİĞİ",
-      clinic_name: "EsteWorld",
-      brand_group: "EsteWorld",
-      clinic_id: "CL_ESTEWORLD_ATASEHIR",
-      lead_doctor: "unknown",
-      facility_type: "Polyclinic",
-      district: "Ataşehir",
-      hair_transplant_type: "FUE, DHI",
-      target_market: "international",
-      hair_related: "high",
-      hair_visibility: "secondary",
-      clinic_model: "high_volume_clinic",
-      doctor_involvement: "doctor_supervised_team",
-      website: "https://esteworld.com.tr",
-      medical_tourism_license: "yes",
-      instagram_followers: 300000,
-      google_rating: 4.8,
-      google_reviews: 2323,
-      price_main: "€3000–€4500",
-      price_notes: "大型品牌，国际客户多",
-      hiv_source: "official page",
-      last_checked: "2026-03",
-    },
-    {
-      official_name: "ÖZEL DR. CİNİK TIP MERKEZİ",
-      clinic_name: "Cinik",
-      brand_group: "Cinik",
-      clinic_id: "CL_CINIK",
-      lead_doctor: "Emrah Cinik",
-      facility_type: "Medical Center",
-      district: "Şişli",
-      hair_transplant_type: "FUE, DHI",
-      target_market: "international",
-      hair_related: "medium",
-      hair_visibility: "secondary",
-      clinic_model: "high_volume_clinic",
-      doctor_involvement: "doctor_supervised_team",
-      website: "https://emrahcinik.com",
-      medical_tourism_license: "yes",
-      instagram_followers: 180000,
-      google_rating: 4.5,
-      google_reviews: 1900,
-      price_main: "€2350",
-      price_notes: "套餐型品牌诊所",
-      hiv_source: "unknown",
-      last_checked: "2026-03",
-    },
-    {
-      official_name: "ÖZEL ESTETİK İNTERNATİONAL TIP MERKEZİ",
-      clinic_name: "Estetik International",
-      brand_group: "Estetik International",
-      clinic_id: "CL_ESTETIK_INTERNATIONAL",
-      lead_doctor: "Bülent Cihantimur",
-      facility_type: "Medical Center",
-      district: "Şişli",
-      hair_transplant_type: "FUE, DHI",
-      target_market: "international",
-      hair_related: "medium",
-      hair_visibility: "secondary",
-      clinic_model: "aesthetic_center",
-      doctor_involvement: "doctor_supervised_team",
-      website: "https://www.estetikinternational.com/tr",
-      medical_tourism_license: "yes",
-      instagram_followers: 1500000,
-      google_rating: 4.4,
-      google_reviews: 500,
-      price_main: "package",
-      price_notes: "医美综合机构，植发非核心",
-      hiv_source: "official website",
-      last_checked: "2026-03",
-    },
-    {
-      official_name: "ÖZEL MEDİCALPARK ATAŞEHİR HASTANESİ",
-      clinic_name: "Medical Park Ataşehir",
-      brand_group: "Medical Park",
-      clinic_id: "CL_MEDICALPARK_ATASEHIR",
-      lead_doctor: "unknown",
-      facility_type: "Hospital",
-      district: "Ataşehir",
-      hair_transplant_type: "possible",
-      target_market: "domestic",
-      hair_related: "low",
-      hair_visibility: "hidden",
-      clinic_model: "hospital_unit",
-      doctor_involvement: "unknown",
-      website: "https://www.medicalpark.com.tr/hastanelerimiz/medicalpark-atasehir",
-      medical_tourism_license: "unknown",
-      instagram_followers: null,
-      google_rating: 4.4,
-      google_reviews: 100,
-      price_main: "unknown",
-      price_notes: "综合医院，主页植发不透明",
-      hiv_source: "official website",
-      last_checked: "2026-03",
-    },
-  ];
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TR Hair Guide</title>
+    <style>
+      :root {
+        --bg: #07111f;
+        --panel: rgba(10, 20, 36, 0.78);
+        --panel-2: rgba(16, 28, 48, 0.9);
+        --line: rgba(255, 255, 255, 0.09);
+        --text: #e8eef9;
+        --muted: #94a3b8;
+        --cyan: #22d3ee;
+        --blue: #60a5fa;
+        --violet: #8b5cf6;
+        --emerald: #10b981;
+        --amber: #f59e0b;
+        --rose: #fb7185;
+      }
 
-  const doctors = [
-    {
-      doctor_id: "DR_KORAY_ERDOGAN",
-      doctor_name: "Koray Erdoğan",
-      city: "Istanbul",
-      clinic: "ASMED",
-      doctor_type: "founder_of_clinic",
-      ishrs_status: "former_member",
-      abhers: "no",
-      fue_europe_member: "yes",
-      surgery_model: "doctor_incision",
-      priority: "high",
-      notes: "高端医生品牌，供区管理与高密度 FUE 知名。",
-    },
-    {
-      doctor_id: "DR_EKREM_CIVAS",
-      doctor_name: "Ekrem Civas",
-      city: "Ankara",
-      clinic: "Civas Clinic",
-      doctor_type: "independent_doctor",
-      ishrs_status: "FISHRS",
-      abhers: "yes",
-      fue_europe_member: "unknown",
-      surgery_model: "doctor_incision_team_implant",
-      priority: "high",
-      notes: "ABHRS + FISHRS，学术型医生。",
-    },
-    {
-      doctor_id: "DR_OZGUR_OZTAN",
-      doctor_name: "Ozgur Oztan",
-      city: "Ankara",
-      clinic: "HLC",
-      doctor_type: "founder_of_clinic",
-      ishrs_status: "FISHRS",
-      abhers: "yes",
-      fue_europe_member: "yes",
-      surgery_model: "doctor_performed",
-      priority: "high",
-      notes: "HLC 创始人，manual FUE / stick and place。",
-    },
-    {
-      doctor_id: "DR_ERKAN_DEMIRSOY",
-      doctor_name: "Erkan Demirsoy",
-      city: "Istanbul",
-      clinic: "Armamed",
-      doctor_type: "founder_of_clinic",
-      ishrs_status: "Member",
-      abhers: "no",
-      fue_europe_member: "unknown",
-      surgery_model: "doctor_extraction",
-      priority: "high",
-      notes: "少数亲自做 extraction + incision 的医生。",
-    },
-    {
-      doctor_id: "DR_MEHMET_ERDOGAN",
-      doctor_name: "Mehmet Erdoğan",
-      city: "Istanbul",
-      clinic: "Smile Hair Clinic",
-      doctor_type: "founder_of_clinic",
-      ishrs_status: "none",
-      abhers: "no",
-      fue_europe_member: "yes",
-      surgery_model: "doctor_supervised_team",
-      priority: "medium",
-      notes: "大型国际品牌诊所创始人之一。",
-    },
-  ];
+      * {
+        box-sizing: border-box;
+      }
 
-  const visibilityLabel = {
-    core: "核心可见",
-    secondary: "次级可见",
-    hidden: "隐藏/不透明",
-  };
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background:
+          radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 28%),
+          radial-gradient(circle at top right, rgba(139, 92, 246, 0.14), transparent 30%),
+          radial-gradient(circle at bottom center, rgba(16, 185, 129, 0.1), transparent 30%),
+          var(--bg);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
 
-  const clinicModelLabel = {
-    doctor_clinic: "医生诊所",
-    high_volume_clinic: "高产量植发中心",
-    aesthetic_center: "医美综合机构",
-    hospital_unit: "医院科室",
-  };
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-  const doctorTypeLabel = {
-    independent_doctor: "独立医生",
-    founder_of_clinic: "创始医生",
-  };
+      .container {
+        width: min(1200px, calc(100% - 32px));
+        margin: 32px auto;
+      }
 
-  const surgeryLabel = {
-    doctor_performed: "医生亲自手术",
-    doctor_incision: "医生开槽",
-    doctor_extraction: "医生取发+开槽",
-    doctor_incision_team_implant: "医生开槽+团队种植",
-    doctor_supervised_team: "医生监督+团队操作",
-    unknown: "未知",
-  };
+      .hero,
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+      }
 
-  const stat = [
-    { label: "机构总数", value: clinics.length },
-    { label: "医生总数", value: doctors.length },
-    { label: "核心植发", value: clinics.filter((c) => c.hair_visibility === "core").length },
-    { label: "隐藏跳过", value: clinics.filter((c) => c.hair_visibility === "hidden").length },
-  ];
+      .hero {
+        border-radius: 28px;
+        overflow: hidden;
+        margin-bottom: 24px;
+      }
 
-  return (
-    <div className="min-h-screen bg-[#060816] text-slate-100">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_25%),radial-gradient(circle_at_top_right,rgba(139,92,246,0.16),transparent_30%),radial-gradient(circle_at_bottom,rgba(16,185,129,0.14),transparent_30%)]" />
-      <div className="relative mx-auto max-w-7xl px-6 py-8 md:px-8 md:py-10">
-        <header className="overflow-hidden rounded-[28px] border border-white/10 bg-white/5 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl">
-          <div className="border-b border-white/10 px-6 py-4 md:px-8">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <div className="text-xs uppercase tracking-[0.28em] text-cyan-300/80">TR Hair Guide</div>
-                <h1 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">土耳其植发市场情报面板</h1>
-                <p className="mt-2 max-w-3xl text-sm text-slate-300">
-                  科技感原型，先看机构可见度、机构模型、医生参与度，再决定哪些值得继续研究。
-                </p>
-              </div>
-              <div className="hidden rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-right md:block">
-                <div className="text-xs text-cyan-200">Domain</div>
-                <div className="font-mono text-sm text-white">trhairguide.com</div>
-              </div>
-            </div>
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 28px 32px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(34, 211, 238, 0.86);
+        margin-bottom: 10px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(28px, 5vw, 42px);
+        line-height: 1.08;
+        margin-bottom: 10px;
+      }
+
+      .sub {
+        max-width: 760px;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 14px;
+      }
+
+      .domain-box {
+        min-width: 220px;
+        align-self: flex-start;
+        border: 1px solid rgba(34, 211, 238, 0.18);
+        background: rgba(34, 211, 238, 0.08);
+        border-radius: 18px;
+        padding: 14px 16px;
+      }
+
+      .domain-box .label {
+        font-size: 12px;
+        color: #c7f9ff;
+        margin-bottom: 6px;
+      }
+
+      .domain-box .value {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 14px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        padding: 22px 32px 30px;
+      }
+
+      .stat-card {
+        background: rgba(0, 0, 0, 0.18);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 16px;
+      }
+
+      .stat-card .label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      .stat-card .value {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .bar {
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+      }
+
+      .bar > span {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--cyan), var(--violet));
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.35fr 0.85fr;
+        gap: 24px;
+      }
+
+      .panel {
+        border-radius: 28px;
+        padding: 22px;
+      }
+
+      .panel-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: flex-start;
+        margin-bottom: 18px;
+      }
+
+      .panel-header p {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .mini-tag {
+        align-self: center;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        color: #cbd5e1;
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 12px;
+      }
+
+      .clinic-list,
+      .doctor-list,
+      .steps {
+        display: grid;
+        gap: 14px;
+      }
+
+      .clinic-card,
+      .doctor-card,
+      .step-card {
+        border: 1px solid var(--line);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+        border-radius: 24px;
+      }
+
+      .clinic-card {
+        padding: 18px;
+      }
+
+      .clinic-head,
+      .doctor-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .title-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .title-row h3 {
+        font-size: 19px;
+      }
+
+      .muted {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .data-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .data-item,
+      .metric-box {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 18px;
+        padding: 12px;
+      }
+
+      .data-item .k,
+      .metric-box .k {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #64748b;
+        margin-bottom: 8px;
+      }
+
+      .data-item .v,
+      .metric-box .v {
+        font-size: 13px;
+        line-height: 1.5;
+        color: white;
+      }
+
+      .clinic-side {
+        width: 260px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        padding: 14px;
+      }
+
+      .clinic-main {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .clinic-layout {
+        display: flex;
+        gap: 16px;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .doctor-card {
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.18);
+      }
+
+      .doctor-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .small-tag {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 12px;
+        color: #cbd5e1;
+      }
+
+      .accent {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #9ae6ff;
+      }
+
+      .doctor-note {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .step-card {
+        padding: 14px;
+        background: rgba(0, 0, 0, 0.18);
+      }
+
+      .step-wrap {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .step-no {
+        border: 1px solid rgba(34, 211, 238, 0.18);
+        background: rgba(34, 211, 238, 0.1);
+        color: #baf7ff;
+        border-radius: 12px;
+        padding: 5px 8px;
+        font-size: 12px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      .step-title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .step-text {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .pill {
+        border-radius: 999px;
+        border: 1px solid transparent;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .tone-high {
+        background: rgba(16, 185, 129, 0.15);
+        color: #bbf7d0;
+        border-color: rgba(16, 185, 129, 0.2);
+      }
+
+      .tone-medium {
+        background: rgba(245, 158, 11, 0.15);
+        color: #fde68a;
+        border-color: rgba(245, 158, 11, 0.2);
+      }
+
+      .tone-low {
+        background: rgba(148, 163, 184, 0.15);
+        color: #e2e8f0;
+        border-color: rgba(148, 163, 184, 0.2);
+      }
+
+      .tone-core {
+        background: rgba(34, 211, 238, 0.15);
+        color: #cffafe;
+        border-color: rgba(34, 211, 238, 0.2);
+      }
+
+      .tone-secondary {
+        background: rgba(96, 165, 250, 0.15);
+        color: #dbeafe;
+        border-color: rgba(96, 165, 250, 0.2);
+      }
+
+      .tone-hidden {
+        background: rgba(251, 113, 133, 0.15);
+        color: #ffe4e6;
+        border-color: rgba(251, 113, 133, 0.2);
+      }
+
+      @media (max-width: 1024px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .data-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .clinic-layout {
+          flex-direction: column;
+        }
+
+        .clinic-side {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .container {
+          width: min(100% - 20px, 1200px);
+          margin: 16px auto 22px;
+        }
+
+        .hero-top,
+        .stats,
+        .panel {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .hero-top {
+          flex-direction: column;
+        }
+
+        .stats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .data-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section class="hero">
+        <div class="hero-top">
+          <div>
+            <div class="eyebrow">TR Hair Guide</div>
+            <h1>土耳其植发市场情报面板</h1>
+            <p class="sub">先看机构可见度、机构模型、医生参与度，再决定哪些值得继续研究。这个版本是纯 HTML，不会再出现 React / JSX 上线乱码问题。</p>
           </div>
-
-          <div className="grid gap-4 p-6 md:grid-cols-4 md:p-8">
-            {stat.map((item) => (
-              <div
-                key={item.label}
-                className="rounded-2xl border border-white/10 bg-black/20 p-4 shadow-lg shadow-black/20"
-              >
-                <div className="text-xs text-slate-400">{item.label}</div>
-                <div className="mt-2 text-3xl font-semibold text-white">{item.value}</div>
-                <div className="mt-3 h-1 rounded-full bg-white/5">
-                  <div className="h-1 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500" style={{ width: `${Math.min(100, item.value * 18)}%` }} />
-                </div>
-              </div>
-            ))}
+          <div class="domain-box">
+            <div class="label">Domain</div>
+            <div class="value">trhairguide.com</div>
           </div>
-        </header>
+        </div>
+        <div class="stats" id="stats"></div>
+      </section>
 
-        <section className="mt-8 grid gap-6 xl:grid-cols-[1.35fr_0.85fr]">
-          <div className="rounded-[28px] border border-white/10 bg-white/5 p-5 shadow-2xl shadow-cyan-500/5 backdrop-blur-xl md:p-6">
-            <div className="mb-5 flex items-center justify-between gap-4">
-              <div>
-                <h2 className="text-xl font-semibold">机构雷达</h2>
-                <p className="mt-1 text-sm text-slate-400">快速判断哪些是核心植发玩家，哪些只是噪音。</p>
-              </div>
-              <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">
-                clinic intelligence
-              </div>
+      <section class="grid">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>机构雷达</h2>
+              <p>快速判断哪些是核心植发玩家，哪些只是噪音。</p>
             </div>
-
-            <div className="space-y-4">
-              {clinics.map((clinic) => (
-                <div
-                  key={clinic.clinic_id}
-                  className="group rounded-3xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-5 transition hover:border-cyan-400/30 hover:bg-[linear-gradient(135deg,rgba(34,211,238,0.08),rgba(139,92,246,0.08))]"
-                >
-                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="text-lg font-semibold text-white">{clinic.clinic_name}</h3>
-                        <Pill tone={clinic.hair_related}>{clinic.hair_related}</Pill>
-                        <Pill tone={clinic.hair_visibility}>{visibilityLabel[clinic.hair_visibility]}</Pill>
-                      </div>
-                      <p className="mt-2 text-sm text-slate-400">{clinic.official_name}</p>
-                      <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                        <DataItem label="机构模型" value={clinicModelLabel[clinic.clinic_model] || clinic.clinic_model} />
-                        <DataItem label="医生参与" value={surgeryLabel[clinic.doctor_involvement] || clinic.doctor_involvement} />
-                        <DataItem label="区域" value={`${clinic.district} · ${clinic.facility_type}`} />
-                        <DataItem label="目标市场" value={clinic.target_market} />
-                      </div>
-                    </div>
-                    <div className="w-full max-w-xs rounded-2xl border border-white/10 bg-black/20 p-4">
-                      <div className="text-xs text-slate-400">价格备注</div>
-                      <div className="mt-2 text-sm text-white">{clinic.price_notes}</div>
-                      <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                        <MiniMetric label="评分" value={clinic.google_rating || "-"} />
-                        <MiniMetric label="评论" value={clinic.google_reviews || "-"} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <div class="mini-tag">clinic intelligence</div>
           </div>
-
-          <div className="space-y-6">
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-5 shadow-2xl shadow-violet-500/5 backdrop-blur-xl md:p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold">医生面板</h2>
-                  <p className="mt-1 text-sm text-slate-400">只保留真正有决策价值的医生。</p>
-                </div>
-                <div className="rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-xs text-violet-200">
-                  surgeon layer
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                {doctors.map((doctor) => (
-                  <div key={doctor.doctor_id} className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="text-base font-semibold text-white">{doctor.doctor_name}</div>
-                        <div className="mt-1 text-sm text-slate-400">{doctor.clinic} · {doctor.city}</div>
-                      </div>
-                      <Pill tone={doctor.priority}>{doctor.priority}</Pill>
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <SmallTag>{doctorTypeLabel[doctor.doctor_type] || doctor.doctor_type}</SmallTag>
-                      <SmallTag>{doctor.ishrs_status}</SmallTag>
-                      <SmallTag>ABHRS {doctor.abhers}</SmallTag>
-                      <SmallTag>FUE Europe {doctor.fue_europe_member}</SmallTag>
-                    </div>
-                    <div className="mt-3 text-sm text-cyan-200">{surgeryLabel[doctor.surgery_model] || doctor.surgery_model}</div>
-                    <div className="mt-2 text-xs leading-6 text-slate-400">{doctor.notes}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-5 shadow-2xl shadow-emerald-500/5 backdrop-blur-xl md:p-6">
-              <h2 className="text-xl font-semibold">建议工作流</h2>
-              <div className="mt-4 space-y-3">
-                <FlowStep number="01" title="先看网页可见度" text="core / secondary 继续研究，hidden 直接冻结。" />
-                <FlowStep number="02" title="再看机构模型" text="医生诊所、高产量诊所、医美中心、医院科室。" />
-                <FlowStep number="03" title="确认手术模式" text="医生亲自做、医生开槽、医生监督、团队操作。" />
-                <FlowStep number="04" title="医生入库标准" text="ISHRS / FUE Europe / 明确亲自介入手术。" />
-              </div>
-            </div>
-          </div>
+          <div class="clinic-list" id="clinicList"></div>
         </section>
-      </div>
+
+        <section style="display:grid; gap:24px;">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>医生面板</h2>
+                <p>只保留真正有决策价值的医生。</p>
+              </div>
+              <div class="mini-tag">surgeon layer</div>
+            </div>
+            <div class="doctor-list" id="doctorList"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>建议工作流</h2>
+                <p>保持数据结构统一，后面扩展会更快。</p>
+              </div>
+            </div>
+            <div class="steps" id="steps"></div>
+          </section>
+        </section>
+      </section>
     </div>
-  );
-}
 
-function Pill({ children, tone = "medium" }) {
-  const tones = {
-    high: "bg-emerald-400/15 text-emerald-200 border-emerald-400/20",
-    medium: "bg-amber-400/15 text-amber-200 border-amber-400/20",
-    low: "bg-slate-400/15 text-slate-200 border-slate-400/20",
-    core: "bg-cyan-400/15 text-cyan-200 border-cyan-400/20",
-    secondary: "bg-blue-400/15 text-blue-200 border-blue-400/20",
-    hidden: "bg-rose-400/15 text-rose-200 border-rose-400/20",
-  };
-  return (
-    <span className={`rounded-full border px-2.5 py-1 text-xs font-medium ${tones[tone] || tones.medium}`}>
-      {children}
-    </span>
-  );
-}
+    <script>
+      const clinics = [
+        {
+          official_name: "ÖZEL ASMED TIP MERKEZİ",
+          clinic_name: "ASMED",
+          clinic_id: "CL_ASMED",
+          district: "Ataşehir",
+          facility_type: "Medical Center",
+          clinic_model: "医生诊所",
+          doctor_involvement: "医生开槽",
+          target_market: "international",
+          hair_related: "high",
+          hair_visibility: "core",
+          google_rating: 4.5,
+          google_reviews: 352,
+          price_notes: "高端 FUE，医生品牌型"
+        },
+        {
+          official_name: "ÖZEL ESTEWORLD ATAŞEHİR POLİKLİNİĞİ",
+          clinic_name: "EsteWorld",
+          clinic_id: "CL_ESTEWORLD_ATASEHIR",
+          district: "Ataşehir",
+          facility_type: "Polyclinic",
+          clinic_model: "高产量植发中心",
+          doctor_involvement: "医生监督+团队操作",
+          target_market: "international",
+          hair_related: "high",
+          hair_visibility: "secondary",
+          google_rating: 4.8,
+          google_reviews: 2323,
+          price_notes: "大型品牌，国际客户多"
+        },
+        {
+          official_name: "ÖZEL DR. CİNİK TIP MERKEZİ",
+          clinic_name: "Cinik",
+          clinic_id: "CL_CINIK",
+          district: "Şişli",
+          facility_type: "Medical Center",
+          clinic_model: "高产量植发中心",
+          doctor_involvement: "医生监督+团队操作",
+          target_market: "international",
+          hair_related: "medium",
+          hair_visibility: "secondary",
+          google_rating: 4.5,
+          google_reviews: 1900,
+          price_notes: "套餐型品牌诊所"
+        },
+        {
+          official_name: "ÖZEL ESTETİK İNTERNATİONAL TIP MERKEZİ",
+          clinic_name: "Estetik International",
+          clinic_id: "CL_ESTETIK_INTERNATIONAL",
+          district: "Şişli",
+          facility_type: "Medical Center",
+          clinic_model: "医美综合机构",
+          doctor_involvement: "医生监督+团队操作",
+          target_market: "international",
+          hair_related: "medium",
+          hair_visibility: "secondary",
+          google_rating: 4.4,
+          google_reviews: 500,
+          price_notes: "医美综合机构，植发非核心"
+        },
+        {
+          official_name: "ÖZEL MEDİCALPARK ATAŞEHİR HASTANESİ",
+          clinic_name: "Medical Park Ataşehir",
+          clinic_id: "CL_MEDICALPARK_ATASEHIR",
+          district: "Ataşehir",
+          facility_type: "Hospital",
+          clinic_model: "医院科室",
+          doctor_involvement: "未知",
+          target_market: "domestic",
+          hair_related: "low",
+          hair_visibility: "hidden",
+          google_rating: 4.4,
+          google_reviews: 100,
+          price_notes: "综合医院，主页植发不透明"
+        }
+      ];
 
-function DataItem({ label, value }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-      <div className="text-[11px] uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-2 text-sm text-white">{value}</div>
-    </div>
-  );
-}
+      const doctors = [
+        {
+          doctor_name: "Koray Erdoğan",
+          clinic: "ASMED",
+          city: "Istanbul",
+          doctor_type: "创始医生",
+          ishrs_status: "former_member",
+          abhers: "no",
+          fue_europe_member: "yes",
+          surgery_model: "医生开槽",
+          priority: "high",
+          notes: "高端医生品牌，供区管理与高密度 FUE 知名。"
+        },
+        {
+          doctor_name: "Ekrem Civas",
+          clinic: "Civas Clinic",
+          city: "Ankara",
+          doctor_type: "独立医生",
+          ishrs_status: "FISHRS",
+          abhers: "yes",
+          fue_europe_member: "unknown",
+          surgery_model: "医生开槽+团队种植",
+          priority: "high",
+          notes: "ABHRS + FISHRS，学术型医生。"
+        },
+        {
+          doctor_name: "Ozgur Oztan",
+          clinic: "HLC",
+          city: "Ankara",
+          doctor_type: "创始医生",
+          ishrs_status: "FISHRS",
+          abhers: "yes",
+          fue_europe_member: "yes",
+          surgery_model: "医生亲自手术",
+          priority: "high",
+          notes: "HLC 创始人，manual FUE / stick and place。"
+        },
+        {
+          doctor_name: "Erkan Demirsoy",
+          clinic: "Armamed",
+          city: "Istanbul",
+          doctor_type: "创始医生",
+          ishrs_status: "Member",
+          abhers: "no",
+          fue_europe_member: "unknown",
+          surgery_model: "医生取发+开槽",
+          priority: "high",
+          notes: "少数亲自做 extraction + incision 的医生。"
+        },
+        {
+          doctor_name: "Mehmet Erdoğan",
+          clinic: "Smile Hair Clinic",
+          city: "Istanbul",
+          doctor_type: "创始医生",
+          ishrs_status: "none",
+          abhers: "no",
+          fue_europe_member: "yes",
+          surgery_model: "医生监督+团队操作",
+          priority: "medium",
+          notes: "大型国际品牌诊所创始人之一。"
+        }
+      ];
 
-function MiniMetric({ label, value }) {
-  return (
-    <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-center">
-      <div className="text-[11px] uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-1 text-lg font-semibold text-white">{value}</div>
-    </div>
-  );
-}
+      const steps = [
+        ["01", "先看网页可见度", "core / secondary 继续研究，hidden 直接冻结。"],
+        ["02", "再看机构模型", "医生诊所、高产量诊所、医美中心、医院科室。"],
+        ["03", "确认手术模式", "医生亲自做、医生开槽、医生监督、团队操作。"],
+        ["04", "医生入库标准", "ISHRS / FUE Europe / 明确亲自介入手术。"]
+      ];
 
-function SmallTag({ children }) {
-  return <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-slate-300">{children}</span>;
-}
+      const toneMap = {
+        high: "tone-high",
+        medium: "tone-medium",
+        low: "tone-low",
+        core: "tone-core",
+        secondary: "tone-secondary",
+        hidden: "tone-hidden"
+      };
 
-function FlowStep({ number, title, text }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-      <div className="flex items-start gap-3">
-        <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-2 py-1 font-mono text-xs text-cyan-200">
-          {number}
+      const stats = [
+        ["机构总数", clinics.length],
+        ["医生总数", doctors.length],
+        ["核心植发", clinics.filter(c => c.hair_visibility === "core").length],
+        ["隐藏跳过", clinics.filter(c => c.hair_visibility === "hidden").length]
+      ];
+
+      document.getElementById("stats").innerHTML = stats.map(([label, value]) => `
+        <div class="stat-card">
+          <div class="label">${label}</div>
+          <div class="value">${value}</div>
+          <div class="bar"><span style="width:${Math.min(100, value * 18)}%"></span></div>
         </div>
-        <div>
-          <div className="text-sm font-semibold text-white">{title}</div>
-          <div className="mt-1 text-sm text-slate-400">{text}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
+      `).join("");
+
+      document.getElementById("clinicList").innerHTML = clinics.map(clinic => `
+        <article class="clinic-card">
+          <div class="clinic-layout">
+            <div class="clinic-main">
+              <div class="title-row">
+                <h3>${clinic.clinic_name}</h3>
+                <span class="pill ${toneMap[clinic.hair_related]}">${clinic.hair_related}</span>
+                <span class="pill ${toneMap[clinic.hair_visibility]}">${clinic.hair_visibility === "core" ? "核心可见" : clinic.hair_visibility === "secondary" ? "次级可见" : "隐藏/不透明"}</span>
+              </div>
+              <p class="muted">${clinic.official_name}</p>
+              <div class="data-grid">
+                <div class="data-item"><div class="k">机构模型</div><div class="v">${clinic.clinic_model}</div></div>
+                <div class="data-item"><div class="k">医生参与</div><div class="v">${clinic.doctor_involvement}</div></div>
+                <div class="data-item"><div class="k">区域</div><div class="v">${clinic.district} · ${clinic.facility_type}</div></div>
+                <div class="data-item"><div class="k">目标市场</div><div class="v">${clinic.target_market}</div></div>
+              </div>
+            </div>
+            <aside class="clinic-side">
+              <div class="k" style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.08em;">价格备注</div>
+              <div class="v" style="margin-top:8px;font-size:13px;line-height:1.6;color:#fff;">${clinic.price_notes}</div>
+              <div class="metrics">
+                <div class="metric-box"><div class="k">评分</div><div class="v">${clinic.google_rating ?? "-"}</div></div>
+                <div class="metric-box"><div class="k">评论</div><div class="v">${clinic.google_reviews ?? "-"}</div></div>
+              </div>
+            </aside>
+          </div>
+        </article>
+      `).join("");
+
+      document.getElementById("doctorList").innerHTML = doctors.map(doctor => `
+        <article class="doctor-card">
+          <div class="doctor-head">
+            <div>
+              <h3 style="font-size:17px;">${doctor.doctor_name}</h3>
+              <p class="muted" style="margin-top:4px;">${doctor.clinic} · ${doctor.city}</p>
+            </div>
+            <span class="pill ${toneMap[doctor.priority]}">${doctor.priority}</span>
+          </div>
+          <div class="doctor-tags">
+            <span class="small-tag">${doctor.doctor_type}</span>
+            <span class="small-tag">${doctor.ishrs_status}</span>
+            <span class="small-tag">ABHRS ${doctor.abhers}</span>
+            <span class="small-tag">FUE Europe ${doctor.fue_europe_member}</span>
+          </div>
+          <div class="accent">${doctor.surgery_model}</div>
+          <div class="doctor-note">${doctor.notes}</div>
+        </article>
+      `).join("");
+
+      document.getElementById("steps").innerHTML = steps.map(([no, title, text]) => `
+        <article class="step-card">
+          <div class="step-wrap">
+            <div class="step-no">${no}</div>
+            <div>
+              <div class="step-title">${title}</div>
+              <div class="step-text">${text}</div>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    </script>
+  </body>
+</html>
