@@ -1,97 +1,190 @@
 # Hair Transplant Doctors in Turkey
+# 土耳其植发医生数据库
 
-## Dr Ekrem Civas
-Location: Ankara  
-Clinic: Civas Hair Transplant Clinic  
-
-- ABHRS Diplomate
-- FISHRS Fellow
-- Hair transplant since 1999
-- Surgery model: doctor_performed
-
-Website: https://www.civashairtransplant.com
+A curated list of well‑known hair transplant doctors in Turkey.
+精选土耳其知名植发医生数据库。
 
 ---
 
-## Dr Kaan Pekiner
-Location: Ankara  
-Clinic: Dr Pekiner Hair Transplant Clinic  
+## 👨‍⚕️ Dr Ekrem Civas
 
-- ISHRS Member
-- Manual FUE specialist
-- Surgery model: doctor_performed
+| 项目 | 信息 |
+|---|---|
+| 城市 | Ankara |
+| 诊所 | Civas Hair Transplant Clinic |
+| 资质 | ABHRS Diplomate · FISHRS Fellow |
+| 手术模式 | doctor_performed（医生主刀） |
+| 从业时间 | 1999 |
 
-Website: https://www.drpekiner.com
+**技术特点**
 
----
+- FUT / FUE
+- Scar & burn hair restoration
+- Eyebrow transplantation
 
-## Dr Koray Erdogan
-Location: Istanbul  
-Clinic: ASMED Hair Transplant Center  
+🌐 Website
 
-- FUE pioneer
-- ISHRS Golden Follicle Award 2016
-- Surgery model: doctor_incision
-
-Website: https://www.hairtransplantfue.org
+https://www.civashairtransplant.com
 
 ---
 
-## Dr Erkan Demirsoy
-Location: Istanbul  
-Clinic: Armamed Hair Transplant Clinic  
+## 👨‍⚕️ Dr Kaan Pekiner
+
+| 项目 | 信息 |
+|---|---|
+| 城市 | Ankara |
+| 诊所 | Dr Pekiner Hair Transplant Clinic |
+| 资质 | ISHRS Member |
+| 手术模式 | doctor_performed（医生主刀） |
+
+**技术特点**
 
 - Manual FUE specialist
-- ISHRS Member
-- Surgery model: doctor_performed
+- High density FUE
+- Eyebrow transplant
 
-Website: https://www.hairtransplants-armamed.com
+🌐 Website
 
----
-
-## Dr Emre Karadeniz
-Location: Istanbul  
-Clinic: AEK Hair Clinic  
-
-- ABHRS Diplomate
-- FISHRS Fellow
-- Surgery model: doctor_supervised
-
-Website: https://www.aekhairclinic.com
+https://www.drpekiner.com
 
 ---
 
-## Dr Ozlem Bicer
-Location: Istanbul  
-Clinic: Dr Ozlem Bicer Hair Transplant Clinic  
+## 👨‍⚕️ Dr Koray Erdogan
 
-- ABHRS Diplomate
-- Female hair transplant specialist
-- Surgery model: doctor_supervised
+| 项目 | 信息 |
+|---|---|
+| 城市 | Istanbul |
+| 诊所 | ASMED Hair Transplant Center |
+| 资质 | ISHRS Golden Follicle Award 2016 |
+| 手术模式 | doctor_incision（医生设计+切口） |
+| 从业时间 | 2001 |
 
-Website: https://www.ozlembicer.com
+**技术特点**
+
+- High density FUE
+- Donor management
+- Natural hairline design
+
+🌐 Website
+
+https://www.hairtransplantfue.org
 
 ---
 
-## Dr Emrah Cinik
-Location: Istanbul  
-Clinic: Dr Cinik Hair Transplant Clinic  
+## 👨‍⚕️ Dr Erkan Demirsoy
+
+| 项目 | 信息 |
+|---|---|
+| 城市 | Istanbul |
+| 诊所 | Armamed Hair Transplant Clinic |
+| 资质 | ISHRS Member |
+| 手术模式 | doctor_performed（医生主刀） |
+
+**技术特点**
+
+- Manual FUE
+- Body hair transplant
+- High density sessions
+
+🌐 Website
+
+https://www.hairtransplants-armamed.com
+
+---
+
+## 👨‍⚕️ Dr Emre Karadeniz
+
+| 项目 | 信息 |
+|---|---|
+| 城市 | Istanbul |
+| 诊所 | AEK Hair Clinic |
+| 资质 | ABHRS Diplomate · FISHRS Fellow |
+| 手术模式 | doctor_supervised（医生监督） |
+| 从业时间 | 2010 |
+
+**技术特点**
+
+- FUE
+- FUT
+- Repair procedures
+- Body hair transplant
+
+🌐 Website
+
+https://www.aekhairclinic.com
+
+---
+
+## 👩‍⚕️ Dr Ozlem Bicer
+
+| 项目 | 信息 |
+|---|---|
+| 城市 | Istanbul |
+| 诊所 | Dr Ozlem Bicer Hair Transplant Clinic |
+| 资质 | ABHRS Diplomate |
+| 手术模式 | doctor_supervised（医生监督） |
+
+**技术特点**
+
+- Female hair transplant
+- Non‑shaven FUE
+- Eyebrow transplant
+
+🌐 Website
+
+https://www.ozlembicer.com
+
+---
+
+## 👨‍⚕️ Dr Emrah Cinik
+
+| 项目 | 信息 |
+|---|---|
+| 城市 | Istanbul |
+| 诊所 | Dr Cinik Hair Transplant Clinic |
+| 手术模式 | team_surgery（团队手术） |
+| 特色套餐 | Doctor package available |
+
+**手术类型**
 
 - FUE
 - Sapphire FUE
 - DHI
-- Surgery model: team_surgery
 
-Website: https://emrahcinik.com
+🌐 Website
+
+https://emrahcinik.com
 
 ---
 
-## Dr Levent Acar
-Location: Istanbul  
-Clinic: Cosmedica Clinic  
+## 👨‍⚕️ Dr Levent Acar
 
-- Istanbul University medical graduate
-- Specialty: Obstetrics and Gynecology
-- Surgery model: team_surgery
+| 项目 | 信息 |
+|---|---|
+| 城市 | Istanbul |
+| 诊所 | Cosmedica Clinic |
+| 教育 | Istanbul University Çapa Medical Faculty |
+| 专科 | Obstetrics and Gynecology |
+| 手术模式 | team_surgery（团队手术） |
 
-Website: https://cosmedica.com
+**技术特点**
+
+- FUE
+- Sapphire FUE
+
+🌐 Website
+
+https://cosmedica.com
+
+---
+
+## 数据说明
+
+手术模式说明：
+
+- **doctor_performed** → 医生亲自完成手术
+- **doctor_supervised** → 医生监督团队操作
+- **doctor_incision** → 医生负责设计与切口
+- **team_surgery** → 团队流水线手术
+
+该数据库用于帮助患者更透明地比较不同植发医生。
