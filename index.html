@@ -279,6 +279,17 @@
         font-size: 14px;
       }
 
+      .source-list {
+        margin: 18px 0 0;
+        padding-left: 18px;
+        color: var(--text-soft);
+        font-size: 15px;
+      }
+
+      .source-list li + li {
+        margin-top: 10px;
+      }
+
       .footer {
         padding: 0 0 24px;
       }
@@ -340,141 +351,86 @@
         <div class="container">
           <section class="section">
             <div class="card hero">
-              <div class="eyebrow">中立的信息整理平台</div>
+              <div class="eyebrow">中立信息平台</div>
               <h1>土耳其植发透明指南</h1>
               <p class="lead">
-                帮助患者直接核对四件最重要的事：土耳其卫生部对植发手术的法律要求、合法植发机构名单、ISHRS / ABHRS 认证含义，以及什么样的医生背景更值得优先看。
+                帮助用户先看清两件最重要的事：植发手术的钱到底花在哪里，手术到底由谁真正执行。
               </p>
-              <div class="cta-row">
-                <a class="button button-primary" href="doctors/">查看医生资质</a>
-                <a class="button button-secondary" href="clinics/">查看诊所对比</a>
-              </div>
+              <p class="lead">
+                这里不做诊所推广，只整理公开法规、认证信息和可核实的数据，帮助你先建立判断框架，再去看医生和诊所。
+              </p>
             </div>
           </section>
 
           <section class="section">
             <div class="card content-card">
-              <div class="grid stats-grid">
-                <div class="stat-card">
-                  <div class="stat-number">14</div>
-                  <div class="stat-label">土耳其全部 ISHRS 医生</div>
-                </div>
-                <div class="stat-card">
-                  <div class="stat-number">230</div>
-                  <div class="stat-label">伊斯坦布尔全部合法植发机构</div>
-                </div>
-                <div class="stat-card">
-                  <div class="stat-number">2026-03</div>
-                  <div class="stat-label">数据更新时间</div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="section">
-            <div class="card content-card">
-              <h2>土耳其卫生部对植发手术和诊所的要求</h2>
+              <h2>土耳其卫生部对植发手术的关键要求</h2>
               <p>
-                核心法规是 <strong>Saç Ekimi Birimleri Hakkında Yönetmelik</strong>（植发单位管理条例）。
-                首次发布于 <strong>2023 年 5 月 6 日</strong>，公报号 <strong>32182</strong>；最新修订于
-                <strong>2025 年 9 月 12 日</strong>，公报号 <strong>33015</strong>。
+                植发属于医疗行为，核心步骤和辅助分工并不是任意安排。根据土耳其卫生部《Saç Ekimi Birimleri Hakkında Yönetmelik》，至少应先核对下面这些底线要求。
               </p>
               <div class="grid roles-grid">
                 <article class="role-card">
-                  <h3>法律底线</h3>
-                  <p>植发属于医疗行为，必须在获得卫生部批准的医院、医疗中心、诊所内进行，并持有植发单位经营许可证书。</p>
-                </article>
-                <article class="role-card">
                   <h3>打孔 / 开槽</h3>
-                  <p>打孔（kanal acma / incision）必须由持有医师执照的医生亲自完成，这是法律强制要求。</p>
+                  <p>打孔或开槽这类关键切口步骤，必须由持有医师执照的医生亲自完成。</p>
                 </article>
                 <article class="role-card">
                   <h3>助手 / 技术员</h3>
-                  <p>可以参与取发和移植，但必须在医生直接监督下，并持有卫生部认证的辅助施行者证书。</p>
+                  <p>可以参与取发和移植，但必须在医生直接监督下工作，并持有卫生部认证证书。</p>
                 </article>
                 <article class="role-card">
-                  <h3>麻醉</h3>
-                  <p>全麻或深度镇静必须由合格麻醉医师负责，并全程监测心率、血压、氧饱和度等体征。</p>
+                  <h3>麻醉 / 镇静</h3>
+                  <p>如果涉及全麻或更深镇静，必须由合格麻醉医师负责，并全程监测体征。</p>
+                </article>
+                <article class="role-card">
+                  <h3>机构资质</h3>
+                  <p>植发必须在获得卫生部批准的医院、医疗中心或诊所内进行，并满足许可与感染控制要求。</p>
                 </article>
               </div>
               <p>
-                官方原文：
+                官方来源：
                 <a href="https://www.resmigazete.gov.tr/eskiler/2023/05/20230506-11.htm" target="_blank" rel="noreferrer"><strong>2023 主法规</strong></a>
                 /
-                <a href="https://www.resmigazete.gov.tr/eskiler/2025/09/20250912-2.htm" target="_blank" rel="noreferrer"><strong>2025 最新修订版</strong></a>
+                <a href="https://www.resmigazete.gov.tr/eskiler/2025/09/20250912-2.htm" target="_blank" rel="noreferrer"><strong>2025 修订版</strong></a>
               </p>
             </div>
           </section>
 
           <section class="section">
             <div class="card content-card">
-              <h2>合法植发机构名单</h2>
+              <h2>把一台植发手术拆开来看</h2>
               <p>
-                最权威的查询入口是土耳其卫生部官方 <strong>Saç Ekimi Merkezleri Portalı</strong>。这个门户会实时列出卫生部批准的合法植发中心。
+                真正影响结果和费用的，往往不是宣传页写得多漂亮，而是下面这些角色各自承担什么工作。
               </p>
-              <p>
-                官方查询入口：
-                <a href="https://sacekimmerkezi.saglik.gov.tr/" target="_blank" rel="noreferrer"><strong>https://sacekimmerkezi.saglik.gov.tr/</strong></a>
-              </p>
-              <p>
-                名单会定期更新。不在这个名单上的机构，至少说明它没有出现在卫生部当前批准的合法中心列表里。本站诊所数据库可以与这份官方名单交叉核对，提高可信度。
-              </p>
-            </div>
-          </section>
-
-          <section class="section">
-            <div class="card content-card">
-              <h2>ISHRS 和 ABHRS 说明</h2>
               <div class="grid roles-grid">
                 <article class="role-card">
-                  <h3>ISHRS</h3>
-                  <p>国际毛发修复外科学会（International Society of Hair Restoration Surgery）是全球最权威的植发专业学术组织之一。其会员分为 Member（会员）和 Fellow（研究员，简称 FISHRS）。</p>
+                  <h3>医生</h3>
+                  <p>负责设计、规划和关键步骤判断。你最先要确认的是医生是谁，实际参与到哪一步。</p>
                 </article>
                 <article class="role-card">
-                  <h3>ABHRS</h3>
-                  <p>美国毛发修复外科委员会（American Board of Hair Restoration Surgery）是国际公认的植发医生专业认证。获得认证通常需持有有效医师执照、完成规定培训或具备足够临床经验，并通过书面考试、口头考试以及病例审核。</p>
+                  <h3>团队 / 助手</h3>
+                  <p>常参与取发、分离毛囊和种植。团队是否固定、是否熟练，会直接影响执行质量。</p>
                 </article>
                 <article class="role-card">
-                  <h3>Member（ISHRS）</h3>
-                  <p>说明该医生已进入 ISHRS 正式会员体系，并非普通营销标签。Member 是通过协会审核后的正式会员身份。</p>
+                  <h3>麻醉师</h3>
+                  <p>如果使用镇静或更深麻醉，安全重点不只是舒适，而是谁负责麻醉和全程监测。</p>
                 </article>
                 <article class="role-card">
-                  <h3>Fellow（FISHRS）</h3>
-                  <p>Fellow 是更高一级的会员身份，要求更高的临床经验、学术贡献和同行认可，通常代表该医生在植发领域达到更高专业标准。</p>
+                  <h3>销售 / 中介</h3>
+                  <p>负责接待、沟通和转化，但不等于医疗能力。你的费用中，可能有一部分就花在这里。</p>
                 </article>
               </div>
               <p>
-                参考来源：
-                <a href="https://ishrs.org/categories-of-membership/" target="_blank" rel="noreferrer"><strong>ISHRS Membership Categories</strong></a>
-                /
-                <a href="https://abhrs.org/certification/" target="_blank" rel="noreferrer"><strong>ABHRS Certification Requirements</strong></a>
+                真正要问的不是“是不是名医”，而是关键步骤是谁做、做到什么程度、费用主要流向哪里。
               </p>
             </div>
           </section>
 
           <section class="section">
             <div class="card content-card">
-              <h2>医生背景的最低门槛与优先顺序</h2>
-              <p>
-                最低门槛是：必须持有土耳其医师执照（<strong>Tip Doktoru</strong>）。在此基础上，更建议优先看这些背景：
-              </p>
-              <div class="grid roles-grid">
-                <article class="role-card">
-                  <h3>皮肤科</h3>
-                  <p>与毛发疾病、头皮状态和植发适应证判断更匹配。</p>
-                </article>
-                <article class="role-card">
-                  <h3>整形外科</h3>
-                  <p>与切口处理、组织美学、精细手术操作高度相关。</p>
-                </article>
-                <article class="role-card">
-                  <h3>外科相关专业</h3>
-                  <p>更符合植发手术对切口、操作稳定性和安全边界的要求。</p>
-                </article>
-                <article class="role-card">
-                  <h3>为什么这和法规一致</h3>
-                  <p>法规要求核心步骤由医师完成，而这些背景在实际操作中更符合专业标准和患者安全要求。</p>
-                </article>
+              <h2>从这里开始查</h2>
+              <div class="cta-row">
+                <a class="button button-primary" href="doctors/">查看医生库</a>
+                <a class="button button-secondary" href="clinics/">查看诊所库</a>
               </div>
             </div>
           </section>
@@ -506,27 +462,13 @@
           <section class="section">
             <div class="card content-card">
               <h2>数据来源与参考</h2>
-              <div class="grid article-list">
-                <a class="article-link" href="https://www.resmigazete.gov.tr/eskiler/2023/05/20230506-11.htm" target="_blank" rel="noreferrer">
-                  土耳其卫生部植发单位管理条例
-                  <span>https://www.resmigazete.gov.tr/eskiler/2023/05/20230506-11.htm</span>
-                </a>
-                <a class="article-link" href="https://sacekimmerkezi.saglik.gov.tr/" target="_blank" rel="noreferrer">
-                  合法植发中心查询
-                  <span>https://sacekimmerkezi.saglik.gov.tr/</span>
-                </a>
-                <a class="article-link" href="https://ishrs.org/" target="_blank" rel="noreferrer">
-                  ISHRS 官网（会员与认证）
-                  <span>https://ishrs.org/</span>
-                </a>
-                <a class="article-link" href="https://abhrs.org/certification/" target="_blank" rel="noreferrer">
-                  ABHRS 认证说明
-                  <span>https://abhrs.org/certification/</span>
-                </a>
-              </div>
-            <p class="mt-5 text-sm leading-8 text-stone-600">
-              本网站所有医生与诊所信息均基于以上公开官方来源整理，仅供患者参考。请以最新官方信息为准。
-            </p>
+              <ul class="source-list">
+                <li><a href="https://www.resmigazete.gov.tr/eskiler/2023/05/20230506-11.htm" target="_blank" rel="noreferrer"><strong>土耳其卫生部植发单位管理条例（2023）</strong></a></li>
+                <li><a href="https://www.resmigazete.gov.tr/eskiler/2025/09/20250912-2.htm" target="_blank" rel="noreferrer"><strong>土耳其卫生部植发单位管理条例修订版（2025）</strong></a></li>
+                <li><a href="https://sacekimmerkezi.saglik.gov.tr/" target="_blank" rel="noreferrer"><strong>合法植发中心官方查询入口</strong></a></li>
+                <li><a href="https://ishrs.org/" target="_blank" rel="noreferrer"><strong>ISHRS 官网</strong></a></li>
+                <li><a href="https://abhrs.org/certification/" target="_blank" rel="noreferrer"><strong>ABHRS 认证说明</strong></a></li>
+              </ul>
             </div>
           </section>
         </div>
