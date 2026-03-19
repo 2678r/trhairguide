@@ -15,7 +15,7 @@
         },
       }
     </script>
-    <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="stylesheet" href="/assets/styles.css?v=20260319b" />
   </head>
   <body data-page="doctors" class="bg-sand text-ink">
     <div class="min-h-screen">
@@ -36,19 +36,100 @@
       </header>
 
       <main class="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
-        <section class="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-10">
+        <section class="overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-10">
           <div class="inline-flex rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs uppercase tracking-[0.24em] text-stone-600">
             ISHRS 精品医生库
           </div>
-          <h1 class="mt-5 text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl">14 位医生，重点看资质与专长。</h1>
-          <p class="mt-5 max-w-4xl text-base leading-8 text-stone-600">
-            这个页面数量不大，所以适合用卡片方式做清晰展示。你以后只需要维护 `data/doctors.json`，
-            页面会自动读取 Fellow / Member / ABHRS / 专长 / 手术模型 / 备注 / 城市等字段。
-          </p>
+          <div class="mt-6 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <div>
+              <h1 class="text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">国际植发协会体系下的精品医生</h1>
+              <p class="mt-5 max-w-4xl text-base leading-8 text-stone-600">
+                资料主要来源于
+                <a href="https://ishrs.org/find-a-doctor/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">
+                  ISHRS 国际植发协会官网
+                </a>
+                、医生个人网站及其他公开资料。这个页面不是按营销热度排名单，而是把真正有资质、有公开履历、能看出专长和手术模式的医生集中整理出来。
+              </p>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <div class="rounded-[1.5rem] border border-emerald-200 bg-emerald-50/60 p-4">
+                <div class="text-xs uppercase tracking-[0.2em] text-emerald-700">先看会员级别</div>
+                <div class="mt-3 text-lg font-semibold text-stone-900">Fellow / Member</div>
+                <p class="mt-2 text-sm leading-7 text-stone-700">先分清 Fellow 还是 Member，再继续看专长、背景和模式。</p>
+              </div>
+              <div class="rounded-[1.5rem] border border-amber-200 bg-amber-50/60 p-4">
+                <div class="text-xs uppercase tracking-[0.2em] text-amber-700">再看专项认证</div>
+                <div class="mt-3 text-lg font-semibold text-stone-900">ABHRS</div>
+                <p class="mt-2 text-sm leading-7 text-stone-700">如果同时有 ABHRS，含金量会更高，通常更容易让人一眼建立信任。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mt-8 rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft">
+          <div class="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+            <div class="max-w-2xl">
+              <div class="text-xs uppercase tracking-[0.22em] text-stone-500">含金量说明</div>
+              <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900">为什么这页会让人一眼看出实力和层级？</h2>
+            </div>
+            <div class="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-500">
+              官方依据已核对
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <div class="rounded-[1.5rem] border border-stone-200 bg-stone-50 p-5">
+              <div class="text-xs uppercase tracking-[0.2em] text-stone-500">ISHRS</div>
+              <h3 class="mt-3 text-2xl font-semibold text-stone-900">国际植发协会</h3>
+              <p class="mt-3 text-sm leading-7 text-stone-700">
+                ISHRS 是植发领域最常被引用的国际专业协会之一。官网公开医生名录、教育项目和专业说明，所以它天然比普通营销包装更有参考价值。
+              </p>
+            </div>
+
+            <div class="rounded-[1.5rem] border border-emerald-200 bg-emerald-50/60 p-5">
+              <div class="text-xs uppercase tracking-[0.2em] text-emerald-700">Fellow (FISHRS)</div>
+              <h3 class="mt-3 text-2xl font-semibold text-stone-900">更高一级的会员身份</h3>
+              <p class="mt-3 text-sm leading-7 text-stone-700">
+                ISHRS 官方写明，Fellow 这一头衔面向满足更高教育与专业标准的成员。通常可以理解成在会员之上，再往上走了一层，属于更强的大牛信号。
+              </p>
+            </div>
+
+            <div class="rounded-[1.5rem] border border-amber-200 bg-amber-50/60 p-5">
+              <div class="text-xs uppercase tracking-[0.2em] text-amber-700">Member</div>
+              <h3 class="mt-3 text-2xl font-semibold text-stone-900">正式会员，不是随便挂的标签</h3>
+              <p class="mt-3 text-sm leading-7 text-stone-700">
+                ISHRS 的 Find a Doctor 页面收录的是 Fellow Members 和 full Members。也就是说，Member 本身就已经是正式会员名单，不是普通机构宣传里那种模糊称号。
+              </p>
+            </div>
+
+            <div class="rounded-[1.5rem] border border-sky-200 bg-sky-50/60 p-5">
+              <div class="text-xs uppercase tracking-[0.2em] text-sky-700">ABHRS</div>
+              <h3 class="mt-3 text-2xl font-semibold text-stone-900">更硬的植发专项认证</h3>
+              <p class="mt-3 text-sm leading-7 text-stone-700">
+                ABHRS 可以理解为会员身份之外的专项硬认证。如果一个医生同时有 Fellow 或 Member，再叠加 ABHRS，整体说服力会明显再上一个台阶。
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6 rounded-[1.5rem] border border-stone-200 bg-stone-50 p-5 text-sm leading-8 text-stone-600">
+            <p>
+              简单说：先看 <strong>ISHRS 会员身份</strong>，再看是 <strong>Fellow</strong> 还是 <strong>Member</strong>，最后再看有没有
+              <strong>ABHRS</strong>。这样普通用户不用懂太多行话，也能很快判断一位医生的大致层级和含金量。
+            </p>
+            <p class="mt-3">
+              官方参考与公开来源：
+              <a href="https://ishrs.org/find-a-doctor/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">Find a Doctor</a>
+              与
+              <a href="https://ishrs.org/join/become-a-fellow/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">FISHRS 页面</a>
+              ，以及
+              <a href="https://ishrs.org/medical-boards-and-specialization/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">ABHRS / 医疗专业认证说明</a>
+              。
+            </p>
+          </div>
         </section>
 
         <section class="mt-8 rounded-[1.75rem] border border-stone-200 bg-white p-5 shadow-soft">
-          <div class="grid gap-3 lg:grid-cols-[minmax(0,1.2fr)_repeat(3,minmax(160px,0.35fr))]">
+          <div class="grid gap-3 lg:grid-cols-[minmax(0,1.15fr)_repeat(3,minmax(160px,0.3fr))]">
             <input id="doctor-search" type="search" placeholder="搜索医生 / 专长 / 备注 / 城市" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white" />
             <select id="doctor-city" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white"></select>
             <select id="doctor-status" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white">
@@ -69,7 +150,7 @@
           </div>
         </section>
 
-        <section id="doctor-grid" class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3"></section>
+        <section id="doctor-grid" class="mt-8 grid gap-5"></section>
       </main>
 
       <footer class="border-t border-stone-200 bg-white">
@@ -79,6 +160,6 @@
       </footer>
     </div>
 
-    <script src="/assets/app.js" defer></script>
+    <script src="/assets/app.js?v=20260319b" defer></script>
   </body>
 </html>

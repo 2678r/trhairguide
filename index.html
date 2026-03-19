@@ -26,7 +26,7 @@
         },
       }
     </script>
-    <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="stylesheet" href="/assets/styles.css?v=20260319b" />
   </head>
   <body data-page="home" class="bg-sand text-ink">
     <div class="min-h-screen">
@@ -50,41 +50,62 @@
           <div class="grid gap-8 rounded-[2rem] border border-stone-200 bg-white p-6 shadow-soft lg:grid-cols-[1.3fr_0.7fr] lg:p-10">
             <div>
               <div class="inline-flex rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs uppercase tracking-[0.24em] text-stone-600">
-                Static Site · Cloudflare Pages
+                Turkey Hair Transplant Research Hub
               </div>
               <h1 class="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">
-                用最简单、最稳定的结构，持续维护土耳其植发数据库。
+                土耳其植发信息网：先把植发手术本身讲清楚。
               </h1>
               <p class="mt-5 max-w-3xl text-base leading-8 text-stone-600 sm:text-lg">
-                这个网站以后固定围绕两份数据工作：`doctors.json` 和 `clinics.json`。首页负责解释逻辑和导航，
-                医生库负责少量精品医生展示，诊所库负责 230 家以上机构的数据库检索，自查指南负责静态知识，提交页负责众包收集新信息。
+                对普通用户来说，先理解一台植发手术到底怎么做，比先看广告、套餐和案例更重要。因为同样叫植发，真正负责关键步骤的是谁、团队熟练度怎么样，最后会直接影响价格和质量。
               </p>
+              <div class="mt-6 rounded-[1.5rem] border border-stone-200 bg-stone-50 p-5">
+                <div class="text-xs uppercase tracking-[0.2em] text-stone-500">植发手术 4 个步骤</div>
+                <div class="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                  <div>
+                    <div class="text-base font-semibold text-stone-900">设计</div>
+                    <p class="mt-2 text-sm leading-7 text-stone-600">设计发际线和种植区域，决定整体方向和审美基础。</p>
+                  </div>
+                  <div>
+                    <div class="text-base font-semibold text-stone-900">取发</div>
+                    <p class="mt-2 text-sm leading-7 text-stone-600">从供体区提取毛囊，考验手法、节奏和对供体的保护。</p>
+                  </div>
+                  <div>
+                    <div class="text-base font-semibold text-stone-900">打孔</div>
+                    <p class="mt-2 text-sm leading-7 text-stone-600">决定角度、方向和密度，是手术里最关键的步骤之一。</p>
+                  </div>
+                  <div>
+                    <div class="text-base font-semibold text-stone-900">移植</div>
+                    <p class="mt-2 text-sm leading-7 text-stone-600">把毛囊放回受区，影响成活率、排列和最终观感。</p>
+                  </div>
+                </div>
+              </div>
               <div class="mt-8 flex flex-wrap gap-3">
                 <a href="/doctors.html" class="inline-flex items-center rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700">进入医生库</a>
                 <a href="/clinics.html" class="inline-flex items-center rounded-full border border-stone-300 px-5 py-3 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:bg-stone-50">进入诊所库</a>
+                <a href="/guide.html" class="inline-flex items-center rounded-full border border-stone-300 px-5 py-3 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:bg-stone-50">查看自查指南</a>
               </div>
             </div>
 
             <div class="grid gap-4">
               <div class="rounded-3xl border border-stone-200 bg-stone-50 p-5">
-                <p class="text-xs uppercase tracking-[0.22em] text-stone-500">当前数据规模</p>
+                <p class="text-xs uppercase tracking-[0.22em] text-stone-500">当前数据库规模</p>
                 <div id="home-stats" class="mt-4 grid gap-3 sm:grid-cols-2">
                   <div class="rounded-2xl border border-stone-200 bg-white p-4">
-                    <div class="text-sm text-stone-500">医生</div>
+                    <div class="text-sm text-stone-500">精品医生</div>
                     <div data-home-doctors class="mt-2 text-3xl font-semibold">—</div>
                   </div>
                   <div class="rounded-2xl border border-stone-200 bg-white p-4">
-                    <div class="text-sm text-stone-500">诊所</div>
+                    <div class="text-sm text-stone-500">合规机构</div>
                     <div data-home-clinics class="mt-2 text-3xl font-semibold">—</div>
                   </div>
                 </div>
               </div>
               <div class="rounded-3xl border border-stone-200 bg-stone-50 p-5">
-                <p class="text-xs uppercase tracking-[0.22em] text-stone-500">以后固定维护方式</p>
+                <p class="text-xs uppercase tracking-[0.22em] text-stone-500">一般怎么分工</p>
                 <ol class="mt-4 grid gap-3 text-sm leading-7 text-stone-600">
-                  <li>1. 两周更新一次 `data/doctors.json` 和 `data/clinics.json`。</li>
-                  <li>2. 静态页面结构不动，只维护数据与表单入口。</li>
-                  <li>3. 提交页继续接收用户众包的新价格和医生信息。</li>
+                  <li>1. 一般是一位医生，加几位助手共同完成。</li>
+                  <li>2. 医生通常负责设计和打孔，有些医生也会亲自取发。</li>
+                  <li>3. 其余步骤常由助手完成，所以团队熟练度也非常重要。</li>
                 </ol>
               </div>
             </div>
@@ -96,50 +117,112 @@
             <a href="/doctors.html" class="group rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft transition hover:-translate-y-1">
               <div class="text-xs uppercase tracking-[0.24em] text-stone-500">Doctors</div>
               <h2 class="mt-4 text-2xl font-semibold">医生数据库</h2>
-              <p class="mt-3 text-sm leading-7 text-stone-600">14 位精品医生。数量少，重点看 Fellow / Member / ABHRS / 专长 / 医生主导模式。</p>
+              <p class="mt-3 text-sm leading-7 text-stone-600">先看 ISHRS 会员身份，再看 Fellow / Member、ABHRS、城市、专长和医生主导模式。</p>
               <div class="mt-5 text-sm font-medium text-clay">打开医生库</div>
             </a>
 
             <a href="/clinics.html" class="group rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft transition hover:-translate-y-1">
               <div class="text-xs uppercase tracking-[0.24em] text-stone-500">Clinics</div>
               <h2 class="mt-4 text-2xl font-semibold">诊所数据库</h2>
-              <p class="mt-3 text-sm leading-7 text-stone-600">230 家合规机构。重点做成宽表格、搜索、筛选、排序，这是网站最核心的页面。</p>
+              <p class="mt-3 text-sm leading-7 text-stone-600">先看是否具名医生、是否价格透明，再自己继续研究，不把刷量评价和粉丝数当核心依据。</p>
               <div class="mt-5 text-sm font-medium text-clay">打开诊所库</div>
             </a>
 
             <a href="/guide.html" class="group rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft transition hover:-translate-y-1">
               <div class="text-xs uppercase tracking-[0.24em] text-stone-500">Guide</div>
               <h2 class="mt-4 text-2xl font-semibold">自查指南</h2>
-              <p class="mt-3 text-sm leading-7 text-stone-600">一页静态文章，负责告诉用户如何先看医生、再看机构、最后才问价格。</p>
+              <p class="mt-3 text-sm leading-7 text-stone-600">把术前要问的问题拆开看：医生、团队、麻醉、销售、中介，每一环都影响风险和费用去向。</p>
               <div class="mt-5 text-sm font-medium text-clay">阅读指南</div>
             </a>
 
             <a href="/submit.html" class="group rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft transition hover:-translate-y-1">
               <div class="text-xs uppercase tracking-[0.24em] text-stone-500">Submit</div>
               <h2 class="mt-4 text-2xl font-semibold">提交信息</h2>
-              <p class="mt-3 text-sm leading-7 text-stone-600">用 Google Forms 接收用户提交价格、医生信息和纠错，做成众包入口。</p>
+              <p class="mt-3 text-sm leading-7 text-stone-600">收集真实用户反馈、价格信息和纠错补充，让数据库随着众包持续变得更完整。</p>
               <div class="mt-5 text-sm font-medium text-clay">进入提交页</div>
             </a>
           </div>
         </section>
 
         <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-          <div class="grid gap-6 lg:grid-cols-2">
+          <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft">
+            <div class="text-xs uppercase tracking-[0.24em] text-stone-500">手术分工</div>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight">一台手术的质量，通常由医生水平和团队熟练度共同决定。</h2>
+            <div class="mt-5 grid gap-4 lg:grid-cols-3">
+              <div class="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-4">
+                <div class="text-sm font-semibold text-stone-900">医生</div>
+                <p class="mt-2 text-sm leading-7 text-stone-600">医生负责设计和打孔，有些医生还会亲自取发。医生水平决定方向、密度和手术核心质量。</p>
+              </div>
+              <div class="rounded-2xl border border-amber-200 bg-amber-50/60 p-4">
+                <div class="text-sm font-semibold text-stone-900">助手团队</div>
+                <p class="mt-2 text-sm leading-7 text-stone-600">毛囊分离、移植等步骤常由助手完成。团队是否稳定、熟练，会直接影响效率和结果。</p>
+              </div>
+              <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                <div class="text-sm font-semibold text-stone-900">价格与质量</div>
+                <p class="mt-2 text-sm leading-7 text-stone-600">不同的医生、不同的团队，价格不一样，质量也不一样。便宜和贵，背后往往对应的是完全不同的执行结构。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
             <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft">
-              <div class="text-xs uppercase tracking-[0.24em] text-stone-500">为什么这样建</div>
-              <h2 class="mt-4 text-3xl font-semibold tracking-tight">先把框架固定，后面就只维护数据。</h2>
-              <p class="mt-4 text-sm leading-8 text-stone-600">
-                你这类项目最怕一开始技术栈太重，后期维护成本反而压垮更新频率。纯 HTML + Tailwind CSS +
-                Cloudflare Pages 的优势是稳定、便宜、部署快，而且以后即便你只会改 JSON，也能继续维护。
-              </p>
+              <div class="text-xs uppercase tracking-[0.24em] text-stone-500">真正要先问的问题</div>
+              <h2 class="mt-4 text-3xl font-semibold tracking-tight">客户最该先弄明白的，是关键步骤到底由谁来做。</h2>
+              <div class="mt-4 space-y-4 text-sm leading-8 text-stone-600">
+                <p>
+                  一台植发手术里，设计、取发、打孔、移植未必都由同一个人完成。表面上看是一个套餐，实际上背后是不同角色的协作。
+                </p>
+                <p>
+                  很多机构会说“医生监督”或“团队操作”，但这些说法本身并不能回答最关键的问题：设计是谁做的，打孔是谁做的，取发和移植又是谁做的。
+                </p>
+                <p>
+                  所以这个网站先帮你把手术拆开，再去看医生库和诊所库。先把执行结构看清楚，后面的价格和营销信息才有解释基础。
+                </p>
+              </div>
             </div>
 
             <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft">
-              <div class="text-xs uppercase tracking-[0.24em] text-stone-500">众包模式</div>
-              <h2 class="mt-4 text-3xl font-semibold tracking-tight">网站会越来越全，数据更新节奏才是核心。</h2>
-              <p class="mt-4 text-sm leading-8 text-stone-600">
-                以后你主要维护两件事：一是医生和诊所的 JSON，二是 Google Forms 收集来的用户提交。结构固定后，新增数据会自然累积，不需要频繁推倒重来。
-              </p>
+              <div class="text-xs uppercase tracking-[0.24em] text-stone-500">法律底线</div>
+              <h2 class="mt-4 text-3xl font-semibold tracking-tight">土耳其公开规定里，关键步骤有明确的医生要求。</h2>
+              <div class="mt-4 space-y-4 text-sm leading-8 text-stone-600">
+                <p>
+                  你参考的土耳其植发单元相关公开规定里，明确提到手术中的<strong>设计</strong>和<strong>打孔</strong>这类关键步骤应由医生完成，其他人员只能在规定范围内辅助。
+                </p>
+                <p>
+                  这也是为什么这个网站会优先去核实医生身份。因为一旦连关键步骤是不是医生在做都说不清，后面的价格、服务和营销就都失去了判断基础。
+                </p>
+                <p>
+                  参考来源：
+                  <a href="https://www.saglikaktuel.com/haber/sac-ekimi-birimleri-hakkinda-yonetmelik-89923.htm" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">
+                    土耳其植发单元相关公开规定
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-6 lg:grid-cols-2">
+            <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft">
+              <div class="text-xs uppercase tracking-[0.24em] text-stone-500">网站怎么用</div>
+              <h2 class="mt-4 text-3xl font-semibold tracking-tight">首页讲手术概念，具体核实去看两个数据库。</h2>
+              <div class="mt-4 grid gap-4 sm:grid-cols-2">
+                <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                  <div class="text-sm font-semibold text-stone-900">精品医生</div>
+                  <p class="mt-2 text-sm leading-7 text-stone-600">先核实医生是谁，是否有 ISHRS 会员身份、ABHRS、专长和公开网站。</p>
+                </div>
+                <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                  <div class="text-sm font-semibold text-stone-900">合规机构</div>
+                  <p class="mt-2 text-sm leading-7 text-stone-600">再核实机构是否在合法名单里，以及是否具名医生、是否公开套餐价。</p>
+                </div>
+                <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                  <div class="text-sm font-semibold text-stone-900">真实反馈</div>
+                  <p class="mt-2 text-sm leading-7 text-stone-600">最后再结合用户真实反馈，持续补足价格、体验和纠错信息。</p>
+                </div>
+                <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                  <div class="text-sm font-semibold text-stone-900">警惕误导</div>
+                  <p class="mt-2 text-sm leading-7 text-stone-600">不要把粉丝数、评价数和博主推荐，当成资格与合规的替代品。</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -148,11 +231,11 @@
       <footer class="border-t border-stone-200 bg-white">
         <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-sm text-stone-500 sm:px-6 lg:px-8 md:flex-row md:items-center md:justify-between">
           <span>土耳其植发信息网</span>
-          <span>静态站框架已固定，后续重点维护 `data/*.json` 与 Google Forms。</span>
+          <span>后续重点维护 `data/*.json` 与众包提交入口。</span>
         </div>
       </footer>
     </div>
 
-    <script src="/assets/app.js" defer></script>
+    <script src="/assets/app.js?v=20260319b" defer></script>
   </body>
 </html>

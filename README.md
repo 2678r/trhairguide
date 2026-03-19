@@ -13,7 +13,7 @@
 - `guide.html`
   自查指南
 - `submit.html`
-  Google Forms 众包提交页
+  Tally 众包提交页
 - `data/doctors.json`
   医生数据源
 - `data/clinics.json`
@@ -26,7 +26,7 @@
 ## 以后怎么维护
 
 1. 每两周更新一次 `data/doctors.json` 和 `data/clinics.json`
-2. 如果 Google Forms 换了链接，只改 `submit.html` 里的 iframe `src`
+2. 如果 Tally 表单换了链接，只改 `submit.html` 里的 iframe `src`
 3. 如果要改说明文字，直接改对应 HTML 页面
 4. 页面结构尽量不动，长期只维护数据与表单
 

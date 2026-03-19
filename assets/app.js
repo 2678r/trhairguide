@@ -13,6 +13,14 @@ function websiteHost(url) {
   return value.replace(/^https?:\/\//, '').replace(/\/$/, '')
 }
 
+function resolveDoctorPhoto(photo) {
+  const value = normalize(photo)
+  if (!value) return ''
+  const filename = value.split('/').pop() || ''
+  const basename = filename.replace(/\.(jpg|jpeg|png|webp)$/i, '')
+  return `/assets/doctors/${basename}.jpeg`
+}
+
 function statusScore(doctor) {
   const status = normalize(doctor.ishrs_status).toLowerCase()
   if (status === 'fellow') return 3
@@ -41,14 +49,7 @@ function clinicTypeLabel(clinic) {
 }
 
 function clinicPriceLabel(clinic) {
-  return normalize(clinic.price_transparency) ? '公开价格' : '价格需咨询'
-}
-
-function shortNote(text) {
-  const note = normalize(text)
-  if (!note) return '—'
-  if (note.length <= 140) return note
-  return `${note.slice(0, 140)}...`
+  return normalize(clinic.price_transparency) ? '套餐价' : '需咨询'
 }
 
 function setupHome() {
@@ -116,34 +117,66 @@ function setupDoctors() {
         .map((doctor) => {
           const note = doctor.notes_cn || doctor.note_en || doctor.publications_cn || doctor.publications || '暂无补充信息'
           const hasAbhrs = normalize(doctor.abhrs).toLowerCase() === 'yes'
-          const photo = normalize(doctor.photo)
+          const photo = resolveDoctorPhoto(doctor.photo)
           const initials = (doctor.doctor_name_cn || doctor.doctor_name_en || 'TR').slice(0, 2)
+          const status = normalize(doctor.ishrs_status).toLowerCase()
+          const statusClass = status === 'fellow' ? 'pill-success' : status === 'member' ? 'pill-brand' : ''
           return `
-            <article class="rounded-[1.75rem] border border-stone-200 bg-white p-5 shadow-soft">
-              <div class="flex gap-4">
-                <div class="relative h-20 w-20 shrink-0 overflow-hidden rounded-3xl border border-stone-200 bg-stone-100">
-                  ${photo ? `<img src="${photo}" alt="${doctor.doctor_name_cn || doctor.doctor_name_en}" class="h-full w-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'" />` : ''}
-                  <div class="avatar-fallback ${photo ? '' : '!grid'} absolute inset-0 place-items-center bg-stone-100 text-xl font-semibold text-stone-500">${initials}</div>
+            <article class="group overflow-hidden rounded-[2rem] border border-stone-200 bg-white shadow-soft transition hover:-translate-y-1 hover:border-stone-300">
+              <div class="grid gap-0 lg:grid-cols-[260px_minmax(0,1fr)]">
+                <div class="relative min-h-[240px] border-b border-stone-200 bg-stone-100 lg:min-h-full lg:border-b-0 lg:border-r">
+                  ${photo ? `<img src="${photo}" alt="${doctor.doctor_name_cn || doctor.doctor_name_en}" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'" />` : ''}
+                  <div class="avatar-fallback ${photo ? '' : '!grid'} absolute inset-0 place-items-center bg-stone-100 text-4xl font-semibold text-stone-500">${initials}</div>
                 </div>
-                <div class="min-w-0 flex-1">
-                  <h2 class="text-2xl font-semibold tracking-tight">${doctor.doctor_name_cn || doctor.doctor_name_en}</h2>
-                  <p class="mt-1 text-sm text-stone-500">${doctor.doctor_name_en || ''}</p>
-                  <div class="mt-3 flex flex-wrap gap-2">
-                    <span class="pill ${normalize(doctor.ishrs_status).toLowerCase() === 'fellow' ? 'pill-success' : ''}">${formatDoctorStatus(doctor)}</span>
-                    <span class="pill ${hasAbhrs ? 'pill-brand' : ''}">${hasAbhrs ? 'ABHRS' : '无 ABHRS'}</span>
-                    <span class="pill">${doctor.city_cn || doctor.city || '未标注城市'}</span>
+
+                <div class="p-5 lg:p-6">
+                  <div class="flex flex-col gap-5">
+                    <div class="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                      <div class="min-w-0">
+                        <div class="text-xs uppercase tracking-[0.22em] text-stone-400">Doctor Profile</div>
+                        <h2 class="mt-2 text-3xl font-semibold tracking-tight text-stone-900">${doctor.doctor_name_cn || doctor.doctor_name_en}</h2>
+                        <p class="mt-1 text-sm text-stone-500">${doctor.doctor_name_en || ''}</p>
+                        <div class="mt-3 flex flex-wrap gap-2">
+                          <span class="pill ${statusClass}">${formatDoctorStatus(doctor)}</span>
+                          <span class="pill ${hasAbhrs ? 'pill-brand' : ''}">${hasAbhrs ? 'ABHRS 认证' : '无 ABHRS'}</span>
+                          <span class="pill">${doctor.city_cn || doctor.city || '未标注城市'}</span>
+                        </div>
+                      </div>
+
+                      <div class="grid gap-2 rounded-[1.35rem] border border-stone-200 bg-stone-50 p-4 text-sm text-stone-600 xl:min-w-[240px]">
+                        <div>
+                          <div class="text-xs uppercase tracking-[0.18em] text-stone-400">职业背景</div>
+                          <div class="mt-1 font-medium text-stone-900">${doctor.background_type_cn || doctor.background_type_en || '未标注'}</div>
+                        </div>
+                        <div>
+                          <div class="text-xs uppercase tracking-[0.18em] text-stone-400">手术模型</div>
+                          <div class="mt-1 font-medium text-stone-900">${doctor.surgery_model_cn || doctor.surgery_model || '未标注'}</div>
+                        </div>
+                        <div>
+                          <div class="text-xs uppercase tracking-[0.18em] text-stone-400">最近核对</div>
+                          <div class="mt-1 font-medium text-stone-900">${doctor.last_verified || '—'}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+                      <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-4">
+                        <div class="text-xs uppercase tracking-[0.18em] text-stone-400">专长方向</div>
+                        <div class="mt-2 text-base font-medium text-stone-900">${doctor.specialty_cn || doctor.specialty_en || '未标注'}</div>
+                      </div>
+
+                      <div class="rounded-[1.35rem] border border-stone-200 bg-white p-4">
+                        <div class="text-xs uppercase tracking-[0.18em] text-stone-400">备注 / 学术信息</div>
+                        <div class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-700">${note}</div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-4 border-t border-stone-100 pt-4 text-sm">
+                      <a href="${doctor.website || '#'}" ${doctor.website ? 'target="_blank" rel="noreferrer"' : ''} class="font-medium text-clay ${doctor.website ? 'hover:underline' : 'pointer-events-none text-stone-400'}">${doctor.website ? websiteHost(doctor.website) : '暂无官网'}</a>
+                      <span class="text-stone-500">${doctor.city_cn || doctor.city || '未标注城市'}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <dl class="mt-5 grid gap-3 text-sm text-stone-600">
-                <div><dt class="text-stone-500">职业背景</dt><dd class="mt-1 text-stone-900">${doctor.background_type_cn || doctor.background_type_en || '未标注'}</dd></div>
-                <div><dt class="text-stone-500">专长</dt><dd class="mt-1 text-stone-900">${doctor.specialty_cn || doctor.specialty_en || '未标注'}</dd></div>
-                <div><dt class="text-stone-500">手术模型</dt><dd class="mt-1 text-stone-900">${doctor.surgery_model_cn || doctor.surgery_model || '未标注'}</dd></div>
-                <div><dt class="text-stone-500">备注</dt><dd class="mt-1 whitespace-pre-line leading-7 text-stone-900">${note}</dd></div>
-              </dl>
-              <div class="mt-5 flex items-center justify-between gap-4 text-sm">
-                <a href="${doctor.website || '#'}" ${doctor.website ? 'target="_blank" rel="noreferrer"' : ''} class="font-medium text-clay ${doctor.website ? '' : 'pointer-events-none text-stone-400'}">${doctor.website ? websiteHost(doctor.website) : '暂无官网'}</a>
-                <span class="text-stone-500">核对：${doctor.last_verified || '—'}</span>
               </div>
             </article>
           `
@@ -161,111 +194,136 @@ function setupClinics() {
   const count = document.getElementById('clinic-count')
   const total = document.getElementById('clinic-total')
   const searchInput = document.getElementById('clinic-search')
-  const typeSelect = document.getElementById('clinic-type')
-  const structureSelect = document.getElementById('clinic-structure')
-  const pricingSelect = document.getElementById('clinic-pricing')
   const sortSelect = document.getElementById('clinic-sort')
+  const packageBtn = document.getElementById('filter-package')
+  const doctorBtn = document.getElementById('filter-doctor')
+  const resetBtn = document.getElementById('filter-reset')
+  let packageOnly = false
+  let namedDoctorOnly = false
 
-  loadJson('/data/clinics.json').then((clinics) => {
-    total.textContent = clinics.length
-    const types = [...new Set(clinics.map(clinicTypeLabel))]
-    typeSelect.innerHTML = `<option value="all">全部机构类型</option>${types
-      .map((type) => `<option value="${type}">${type}</option>`)
-      .join('')}`
+  loadJson('/data/clinics.json')
+    .then((clinics) => {
+      total.textContent = clinics.length
 
-    const render = () => {
-      const q = searchInput.value.trim().toLowerCase()
-      const type = typeSelect.value
-      const structure = structureSelect.value
-      const pricing = pricingSelect.value
-      const sort = sortSelect.value
-
-      let result = clinics.filter((clinic) => {
-        const hasDoctor = normalize(clinic.lead_doctor) !== ''
-        const hasPrice = normalize(clinic.price_transparency) !== ''
-        const typeLabel = clinicTypeLabel(clinic)
-        const structureLabel = clinicStructure(clinic)
-
-        const matchSearch =
-          !q ||
-          [
-            clinic.clinic_id,
-            clinic.clinic_name,
-            clinic.official_name,
-            clinic.lead_doctor,
-            clinic.note,
-            clinic.website,
-            typeLabel,
-            structureLabel,
-          ]
-            .filter(Boolean)
-            .some((value) => String(value).toLowerCase().includes(q))
-
-        const matchType = type === 'all' || typeLabel === type
-        const matchStructure =
-          structure === 'all' ||
-          (structure === 'doctor_public' && structureLabel === '有医生 + package') ||
-          (structure === 'doctor_private' && structureLabel === '有医生 + 需咨询') ||
-          (structure === 'hospital' && structureLabel === '大型医院') ||
-          (structure === 'other' && structureLabel === '其他')
-        const matchPricing =
-          pricing === 'all' || (pricing === 'public' && hasPrice) || (pricing === 'private' && !hasPrice)
-
-        return matchSearch && matchType && matchStructure && matchPricing
-      })
-
-      result = result.sort((a, b) => {
-        if (sort === 'name') {
-          return (a.clinic_name || a.official_name).localeCompare(b.clinic_name || b.official_name, 'zh-Hans-CN-u-co-pinyin')
+      const syncButtons = () => {
+        if (packageBtn) {
+          packageBtn.className = `clinic-filter-btn inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium transition ${
+            packageOnly
+              ? 'border-stone-900 bg-stone-900 text-white'
+              : 'border-stone-300 bg-white text-stone-700 hover:border-stone-400 hover:bg-stone-50'
+          }`
         }
-        if (sort === 'recent') {
-          return normalize(b.last_checked).localeCompare(normalize(a.last_checked))
+        if (doctorBtn) {
+          doctorBtn.className = `clinic-filter-btn inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium transition ${
+            namedDoctorOnly
+              ? 'border-stone-900 bg-stone-900 text-white'
+              : 'border-stone-300 bg-white text-stone-700 hover:border-stone-400 hover:bg-stone-50'
+          }`
         }
-        const score = (clinic) => {
-          const structure = clinicStructure(clinic)
-          if (structure === '有医生 + package') return 4
-          if (structure === '有医生 + 需咨询') return 3
-          if (structure === '大型医院') return 2
-          return 1
-        }
-        return score(b) - score(a)
-      })
+      }
 
-      count.textContent = result.length
-      tableBody.innerHTML = result
-        .map((clinic) => {
-          const structure = clinicStructure(clinic)
-          const structureClass =
-            structure === '有医生 + package'
-              ? 'pill-success'
-              : structure === '有医生 + 需咨询'
-                ? 'pill-brand'
-                : structure === '大型医院'
-                  ? 'pill-warning'
-                  : ''
-          return `
-            <tr class="border-b border-stone-200 align-top hover:bg-stone-50/70">
-              <td class="px-4 py-4">
-                <div class="font-semibold text-stone-900">${clinic.clinic_name || clinic.official_name || '未命名机构'}</div>
-                <div class="mt-1 max-w-xs text-sm leading-6 text-stone-500">${clinic.official_name || ''}</div>
-                <div class="mt-2 inline-flex rounded-full bg-stone-100 px-2.5 py-1 text-xs text-stone-500">${clinic.clinic_id}</div>
-              </td>
-              <td class="px-4 py-4"><span class="pill">${clinicTypeLabel(clinic)}</span></td>
-              <td class="px-4 py-4"><span class="pill ${structureClass}">${structure}</span></td>
-              <td class="px-4 py-4 text-stone-700">${clinic.lead_doctor || '<span class="text-stone-400">未标注</span>'}</td>
-              <td class="px-4 py-4"><span class="pill ${normalize(clinic.price_transparency) ? 'pill-success' : ''}">${clinicPriceLabel(clinic)}</span></td>
-              <td class="table-cell-note px-4 py-4 text-stone-700" title="${(clinic.note || '').replace(/"/g, '&quot;')}">${shortNote(clinic.note)}</td>
-              <td class="px-4 py-4"><a href="${clinic.website || '#'}" ${clinic.website ? 'target="_blank" rel="noreferrer"' : ''} class="${clinic.website ? 'text-clay' : 'pointer-events-none text-stone-400'}">${clinic.website ? websiteHost(clinic.website) : '—'}</a></td>
-              <td class="px-4 py-4 text-stone-500">${clinic.last_checked || '—'}</td>
-            </tr>
-          `
+      const render = () => {
+        const q = searchInput.value.trim().toLowerCase()
+        const sort = sortSelect.value
+
+        let result = clinics.filter((clinic) => {
+          const hasDoctor = normalize(clinic.lead_doctor) !== ''
+          const hasPrice = normalize(clinic.price_transparency) !== ''
+
+          const matchSearch =
+            !q ||
+            [
+              clinic.clinic_id,
+              clinic.clinic_name,
+              clinic.official_name,
+              clinic.lead_doctor,
+              clinic.note,
+              clinic.real_review,
+              clinic.website,
+              clinicTypeLabel(clinic),
+              clinicStructure(clinic),
+            ]
+              .filter(Boolean)
+              .some((value) => String(value).toLowerCase().includes(q))
+
+          const matchDoctor = !namedDoctorOnly || hasDoctor
+          const matchPricing = !packageOnly || hasPrice
+
+          return matchSearch && matchDoctor && matchPricing
         })
-        .join('')
-    }
 
-    ;[searchInput, typeSelect, structureSelect, pricingSelect, sortSelect].forEach((el) => el.addEventListener('input', render))
-    render()
-  })
+        result = result.sort((a, b) => {
+          if (sort === 'name') {
+            return (a.clinic_name || a.official_name).localeCompare(b.clinic_name || b.official_name, 'zh-Hans-CN-u-co-pinyin')
+          }
+          if (sort === 'recent') {
+            return normalize(b.last_checked).localeCompare(normalize(a.last_checked))
+          }
+          return 0
+        })
+
+        count.textContent = result.length
+        tableBody.innerHTML = result
+          .map((clinic) => {
+            return `
+              <tr class="border-b border-stone-200 align-top transition hover:bg-stone-50/70">
+                <td class="px-4 py-5 text-stone-900">
+                  <div class="font-semibold text-stone-900">${clinic.clinic_name || '—'}</div>
+                  <div class="mt-2 inline-flex rounded-full bg-stone-100 px-2.5 py-1 text-xs text-stone-500">${clinic.clinic_id}</div>
+                </td>
+                <td class="px-4 py-5 text-stone-700 break-words">${clinic.lead_doctor || '未具名'}</td>
+                <td class="px-4 py-5"><span class="pill">${clinicTypeLabel(clinic)}</span></td>
+                <td class="px-4 py-5 text-sm leading-7 text-stone-600 break-words">${clinic.official_name || '—'}</td>
+                <td class="px-4 py-5 text-stone-700 whitespace-nowrap"><a href="${clinic.website || '#'}" ${clinic.website ? 'target="_blank" rel="noreferrer"' : ''} class="${clinic.website ? 'text-clay font-medium hover:underline' : 'pointer-events-none text-stone-400'}">${clinic.website ? '官网链接' : '—'}</a></td>
+                <td class="px-4 py-5"><span class="pill ${normalize(clinic.price_transparency) ? 'pill-success' : 'pill-brand'}">${clinicPriceLabel(clinic)}</span></td>
+                <td class="table-cell-note px-4 py-5 text-sm leading-7 text-stone-600 whitespace-pre-line break-words">${normalize(clinic.note) || '—'}</td>
+                <td class="table-cell-note px-4 py-5 text-sm leading-7 ${normalize(clinic.real_review) === '欢迎真实评价' ? 'text-stone-400' : 'text-stone-700'} whitespace-pre-line break-words">${normalize(clinic.real_review) || '欢迎真实评价'}</td>
+                <td class="px-4 py-5 whitespace-nowrap text-stone-500">${clinic.last_checked || '—'}</td>
+              </tr>
+            `
+          })
+          .join('')
+
+        syncButtons()
+      }
+
+      ;[searchInput, sortSelect].forEach((el) => el.addEventListener('input', render))
+      if (packageBtn) {
+        packageBtn.addEventListener('click', () => {
+          packageOnly = !packageOnly
+          render()
+        })
+      }
+      if (doctorBtn) {
+        doctorBtn.addEventListener('click', () => {
+          namedDoctorOnly = !namedDoctorOnly
+          render()
+        })
+      }
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          packageOnly = false
+          namedDoctorOnly = false
+          searchInput.value = ''
+          sortSelect.value = 'name'
+          render()
+        })
+      }
+      render()
+    })
+    .catch((error) => {
+      console.error(error)
+      if (count) count.textContent = '0'
+      if (tableBody) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="9" class="px-4 py-8 text-center text-sm text-red-600">
+              诊所数据加载失败：${error.message}
+            </td>
+          </tr>
+        `
+      }
+    })
 }
 
 document.addEventListener('DOMContentLoaded', () => {
