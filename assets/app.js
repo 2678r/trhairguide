@@ -42,6 +42,17 @@ function statusScore(doctor) {
   return 0
 }
 
+function summarizeDoctorNote(doctor) {
+  const raw = normalize(doctor.notes_cn || doctor.note_en || doctor.publications_cn || doctor.publications || '暂无补充信息')
+  if (!raw) return '暂无补充信息'
+  const lines = raw
+    .split('\n')
+    .map((line) => line.replace(/^[-*•\s]+/, '').trim())
+    .filter(Boolean)
+    .slice(0, 3)
+  return lines.join('\n')
+}
+
 function clinicStructure(clinic) {
   const type = normalize(clinic.facility_type).toLowerCase()
   const hasDoctor = normalize(clinic.lead_doctor) !== ''
@@ -54,7 +65,7 @@ function clinicStructure(clinic) {
 
 function clinicTypeLabel(clinic) {
   const type = normalize(clinic.facility_type).toLowerCase()
-  if (type === 'hospital') return '医院'
+  if (type === 'hospital') return '综合医院'
   if (type === 'medical_center') return '医疗中心'
   if (type === 'polyclinic') return '门诊 / 诊所'
   if (type === 'private clinic') return '私人诊所'
@@ -65,11 +76,29 @@ function clinicPriceLabel(clinic) {
   return normalize(clinic.price_transparency) ? '套餐价' : '需咨询'
 }
 
+function formatLeadDoctorName(value) {
+  const raw = normalize(value)
+  if (!raw) return '未具名'
+  return raw
+    .replace(/^DR[_\s-]*/i, '')
+    .split(/[_-]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0) + part.slice(1).toLowerCase())
+    .join(' ')
+}
+
 function setupHome() {
   Promise.all([loadJson('/data/doctors.json'), loadJson('/data/clinics.json')]).then(([doctors, clinics]) => {
-    document.querySelector('[data-home-doctors]').textContent = doctors.length
-    document.querySelector('[data-home-clinics]').textContent = clinics.length
+    const doctorsEl = document.querySelector('[data-home-doctors]')
+    const clinicsEl = document.querySelector('[data-home-clinics]')
+    if (doctorsEl) doctorsEl.textContent = doctors.length
+    if (clinicsEl) clinicsEl.textContent = clinics.length
   })
+}
+
+function clinicSurgeryModeLabel(clinic) {
+  if (normalize(clinic.lead_doctor)) return '具名医生，参与度需进一步核实'
+  return '执行模式未公开'
 }
 
 function setupDoctors() {
@@ -128,7 +157,7 @@ function setupDoctors() {
       count.textContent = result.length
       grid.innerHTML = result
         .map((doctor) => {
-          const note = doctor.notes_cn || doctor.note_en || doctor.publications_cn || doctor.publications || '暂无补充信息'
+          const note = summarizeDoctorNote(doctor)
           const hasAbhrs = normalize(doctor.abhrs).toLowerCase() === 'yes'
           const photo = resolveDoctorPhoto(doctor.photo)
           const initials = (doctor.doctor_name_cn || doctor.doctor_name_en || 'TR').slice(0, 2)
@@ -146,7 +175,6 @@ function setupDoctors() {
                   <div class="flex flex-col gap-5">
                     <div class="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                       <div class="min-w-0">
-                        <div class="text-xs uppercase tracking-[0.22em] text-stone-400">Doctor Profile</div>
                         <h2 class="mt-2 text-3xl font-semibold tracking-tight text-stone-900">${doctor.doctor_name_cn || doctor.doctor_name_en}</h2>
                         <p class="mt-1 text-sm text-stone-500">${doctor.doctor_name_en || ''}</p>
                         <div class="mt-3 flex flex-wrap gap-2">
@@ -162,12 +190,8 @@ function setupDoctors() {
                           <div class="mt-1 font-medium text-stone-900">${doctor.background_type_cn || doctor.background_type_en || '未标注'}</div>
                         </div>
                         <div>
-                          <div class="text-xs uppercase tracking-[0.18em] text-stone-400">手术模型</div>
+                          <div class="text-xs uppercase tracking-[0.18em] text-stone-400">手术模式</div>
                           <div class="mt-1 font-medium text-stone-900">${doctor.surgery_model_cn || doctor.surgery_model || '未标注'}</div>
-                        </div>
-                        <div>
-                          <div class="text-xs uppercase tracking-[0.18em] text-stone-400">最近核对</div>
-                          <div class="mt-1 font-medium text-stone-900">${doctor.last_verified || '—'}</div>
                         </div>
                       </div>
                     </div>
@@ -179,7 +203,7 @@ function setupDoctors() {
                       </div>
 
                       <div class="rounded-[1.35rem] border border-stone-200 bg-white p-4">
-                        <div class="text-xs uppercase tracking-[0.18em] text-stone-400">备注 / 学术信息</div>
+                        <div class="text-xs uppercase tracking-[0.18em] text-stone-400">备注</div>
                         <div class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-700">${note}</div>
                       </div>
                     </div>
@@ -208,31 +232,43 @@ function setupClinics() {
   const total = document.getElementById('clinic-total')
   const searchInput = document.getElementById('clinic-search')
   const sortSelect = document.getElementById('clinic-sort')
-  const packageBtn = document.getElementById('filter-package')
-  const doctorBtn = document.getElementById('filter-doctor')
-  const resetBtn = document.getElementById('filter-reset')
-  let packageOnly = false
-  let namedDoctorOnly = false
+  const statAllBtn = document.getElementById('stat-all')
+  const statDoctorBtn = document.getElementById('stat-doctor')
+  const statHospitalBtn = document.getElementById('stat-hospital')
+  const statPriceBtn = document.getElementById('stat-price')
+  let activeStat = 'all'
 
   loadJson('/data/clinics.json')
     .then((clinics) => {
       total.textContent = clinics.length
+      const namedDoctorCount = clinics.filter((clinic) => normalize(clinic.lead_doctor) !== '').length
+      const hospitalCount = clinics.filter((clinic) => normalize(clinic.facility_type).toLowerCase() === 'hospital').length
+      const priceCount = clinics.filter((clinic) => normalize(clinic.price_transparency) !== '').length
+
+      const statAllCount = document.getElementById('stat-all-count')
+      const statDoctorCount = document.getElementById('stat-doctor-count')
+      const statHospitalCount = document.getElementById('stat-hospital-count')
+      const statPriceCount = document.getElementById('stat-price-count')
+      if (statAllCount) statAllCount.textContent = clinics.length
+      if (statDoctorCount) statDoctorCount.textContent = namedDoctorCount
+      if (statHospitalCount) statHospitalCount.textContent = hospitalCount
+      if (statPriceCount) statPriceCount.textContent = priceCount
 
       const syncButtons = () => {
-        if (packageBtn) {
-          packageBtn.className = `clinic-filter-btn inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium transition ${
-            packageOnly
-              ? 'border-stone-900 bg-stone-900 text-white'
-              : 'border-stone-300 bg-white text-stone-700 hover:border-stone-400 hover:bg-stone-50'
-          }`
+        const buttonMap = {
+          all: statAllBtn,
+          doctor: statDoctorBtn,
+          hospital: statHospitalBtn,
+          price: statPriceBtn,
         }
-        if (doctorBtn) {
-          doctorBtn.className = `clinic-filter-btn inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium transition ${
-            namedDoctorOnly
-              ? 'border-stone-900 bg-stone-900 text-white'
-              : 'border-stone-300 bg-white text-stone-700 hover:border-stone-400 hover:bg-stone-50'
+        Object.entries(buttonMap).forEach(([key, button]) => {
+          if (!button) return
+          button.className = `clinic-filter-btn inline-flex w-full items-center justify-between rounded-[1.15rem] border px-4 py-3 text-left text-sm font-medium transition ${
+            activeStat === key
+              ? 'border-[#8b5e34] bg-[#8b5e34] text-white shadow-[0_14px_30px_rgba(139,94,52,0.22)]'
+              : 'border-[#dcc8b0] bg-[#f7ecdf] text-stone-800 hover:border-[#b99976] hover:bg-[#f2e2cf]'
           }`
-        }
+        })
       }
 
       const render = () => {
@@ -259,10 +295,13 @@ function setupClinics() {
               .filter(Boolean)
               .some((value) => String(value).toLowerCase().includes(q))
 
-          const matchDoctor = !namedDoctorOnly || hasDoctor
-          const matchPricing = !packageOnly || hasPrice
+          const matchStat =
+            activeStat === 'all' ||
+            (activeStat === 'doctor' && hasDoctor) ||
+            (activeStat === 'hospital' && normalize(clinic.facility_type).toLowerCase() === 'hospital') ||
+            (activeStat === 'price' && hasPrice)
 
-          return matchSearch && matchDoctor && matchPricing
+          return matchSearch && matchStat
         })
 
         result = result.sort((a, b) => {
@@ -282,16 +321,13 @@ function setupClinics() {
               <tr class="border-b border-stone-200 align-top transition hover:bg-stone-50/70">
                 <td class="px-4 py-5 text-stone-900">
                   <div class="font-semibold text-stone-900">${clinic.clinic_name || '—'}</div>
-                  <div class="mt-2 inline-flex rounded-full bg-stone-100 px-2.5 py-1 text-xs text-stone-500">${clinic.clinic_id}</div>
+                  <div class="mt-2 text-sm text-stone-500">${clinicTypeLabel(clinic)}</div>
                 </td>
-                <td class="px-4 py-5 text-stone-700 break-words">${clinic.lead_doctor || '未具名'}</td>
-                <td class="px-4 py-5"><span class="pill">${clinicTypeLabel(clinic)}</span></td>
-                <td class="px-4 py-5 text-sm leading-7 text-stone-600 break-words">${clinic.official_name || '—'}</td>
+                <td class="px-4 py-5 text-stone-700 break-words">${formatLeadDoctorName(clinic.lead_doctor)}</td>
+                <td class="px-4 py-5 text-sm leading-7 text-stone-600 break-words">${clinicSurgeryModeLabel(clinic)}</td>
                 <td class="px-4 py-5 text-stone-700 whitespace-nowrap"><a href="${clinic.website || '#'}" ${clinic.website ? 'target="_blank" rel="noreferrer"' : ''} class="${clinic.website ? 'text-clay font-medium hover:underline' : 'pointer-events-none text-stone-400'}">${clinic.website ? '官网链接' : '—'}</a></td>
                 <td class="px-4 py-5"><span class="pill ${normalize(clinic.price_transparency) ? 'pill-success' : 'pill-brand'}">${clinicPriceLabel(clinic)}</span></td>
                 <td class="table-cell-note px-4 py-5 text-sm leading-7 text-stone-600 whitespace-pre-line break-words">${normalize(clinic.note) || '—'}</td>
-                <td class="table-cell-note px-4 py-5 text-sm leading-7 ${normalize(clinic.real_review) === '欢迎真实评价' ? 'text-stone-400' : 'text-stone-700'} whitespace-pre-line break-words">${normalize(clinic.real_review) || '欢迎真实评价'}</td>
-                <td class="px-4 py-5 whitespace-nowrap text-stone-500">${clinic.last_checked || '—'}</td>
               </tr>
             `
           })
@@ -301,27 +337,18 @@ function setupClinics() {
       }
 
       ;[searchInput, sortSelect].forEach((el) => el.addEventListener('input', render))
-      if (packageBtn) {
-        packageBtn.addEventListener('click', () => {
-          packageOnly = !packageOnly
+      ;[
+        ['all', statAllBtn],
+        ['doctor', statDoctorBtn],
+        ['hospital', statHospitalBtn],
+        ['price', statPriceBtn],
+      ].forEach(([key, button]) => {
+        if (!button) return
+        button.addEventListener('click', () => {
+          activeStat = key
           render()
         })
-      }
-      if (doctorBtn) {
-        doctorBtn.addEventListener('click', () => {
-          namedDoctorOnly = !namedDoctorOnly
-          render()
-        })
-      }
-      if (resetBtn) {
-        resetBtn.addEventListener('click', () => {
-          packageOnly = false
-          namedDoctorOnly = false
-          searchInput.value = ''
-          sortSelect.value = 'name'
-          render()
-        })
-      }
+      })
       render()
     })
     .catch((error) => {
@@ -330,7 +357,7 @@ function setupClinics() {
       if (tableBody) {
         tableBody.innerHTML = `
           <tr>
-            <td colspan="9" class="px-4 py-8 text-center text-sm text-red-600">
+            <td colspan="6" class="px-4 py-8 text-center text-sm text-red-600">
               诊所数据加载失败：${error.message}
             </td>
           </tr>

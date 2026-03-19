@@ -5,297 +5,542 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="土耳其植发信息网：面向中文用户的土耳其植发医生数据库、诊所数据库、自查指南与众包提交入口。"
+      content="中立的土耳其植发信息整理平台，帮助用户看懂植发手术的钱到底花在哪里，手术到底由谁真正执行。"
     />
-    <title>土耳其植发信息网</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              sand: '#f6f0e7',
-              ink: '#1f1a14',
-              clay: '#8b5e34',
-              line: '#e4d8c8',
-            },
-            boxShadow: {
-              soft: '0 20px 50px rgba(46, 31, 17, 0.08)',
-            },
-          },
-        },
+    <title>土耳其植发透明指南</title>
+    <style>
+      :root {
+        --bg: #f6f0e7;
+        --surface: #ffffff;
+        --surface-muted: #f8f5ef;
+        --text: #1f1a14;
+        --text-soft: #5f574d;
+        --line: #e5d8c7;
+        --brand: #1f1a14;
+        --brand-soft: #8b5e34;
+        --shadow: 0 20px 50px rgba(46, 31, 17, 0.08);
+        --radius-xl: 32px;
+        --radius-lg: 24px;
+        --radius-md: 18px;
       }
-    </script>
-    <link rel="stylesheet" href="assets/styles.css?v=20260319b" />
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        min-height: 100vh;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .header {
+        border-bottom: 1px solid rgba(229, 216, 199, 0.9);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px 0;
+      }
+
+      .brand-title {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .brand-subtitle {
+        margin-top: 4px;
+        font-size: 11px;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: #7d756c;
+      }
+
+      .nav {
+        display: flex;
+        gap: 24px;
+        font-size: 14px;
+        color: var(--text-soft);
+      }
+
+      .nav a:hover {
+        color: var(--text);
+      }
+
+      .main {
+        padding: 32px 0 56px;
+      }
+
+      .section + .section {
+        margin-top: 24px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 28px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--surface-muted);
+        font-size: 12px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #7d756c;
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        letter-spacing: -0.04em;
+      }
+
+      h1 {
+        margin-top: 20px;
+        max-width: 760px;
+        font-size: clamp(38px, 6vw, 70px);
+        line-height: 1.02;
+      }
+
+      .subtitle {
+        margin-top: 14px;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .lead {
+        margin-top: 18px;
+        max-width: 820px;
+        font-size: 17px;
+        color: var(--text-soft);
+      }
+
+      .content-card {
+        padding: 24px;
+      }
+
+      .content-card h2 {
+        font-size: clamp(28px, 4vw, 38px);
+      }
+
+      .content-card p {
+        margin: 16px 0 0;
+        color: var(--text-soft);
+        font-size: 16px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .stat-card {
+        border: 1px solid var(--line);
+        background: var(--surface-muted);
+        border-radius: var(--radius-md);
+        padding: 22px;
+      }
+
+      .stat-number {
+        font-size: clamp(44px, 7vw, 76px);
+        line-height: 0.95;
+        font-weight: 700;
+        letter-spacing: -0.06em;
+        color: var(--text);
+      }
+
+      .stat-label {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--text-soft);
+      }
+
+      .roles-grid {
+        margin-top: 20px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .role-card,
+      .article-link {
+        border: 1px solid var(--line);
+        background: var(--surface-muted);
+        border-radius: var(--radius-md);
+        padding: 20px;
+      }
+
+      .role-card h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .role-card p {
+        margin: 12px 0 0;
+        font-size: 15px;
+        color: var(--text-soft);
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 22px;
+        border-radius: 999px;
+        font-size: 15px;
+        font-weight: 700;
+        transition: 180ms ease;
+      }
+
+      .button-primary {
+        background: var(--brand);
+        color: #fff;
+      }
+
+      .button-primary:hover {
+        background: #383026;
+      }
+
+      .button-secondary {
+        border: 1px solid #cbbba7;
+        background: #fff;
+        color: var(--text);
+      }
+
+      .button-secondary:hover {
+        border-color: #bba78f;
+        background: #faf7f2;
+      }
+
+      .article-list {
+        margin-top: 20px;
+      }
+
+      .article-link {
+        display: block;
+        font-size: 15px;
+        color: var(--text);
+        transition: 180ms ease;
+      }
+
+      .article-link:hover {
+        border-color: #ccbca7;
+        background: #fff;
+      }
+
+      .article-link span {
+        display: block;
+        color: var(--text-soft);
+        margin-top: 6px;
+        font-size: 14px;
+      }
+
+      .footer {
+        padding: 0 0 24px;
+      }
+
+      .footer-card {
+        padding: 22px 24px;
+        border-radius: var(--radius-lg);
+      }
+
+      .footer-card p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--text-soft);
+      }
+
+      @media (max-width: 820px) {
+        .nav {
+          display: none;
+        }
+
+        .hero,
+        .content-card {
+          padding: 24px;
+        }
+
+        .roles-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .lead {
+          font-size: 16px;
+        }
+      }
+    </style>
   </head>
-  <body data-page="home" class="bg-sand text-ink">
-    <div class="min-h-screen">
-      <header class="border-b border-stone-200/80 bg-white/80 backdrop-blur">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <a href="./" class="flex flex-col">
-            <span class="text-2xl font-semibold tracking-tight">土耳其植发信息网</span>
-            <span class="text-xs uppercase tracking-[0.28em] text-stone-500">Turkey Hair Transplant Guide</span>
+  <body>
+    <div class="shell">
+      <header class="header">
+        <div class="container header-inner">
+          <a href="./">
+            <div class="brand-title">土耳其植发透明指南</div>
+            <div class="brand-subtitle">Neutral Patient Education Platform</div>
           </a>
-          <nav class="hidden gap-6 text-sm text-stone-600 md:flex">
-            <a href="doctors.html" class="nav-link">医生库</a>
-            <a href="clinics.html" class="nav-link">诊所库</a>
-            <a href="guide.html" class="nav-link">自查指南</a>
-            <a href="submit.html" class="nav-link">提交信息</a>
+          <nav class="nav">
+            <a href="doctors/">医生库</a>
+            <a href="clinics/">诊所库</a>
+            <a href="guides/">术语解释</a>
+            <a href="blog/">科普文章</a>
+            <a href="consult/">提交信息</a>
           </nav>
         </div>
       </header>
 
-      <main>
-        <section class="mx-auto max-w-7xl px-4 pb-8 pt-10 sm:px-6 lg:px-8 lg:pb-12 lg:pt-14">
-          <div class="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-10">
-            <div class="inline-flex rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs uppercase tracking-[0.24em] text-stone-600">
-              Hair Transplant Education Hub
-            </div>
-            <div class="mt-6 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-              <div>
-                <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">土耳其植发信息网</h1>
-                <p class="mt-5 max-w-4xl text-base leading-8 text-stone-600 sm:text-lg">
-                  讲清术语、流程、角色分工和真实差异，帮助用户看懂医生、团队、价格与宣传。
-                </p>
-                <div class="mt-8 flex flex-wrap gap-3">
-                  <a href="#terms" class="inline-flex items-center rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700">先看术语解释</a>
-                  <a href="#roles" class="inline-flex items-center rounded-full border border-stone-300 px-5 py-3 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:bg-stone-50">了解医生与团队怎么分工</a>
-                  <a href="#database" class="inline-flex items-center rounded-full border border-stone-300 px-5 py-3 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:bg-stone-50">查看医生库 / 诊所库</a>
-                </div>
+      <main class="main">
+        <div class="container">
+          <section class="section">
+            <div class="card hero">
+              <div class="eyebrow">中立的信息整理平台</div>
+              <h1>土耳其植发透明指南</h1>
+              <p class="lead">
+                帮助患者直接核对四件最重要的事：土耳其卫生部对植发手术的法律要求、合法植发机构名单、ISHRS / ABHRS 认证含义，以及什么样的医生背景更值得优先看。
+              </p>
+              <div class="cta-row">
+                <a class="button button-primary" href="doctors/">查看医生资质</a>
+                <a class="button button-secondary" href="clinics/">查看诊所对比</a>
               </div>
+            </div>
+          </section>
 
-              <div class="grid gap-4">
-                <div class="rounded-[1.5rem] border border-stone-200 bg-stone-50 p-5">
-                  <div class="text-xs uppercase tracking-[0.22em] text-stone-500">为什么先做客户教育</div>
-                  <p class="mt-3 text-sm leading-8 text-stone-600">
-                    首页不是为了推销某家诊所，而是先让第一次接触土耳其植发的人知道：同样叫植发，真正差异往往不在包装，而在术语背后到底是什么意思、关键步骤是谁做、团队是否稳定。
-                  </p>
+          <section class="section">
+            <div class="card content-card">
+              <div class="grid stats-grid">
+                <div class="stat-card">
+                  <div class="stat-number">14</div>
+                  <div class="stat-label">土耳其全部 ISHRS 医生</div>
                 </div>
-                <div class="rounded-[1.5rem] border border-stone-200 bg-stone-50 p-5">
-                  <div class="text-xs uppercase tracking-[0.22em] text-stone-500">当前数据库规模</div>
-                  <div id="home-stats" class="mt-4 grid gap-3 sm:grid-cols-2">
-                    <div class="rounded-2xl border border-stone-200 bg-white p-4">
-                      <div class="text-sm text-stone-500">精品医生</div>
-                      <div data-home-doctors class="mt-2 text-3xl font-semibold">—</div>
-                    </div>
-                    <div class="rounded-2xl border border-stone-200 bg-white p-4">
-                      <div class="text-sm text-stone-500">合规机构</div>
-                      <div data-home-clinics class="mt-2 text-3xl font-semibold">—</div>
-                    </div>
-                  </div>
+                <div class="stat-card">
+                  <div class="stat-number">230</div>
+                  <div class="stat-label">伊斯坦布尔全部合法植发机构</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number">2026-03</div>
+                  <div class="stat-label">数据更新时间</div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section id="roles" class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8 lg:pb-12">
-          <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-8">
-            <div class="text-xs uppercase tracking-[0.24em] text-stone-500">第二屏</div>
-            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">植发到底是谁在做</h2>
-            <p class="mt-4 max-w-4xl text-sm leading-8 text-stone-600 sm:text-base">
-              不同诊所最大的差异，不只是医生名气，而是医生参与到哪一步、团队是否稳定、每天做几台、宣传和真实分工是否一致。
+          <section class="section">
+            <div class="card content-card">
+              <h2>土耳其卫生部对植发手术和诊所的要求</h2>
+              <p>
+                核心法规是 <strong>Saç Ekimi Birimleri Hakkında Yönetmelik</strong>（植发单位管理条例）。
+                首次发布于 <strong>2023 年 5 月 6 日</strong>，公报号 <strong>32182</strong>；最新修订于
+                <strong>2025 年 9 月 12 日</strong>，公报号 <strong>33015</strong>。
+              </p>
+              <div class="grid roles-grid">
+                <article class="role-card">
+                  <h3>法律底线</h3>
+                  <p>植发属于医疗行为，必须在获得卫生部批准的医院、医疗中心、诊所内进行，并持有植发单位经营许可证书。</p>
+                </article>
+                <article class="role-card">
+                  <h3>打孔 / 开槽</h3>
+                  <p>打孔（kanal acma / incision）必须由持有医师执照的医生亲自完成，这是法律强制要求。</p>
+                </article>
+                <article class="role-card">
+                  <h3>助手 / 技术员</h3>
+                  <p>可以参与取发和移植，但必须在医生直接监督下，并持有卫生部认证的辅助施行者证书。</p>
+                </article>
+                <article class="role-card">
+                  <h3>麻醉</h3>
+                  <p>全麻或深度镇静必须由合格麻醉医师负责，并全程监测心率、血压、氧饱和度等体征。</p>
+                </article>
+              </div>
+              <p>
+                官方原文：
+                <a href="https://www.resmigazete.gov.tr/eskiler/2023/05/20230506-11.htm" target="_blank" rel="noreferrer"><strong>2023 主法规</strong></a>
+                /
+                <a href="https://www.resmigazete.gov.tr/eskiler/2025/09/20250912-2.htm" target="_blank" rel="noreferrer"><strong>2025 最新修订版</strong></a>
+              </p>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="card content-card">
+              <h2>合法植发机构名单</h2>
+              <p>
+                最权威的查询入口是土耳其卫生部官方 <strong>Saç Ekimi Merkezleri Portalı</strong>。这个门户会实时列出卫生部批准的合法植发中心。
+              </p>
+              <p>
+                官方查询入口：
+                <a href="https://sacekimmerkezi.saglik.gov.tr/" target="_blank" rel="noreferrer"><strong>https://sacekimmerkezi.saglik.gov.tr/</strong></a>
+              </p>
+              <p>
+                名单会定期更新。不在这个名单上的机构，至少说明它没有出现在卫生部当前批准的合法中心列表里。本站诊所数据库可以与这份官方名单交叉核对，提高可信度。
+              </p>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="card content-card">
+              <h2>ISHRS 和 ABHRS 说明</h2>
+              <div class="grid roles-grid">
+                <article class="role-card">
+                  <h3>ISHRS</h3>
+                  <p>国际毛发修复外科学会（International Society of Hair Restoration Surgery）是全球最权威的植发专业学术组织之一。其会员分为 Member（会员）和 Fellow（研究员，简称 FISHRS）。</p>
+                </article>
+                <article class="role-card">
+                  <h3>ABHRS</h3>
+                  <p>美国毛发修复外科委员会（American Board of Hair Restoration Surgery）是国际公认的植发医生专业认证。获得认证通常需持有有效医师执照、完成规定培训或具备足够临床经验，并通过书面考试、口头考试以及病例审核。</p>
+                </article>
+                <article class="role-card">
+                  <h3>Member（ISHRS）</h3>
+                  <p>说明该医生已进入 ISHRS 正式会员体系，并非普通营销标签。Member 是通过协会审核后的正式会员身份。</p>
+                </article>
+                <article class="role-card">
+                  <h3>Fellow（FISHRS）</h3>
+                  <p>Fellow 是更高一级的会员身份，要求更高的临床经验、学术贡献和同行认可，通常代表该医生在植发领域达到更高专业标准。</p>
+                </article>
+              </div>
+              <p>
+                参考来源：
+                <a href="https://ishrs.org/categories-of-membership/" target="_blank" rel="noreferrer"><strong>ISHRS Membership Categories</strong></a>
+                /
+                <a href="https://abhrs.org/certification/" target="_blank" rel="noreferrer"><strong>ABHRS Certification Requirements</strong></a>
+              </p>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="card content-card">
+              <h2>医生背景的最低门槛与优先顺序</h2>
+              <p>
+                最低门槛是：必须持有土耳其医师执照（<strong>Tip Doktoru</strong>）。在此基础上，更建议优先看这些背景：
+              </p>
+              <div class="grid roles-grid">
+                <article class="role-card">
+                  <h3>皮肤科</h3>
+                  <p>与毛发疾病、头皮状态和植发适应证判断更匹配。</p>
+                </article>
+                <article class="role-card">
+                  <h3>整形外科</h3>
+                  <p>与切口处理、组织美学、精细手术操作高度相关。</p>
+                </article>
+                <article class="role-card">
+                  <h3>外科相关专业</h3>
+                  <p>更符合植发手术对切口、操作稳定性和安全边界的要求。</p>
+                </article>
+                <article class="role-card">
+                  <h3>为什么这和法规一致</h3>
+                  <p>法规要求核心步骤由医师完成，而这些背景在实际操作中更符合专业标准和患者安全要求。</p>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="card content-card">
+              <h2>重点科普文章</h2>
+              <div class="grid article-list">
+                <a class="article-link" href="blog/fue-vs-dhi.html">
+                  FUE 与 DHI 的真实区别
+                  <span>先理解两种最常见术语到底在说什么。</span>
+                </a>
+                <a class="article-link" href="blog/painless-anesthesia.html">
+                  “无痛麻醉”到底是什么
+                  <span>看清舒适宣传和真正安全要求的差别。</span>
+                </a>
+                <a class="article-link" href="blog/team-and-technicians.html">
+                  技师与团队的资质要求
+                  <span>理解团队在手术里到底承担哪些工作。</span>
+                </a>
+                <a class="article-link" href="blog/where-the-money-goes.html">
+                  植发的钱到底花在哪里
+                  <span>把医生、团队、销售和中介成本拆开来看。</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="card content-card">
+              <h2>数据来源与参考</h2>
+              <div class="grid article-list">
+                <a class="article-link" href="https://www.resmigazete.gov.tr/eskiler/2023/05/20230506-11.htm" target="_blank" rel="noreferrer">
+                  土耳其卫生部植发单位管理条例
+                  <span>https://www.resmigazete.gov.tr/eskiler/2023/05/20230506-11.htm</span>
+                </a>
+                <a class="article-link" href="https://sacekimmerkezi.saglik.gov.tr/" target="_blank" rel="noreferrer">
+                  合法植发中心查询
+                  <span>https://sacekimmerkezi.saglik.gov.tr/</span>
+                </a>
+                <a class="article-link" href="https://ishrs.org/" target="_blank" rel="noreferrer">
+                  ISHRS 官网（会员与认证）
+                  <span>https://ishrs.org/</span>
+                </a>
+                <a class="article-link" href="https://abhrs.org/certification/" target="_blank" rel="noreferrer">
+                  ABHRS 认证说明
+                  <span>https://abhrs.org/certification/</span>
+                </a>
+              </div>
+            <p class="mt-5 text-sm leading-8 text-stone-600">
+              本网站所有医生与诊所信息均基于以上公开官方来源整理，仅供患者参考。请以最新官方信息为准。
             </p>
-            <div class="mt-6 grid gap-4 lg:grid-cols-3">
-              <div class="rounded-[1.5rem] border border-emerald-200 bg-emerald-50/60 p-5">
-                <div class="text-sm font-semibold text-stone-900">医生</div>
-                <p class="mt-3 text-sm leading-7 text-stone-600">通常负责设计、判断供体条件、规划发际线和关键技术决策。有些医生会亲自打孔，有些还会亲自取发。</p>
-                <p class="mt-3 text-sm leading-7 text-stone-700">真正影响：方向、密度、自然度，以及手术最关键的判断。</p>
-              </div>
-              <div class="rounded-[1.5rem] border border-amber-200 bg-amber-50/60 p-5">
-                <div class="text-sm font-semibold text-stone-900">团队 / 助手</div>
-                <p class="mt-3 text-sm leading-7 text-stone-600">常负责分离毛囊、部分取发、种植等步骤。团队是否固定、是否熟练，会明显影响效率、成活率和一致性。</p>
-                <p class="mt-3 text-sm leading-7 text-stone-700">真正影响：执行稳定性、毛囊处理质量、当天手术体验。</p>
-              </div>
-              <div class="rounded-[1.5rem] border border-sky-200 bg-sky-50/60 p-5">
-                <div class="text-sm font-semibold text-stone-900">护士 / 麻醉相关人员</div>
-                <p class="mt-3 text-sm leading-7 text-stone-600">如果涉及镇静、无痛或更强的麻醉方案，就要问清楚现场有没有真正负责麻醉和监测的人。</p>
-                <p class="mt-3 text-sm leading-7 text-stone-700">真正影响：安全边界，而不是宣传里“舒服不舒服”这么简单。</p>
-              </div>
             </div>
-          </div>
-        </section>
-
-        <section id="terms" class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8 lg:pb-12">
-          <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-8">
-            <div class="text-xs uppercase tracking-[0.24em] text-stone-500">第三屏</div>
-            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">术语翻译区</h2>
-            <p class="mt-4 max-w-4xl text-sm leading-8 text-stone-600 sm:text-base">
-              下面这些词经常被用来做宣传，但真正有价值的是：它到底是什么意思、会影响什么、最容易被误解成什么。
-            </p>
-            <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">FUE</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：从供体区一个个提取毛囊单位的主流植发方式。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：供体保护、疤痕表现、取发精细度。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：只要写了 FUE 就代表做得精细，其实差异很大。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">DHI</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：常指用植入笔直接把毛囊放入受区的一种种植方式。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：种植节奏、器械选择、团队配合方式。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：DHI 不是更高级版本的植发，也不天然比别的方法更好。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">FUT</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：切取头皮条后再分离毛囊的老一代主流方法。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：供体利用方式、线性疤痕、毛囊获取效率。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：FUT 不等于落后，只是适用场景和代价不同。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">手工 FUE</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：取发时主要靠手动器械而不是电动设备。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：取发节奏、手感控制、对医生或团队熟练度的要求。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：手工不等于一定更高级，关键还是谁在做、做得怎么样。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">蓝宝石</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：常指用蓝宝石刀片做开槽或打孔。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：器械形状和切口表现，但不是决定结果的第一变量。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：蓝宝石不是质量保证，更不是听到这个词就可以放心。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">微型蓝宝石</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：宣传语里常用来强调切口更小、更精细的蓝宝石器械。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：切口大小只是一个参数，仍取决于操作者的稳定性和判断。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：名字越长不代表技术越新，很多时候只是包装得更细。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">医生打孔 / 医生开槽</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：指受区关键切口由医生亲自完成。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：角度、方向、密度布局和最终自然度。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：只要医生露个面就算医生打孔，必须问清楚做到哪一步、做了多久。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">医生监督</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：医生在场或参与部分决策，但不一定亲自做关键执行。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：你面对的是医生主导模式，还是团队主导模式。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：监督不等于操作，不能把两者当成一回事。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">无痛麻醉 / 镇静</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：常用来描述局麻更舒适，或加入镇静让过程没那么紧张。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：舒适度和安全要求，而不是手术本身质量。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：听起来轻松，但只要麻醉更深，就要问清楚谁负责监测。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">团队</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：医生之外参与执行的助手群体。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：分离、摆放、节奏、熟练度和一天能做几台。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：团队不是天然专业词，必须问是不是固定团队、谁在做什么。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">graft / 毛囊单位</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：植发时计算数量的基本单位，一个 graft 里可能有 1 到多根头发。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：手术规模、供体消耗和费用计算方式。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：graft 数越大不代表越好，要结合面积、密度和供体条件看。</p>
-              </article>
-              <article class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">密度</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">一句话定义：单位面积内种了多少毛囊单位。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-700">真正影响什么：视觉覆盖感、自然度、供体消耗和二次修复空间。</p>
-                <p class="mt-2 text-sm leading-7 text-stone-500">常见误解：高密度不是越高越好，不考虑供体和设计只追数字容易出问题。</p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8 lg:pb-12">
-          <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-8">
-            <div class="text-xs uppercase tracking-[0.24em] text-stone-500">第四屏</div>
-            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">这些词听起来高级，但你要问清是什么意思</h2>
-            <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">全程医生操作</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">人话解释：别只听四个字，要问设计、取发、打孔、移植是不是都由医生本人完成。</p>
-              </div>
-              <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">医生监督</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">人话解释：很多时候是医生负责看一眼、做部分步骤，真正大部分执行还是团队。</p>
-              </div>
-              <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">无痛麻醉</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">人话解释：它强调舒服，不代表没有风险。只要涉及更深的麻醉，就要问谁在监测。</p>
-              </div>
-              <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">高密度</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">人话解释：高密度不是口号，是供体、面积、设计和执行能力一起决定的，不是想种多密就多密。</p>
-              </div>
-              <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">VIP 团队</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">人话解释：先别被名字打动，要问是不是固定团队、每天做几台、谁有经验、谁临时拼凑。</p>
-              </div>
-              <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <h3 class="text-lg font-semibold text-stone-900">蓝宝石 / 微针 / DHI</h3>
-                <p class="mt-3 text-sm leading-7 text-stone-600">人话解释：这些先是器械或方法名，不是质量认证。关键仍然是谁在操作、操作得怎么样。</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8 lg:pb-12">
-          <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-8">
-            <div class="text-xs uppercase tracking-[0.24em] text-stone-500">第五屏</div>
-            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">判断一家诊所的框架</h2>
-            <p class="mt-4 max-w-4xl text-sm leading-8 text-stone-600 sm:text-base">
-              真正要问的不是“是不是名医”，而是关键步骤是谁做、做到什么程度、每天做多少台。
-            </p>
-            <div class="mt-6 grid gap-4 lg:grid-cols-2">
-              <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <div class="text-sm font-semibold text-stone-900">判断清单</div>
-                <ul class="mt-3 grid gap-3 text-sm leading-7 text-stone-600">
-                  <li>谁做设计</li>
-                  <li>谁做开槽 / 打孔</li>
-                  <li>谁做取发</li>
-                  <li>谁做种植</li>
-                  <li>团队是否固定</li>
-                  <li>价格是否和参与度匹配</li>
-                </ul>
-              </div>
-              <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
-                <div class="text-sm font-semibold text-stone-900">为什么这个框架有用</div>
-                <p class="mt-3 text-sm leading-8 text-stone-600">
-                  因为同样一个品牌名，背后可能是完全不同的执行结构。有人是医生高度参与，有人是医生只做前面一小段，后面全部交给团队。每天做几台、团队是不是固定、价格和医生参与度是否匹配，才是决定体验和结果差异的关键。
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="database" class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-          <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-8">
-            <div class="text-xs uppercase tracking-[0.24em] text-stone-500">第六屏</div>
-            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">继续查看数据库与评价系统</h2>
-            <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              <a href="doctors.html" class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5 transition hover:border-stone-300 hover:bg-white">
-                <div class="text-sm font-semibold text-stone-900">查看医生库</div>
-                <p class="mt-2 text-sm leading-7 text-stone-600">看 Fellow / Member、ABHRS、专长和医生主导模式。</p>
-              </a>
-              <a href="clinics.html" class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5 transition hover:border-stone-300 hover:bg-white">
-                <div class="text-sm font-semibold text-stone-900">查看诊所库</div>
-                <p class="mt-2 text-sm leading-7 text-stone-600">看合法机构、具名医生、价格透明度和备注信息。</p>
-              </a>
-              <a href="guide.html" class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5 transition hover:border-stone-300 hover:bg-white">
-                <div class="text-sm font-semibold text-stone-900">查看术语解释全集</div>
-                <p class="mt-2 text-sm leading-7 text-stone-600">把首页的核心概念继续扩展成更完整的自查内容。</p>
-              </a>
-              <a href="submit.html" class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5 transition hover:border-stone-300 hover:bg-white">
-                <div class="text-sm font-semibold text-stone-900">提交真实评价</div>
-                <p class="mt-2 text-sm leading-7 text-stone-600">补充价格、体验和纠错，让数据库越来越完整。</p>
-              </a>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
 
-      <footer class="border-t border-stone-200 bg-white">
-        <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-sm text-stone-500 sm:px-6 lg:px-8 md:flex-row md:items-center md:justify-between">
-          <span>土耳其植发信息网</span>
-          <span>后续重点维护 `data/*.json` 与众包提交入口。</span>
+      <footer class="footer">
+        <div class="container">
+          <div class="card footer-card">
+            <p>
+              免责声明：本网站基于公开资料整理，仅供信息参考与术语解读，不构成医疗建议。所有医疗决定请结合官方信息、面诊结果与个人情况独立判断。
+            </p>
+          </div>
         </div>
       </footer>
     </div>
-
-    <script src="assets/app.js?v=20260319b" defer></script>
   </body>
 </html>

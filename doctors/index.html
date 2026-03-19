@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>医生数据库 | 土耳其植发信息网</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { sand: '#f6f0e7', ink: '#1f1a14', clay: '#8b5e34', line: '#e4d8c8' },
+            boxShadow: { soft: '0 20px 50px rgba(46, 31, 17, 0.08)' },
+          },
+        },
+      }
+    </script>
+    <link rel="stylesheet" href="../assets/styles.css?v=20260319b" />
+  </head>
+  <body data-page="doctors" class="bg-sand text-ink">
+    <div class="min-h-screen">
+      <header class="border-b border-stone-200/80 bg-white/80 backdrop-blur">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <a href="../" class="flex flex-col">
+            <span class="text-2xl font-semibold tracking-tight">土耳其植发信息网</span>
+            <span class="text-xs uppercase tracking-[0.28em] text-stone-500">Doctors Database</span>
+          </a>
+          <nav class="hidden gap-6 text-sm text-stone-600 md:flex">
+            <a href="../" class="nav-link">首页</a>
+            <a href="../doctors/" class="nav-link nav-link-active">医生库</a>
+            <a href="../clinics/" class="nav-link">诊所库</a>
+            <a href="../guides/" class="nav-link">术语解释</a>
+            <a href="../blog/" class="nav-link">科普文章</a>
+            <a href="../consult/" class="nav-link">提交信息</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+        <section class="overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-10">
+          <div class="inline-flex rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs uppercase tracking-[0.24em] text-stone-600">
+            ISHRS 精品医生库
+          </div>
+          <div class="mt-6 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+            <div>
+              <h1 class="text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">ISHRS 精品医生库</h1>
+              <p class="mt-5 max-w-4xl text-base leading-8 text-stone-600">
+                国际植发协会体系下的高资质医生整理
+              </p>
+              <p class="mt-4 max-w-4xl text-base leading-8 text-stone-600">
+                本页仅展示 ISHRS 会员医生（Fellow / Member）。资料来源于
+                <a href="https://ishrs.org/find-a-doctor/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">ISHRS 官网</a>、
+                <a href="https://abhrs.org/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">ABHRS 官网</a>
+                及医生公开履历。筛选逻辑：先看会员级别（Fellow 优先），再看 ABHRS 认证，最后看手术模式。
+              </p>
+            </div>
+            <div class="grid gap-3">
+              <div class="rounded-[1.5rem] border border-emerald-200 bg-emerald-50/60 p-4">
+                <div class="text-sm font-semibold text-stone-900">ISHRS Fellow</div>
+                <p class="mt-2 text-sm leading-7 text-stone-700">国际植发协会研究员级别，要求更高的临床经验、学术贡献和同行评审，是 Member 之上的更高认可。</p>
+              </div>
+              <div class="rounded-[1.5rem] border border-amber-200 bg-amber-50/60 p-4">
+                <div class="text-sm font-semibold text-stone-900">ISHRS Member</div>
+                <p class="mt-2 text-sm leading-7 text-stone-700">正式会员，已通过协会审核并进入 ISHRS 会员体系，并非普通营销标签。</p>
+              </div>
+              <div class="rounded-[1.5rem] border border-sky-200 bg-sky-50/60 p-4">
+                <div class="text-sm font-semibold text-stone-900">ABHRS</div>
+                <p class="mt-2 text-sm leading-7 text-stone-700">美国毛发修复外科委员会专项认证。通常需持有有效医师执照，并通过书面考试、口头考试及病例审核，含金量较高。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mt-8 rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-8">
+          <div class="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+            <div>
+              <div class="text-xs uppercase tracking-[0.24em] text-stone-500">预约说明</div>
+              <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900">如何预约这些医生</h2>
+              <div class="mt-5 grid gap-4">
+                <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
+                  <div class="text-base font-semibold text-stone-900">直接联系</div>
+                  <p class="mt-2 text-sm leading-7 text-stone-600">
+                    大多数医生支持直客模式（Direct Booking）。优先通过官网或 WhatsApp 预约，通常能省去中介抽成。部分医生没有专门营销团队，回复速度可能较慢，建议耐心沟通。
+                  </p>
+                </div>
+                <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
+                  <div class="text-base font-semibold text-stone-900">准备材料</div>
+                  <div class="mt-3 rounded-2xl border border-rose-200 bg-rose-50/70 p-4">
+                    <p class="text-sm font-semibold leading-7 text-rose-900">
+                      医生时间宝贵，请务必认真准备资料，不要只发一两张模糊照片就直接询价。
+                    </p>
+                    <div class="mt-3 space-y-3 text-sm leading-7 text-stone-700">
+                      <p>
+                        需要提供：姓名、年龄、电子邮箱，以及是否有传染病（如 HIV、HBV）、是否有基础疾病（如高血压、糖尿病等）、是否有常用药、是否正在使用非那雄胺或米诺地尔，以及已使用多久。
+                      </p>
+                      <p>
+                        照片建议至少包含：正面、头顶、后枕部、左侧面、右侧面。最好分别提供干发和湿发状态下的照片，方便医生更准确判断脱发范围、供体情况和现有密度。
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="rounded-[1.35rem] border border-stone-200 bg-stone-50 p-5">
+                  <div class="text-base font-semibold text-stone-900">沟通重点</div>
+                  <p class="mt-2 text-sm leading-7 text-stone-600">
+                    建议明确询问医生实际参与度（尤其是否亲自打孔）、团队资质、手术模式，以及最终价格是否包含酒店和接送。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs uppercase tracking-[0.24em] text-stone-500">价格提醒</div>
+              <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900">价格参考提醒</h2>
+              <div class="mt-5 rounded-[1.5rem] border border-amber-200 bg-amber-50/60 p-5">
+                <p class="text-sm leading-7 text-stone-700">
+                  医生价格因毛囊数量、手术模式、是否直客等因素而有所不同。网络上的讨论（如Reddit、RealSelf）可作为参考，但最终价格请以直接联系医生或诊所获取的最新报价为准。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mt-8 rounded-[1.75rem] border border-stone-200 bg-white p-5 shadow-soft">
+          <div class="grid gap-3 lg:grid-cols-[minmax(0,1.15fr)_repeat(3,minmax(160px,0.3fr))]">
+            <input id="doctor-search" type="search" placeholder="搜索医生 / 专长 / 备注 / 城市" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white" />
+            <select id="doctor-city" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white"></select>
+            <select id="doctor-status" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white">
+              <option value="all">全部级别</option>
+              <option value="fellow">仅看 Fellow</option>
+              <option value="member">仅看 Member</option>
+              <option value="former_member">仅看前成员</option>
+            </select>
+            <select id="doctor-sort" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white">
+              <option value="status">按资质排序</option>
+              <option value="name">按姓名排序</option>
+              <option value="city">按城市排序</option>
+            </select>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-3 text-sm text-stone-500">
+            <span>当前显示 <strong id="doctor-count" class="text-stone-900">—</strong> 位医生</span>
+          </div>
+        </section>
+
+        <section id="doctor-grid" class="mt-8 grid gap-5"></section>
+      </main>
+    </div>
+
+    <script src="../assets/app.js?v=20260319b" defer></script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>真实评价提交 | 土耳其植发信息网</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { sand: '#f6f0e7', ink: '#1f1a14', clay: '#8b5e34', line: '#e4d8c8' },
+            boxShadow: { soft: '0 20px 50px rgba(46, 31, 17, 0.08)' },
+          },
+        },
+      }
+    </script>
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <link rel="stylesheet" href="../assets/styles.css?v=20260319b" />
+  </head>
+  <body data-page="submit" class="bg-sand text-ink">
+    <div class="min-h-screen">
+      <header class="border-b border-stone-200/80 bg-white/80 backdrop-blur">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <a href="../" class="flex flex-col">
+            <span class="text-2xl font-semibold tracking-tight">土耳其植发信息网</span>
+            <span class="text-xs uppercase tracking-[0.28em] text-stone-500">Crowdsourcing Entry</span>
+          </a>
+          <nav class="hidden gap-6 text-sm text-stone-600 md:flex">
+            <a href="../" class="nav-link">首页</a>
+            <a href="../doctors/" class="nav-link">医生库</a>
+            <a href="../clinics/" class="nav-link">诊所库</a>
+            <a href="../guides/" class="nav-link">术语解释</a>
+            <a href="../blog/" class="nav-link">科普文章</a>
+            <a href="../consult/" class="nav-link nav-link-active">提交信息</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+        <section class="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-10">
+          <div class="inline-flex rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs uppercase tracking-[0.24em] text-stone-600">
+            Crowdsourced Feedback
+          </div>
+          <h1 class="mt-5 text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl">欢迎真实分享评价经历</h1>
+          <p class="mt-5 max-w-4xl text-base leading-8 text-stone-600">
+            欢迎补充价格、医生信息、手术体验和纠错内容，帮助后来的用户看到更完整、更接近真实的情况。
+          </p>
+        </section>
+
+        <section class="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div class="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-soft">
+            <h2 class="text-2xl font-semibold">填写前提示</h2>
+            <ol class="mt-4 grid gap-3 text-sm leading-7 text-stone-600">
+              <li>1. 请尽量填写真实经历，避免广告式描述。</li>
+              <li>2. 如果能提供价格区间、手术时间、机构名和医生名，信息价值会更高。</li>
+              <li>3. 如果你的反馈包含特殊情况，也欢迎写在备注里。</li>
+              <li>4. 这些内容会帮助后来者更快看清真实情况。</li>
+            </ol>
+          </div>
+
+          <div class="overflow-hidden rounded-[1.75rem] border border-stone-200 bg-white shadow-soft">
+            <iframe
+              data-tally-src="https://tally.so/embed/7RZjrR?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              loading="lazy"
+              width="100%"
+              height="765"
+              frameborder="0"
+              marginheight="0"
+              marginwidth="0"
+              title="医生/诊所评价收集"
+            ></iframe>
+          </div>
+        </section>
+      </main>
+
+    </div>
+
+    <script src="../assets/app.js?v=20260319b" defer></script>
+    <script>
+      var d = document,
+        w = 'https://tally.so/widgets/embed.js',
+        v = function () {
+          if (typeof Tally !== 'undefined') {
+            Tally.loadEmbeds()
+          } else {
+            d.querySelectorAll('iframe[data-tally-src]:not([src])').forEach(function (e) {
+              e.src = e.dataset.tallySrc
+            })
+          }
+        }
+      if (typeof Tally !== 'undefined') {
+        v()
+      } else if (d.querySelector('script[src="' + w + '"]') == null) {
+        var s = d.createElement('script')
+        s.src = w
+        s.onload = v
+        s.onerror = v
+        d.body.appendChild(s)
+      } else {
+        v()
+      }
+    </script>
+  </body>
+</html>
