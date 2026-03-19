@@ -25,8 +25,9 @@ body {
   color: var(--text);
   line-height: 1.65;
   background-image:
-    radial-gradient(circle at top right, rgba(0, 196, 180, 0.08), transparent 28%),
-    linear-gradient(180deg, #eef5f7 0%, #e8f1f5 100%);
+    radial-gradient(circle at top right, rgba(0, 196, 180, 0.16), transparent 24%),
+    radial-gradient(circle at 12% 8%, rgba(15, 76, 129, 0.1), transparent 26%),
+    linear-gradient(180deg, #eef5f7 0%, #e6f0f5 100%);
 }
 
 a {
@@ -93,12 +94,24 @@ body .min-h-screen > header nav {
 
 .nav-link {
   color: var(--text-soft);
+  position: relative;
   transition: color 0.15s ease;
 }
 
 .nav-link:hover,
 .nav-link-active {
-  color: var(--text);
+  color: var(--brand);
+}
+
+.nav-link-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--brand-soft);
 }
 
 .main {
@@ -124,6 +137,54 @@ body .min-h-screen > main article {
   box-shadow: var(--shadow) !important;
 }
 
+.term-card,
+.role-card,
+.article-link {
+  border: 1px solid var(--line) !important;
+  background: var(--surface-muted) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 24px;
+}
+
+.term-card strong,
+.role-card strong,
+.article-link strong {
+  color: var(--brand-soft);
+}
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top right, rgba(0, 196, 180, 0.2), transparent 28%),
+    radial-gradient(circle at 18% 18%, rgba(15, 76, 129, 0.12), transparent 32%),
+    linear-gradient(135deg, rgba(15, 76, 129, 0.06) 0%, rgba(0, 196, 180, 0.05) 100%) !important;
+}
+
+.page-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -45% auto;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 196, 180, 0.15), transparent 68%);
+  pointer-events: none;
+}
+
+.page-kicker {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 196, 180, 0.2);
+  background: rgba(0, 196, 180, 0.08);
+  color: var(--brand);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
 .content-card {
   padding: 28px;
 }
@@ -140,12 +201,55 @@ h2 {
   letter-spacing: -0.04em;
 }
 
+h3,
+h4 {
+  color: var(--brand-deep);
+  letter-spacing: -0.03em;
+}
+
 p,
 li,
 .text-stone-600,
 .text-stone-700,
 .text-stone-500 {
   color: var(--text-soft) !important;
+}
+
+.text-stone-900,
+.text-ink {
+  color: var(--brand-deep) !important;
+}
+
+.text-clay {
+  color: var(--brand-soft) !important;
+}
+
+.bg-sand {
+  background: transparent !important;
+}
+
+.bg-white,
+.bg-stone-50,
+.bg-stone-50\/60,
+.bg-sky-50\/60,
+.bg-amber-50\/60,
+.bg-emerald-50\/60 {
+  background: var(--surface-muted) !important;
+}
+
+.card.bg-white,
+article.bg-white,
+section.bg-white {
+  background: var(--surface) !important;
+}
+
+.border-stone-200,
+.border-stone-200\/80,
+.border-sky-200,
+.border-amber-200,
+.border-emerald-200,
+.border-line {
+  border-color: var(--line) !important;
 }
 
 .button {
@@ -179,6 +283,52 @@ li,
 .button-secondary:hover {
   border-color: rgba(15, 76, 129, 0.42) !important;
   background: rgba(15, 76, 129, 0.08) !important;
+}
+
+button.clinic-filter-btn,
+button[id^="stat-"] {
+  border-color: var(--line) !important;
+  background: var(--surface-muted) !important;
+  color: var(--brand-deep) !important;
+}
+
+button.clinic-filter-btn.is-active,
+button[id^="stat-"].is-active,
+button.clinic-filter-btn[aria-pressed="true"] {
+  border-color: rgba(0, 196, 180, 0.28) !important;
+  background: rgba(0, 196, 180, 0.12) !important;
+  box-shadow: 0 14px 28px rgba(0, 196, 180, 0.12);
+}
+
+input,
+select,
+textarea {
+  border-color: var(--line) !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-soft) !important;
+}
+
+article > p,
+article li,
+main article p,
+main article li {
+  line-height: 1.8;
+}
+
+main article blockquote,
+.source-callout,
+div.border-l-4 {
+  border-left-color: var(--brand-soft) !important;
+  background: var(--surface-muted) !important;
+  border-top: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: var(--radius-lg);
 }
 
 .footer {
@@ -226,6 +376,25 @@ li,
   color: #8a6500;
 }
 
+@media (max-width: 820px) {
+  body .min-h-screen > header > div,
+  .header-inner,
+  .container {
+    width: min(100% - 32px, 1180px) !important;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .content-card,
+  .term-card,
+  .role-card,
+  .article-link {
+    padding: 20px;
+  }
+}
+
 .table-cell-note {
   max-width: 28rem;
   white-space: normal;
@@ -265,6 +434,23 @@ body .min-h-screen > main .bg-amber-50\/60,
 body .min-h-screen > main .bg-emerald-50\/60,
 body .min-h-screen > main .bg-\[\#f8f9fa\] {
   background: var(--surface-muted) !important;
+}
+
+body .min-h-screen > main .border-l-4 {
+  border-left-color: var(--brand) !important;
+}
+
+body .min-h-screen > main .text-clay {
+  color: var(--brand) !important;
+}
+
+body .min-h-screen > main .text-stone-900 {
+  color: var(--brand-deep) !important;
+}
+
+body .min-h-screen > main section:hover,
+body .min-h-screen > main article:hover {
+  border-color: rgba(15, 76, 129, 0.18) !important;
 }
 
 body .min-h-screen > main .border-stone-200,
