@@ -1,8 +1,21 @@
 const formatDoctorStatus = (doctor) => doctor.ishrs_status_cn || doctor.ishrs_status || '—'
 const normalize = (value) => String(value || '').trim()
 
+function getBasePath() {
+  const { pathname, hostname } = window.location
+  if (hostname === 'localhost' || hostname === '127.0.0.1') return ''
+  const segments = pathname.split('/').filter(Boolean)
+  if (segments.length <= 1) return ''
+  return `/${segments[0]}`
+}
+
+function withBase(path) {
+  const cleanPath = `/${String(path || '').replace(/^\/+/, '')}`
+  return `${getBasePath()}${cleanPath}`
+}
+
 async function loadJson(path) {
-  const response = await fetch(path)
+  const response = await fetch(withBase(path))
   if (!response.ok) throw new Error(`Failed to load ${path}`)
   return response.json()
 }
@@ -18,7 +31,7 @@ function resolveDoctorPhoto(photo) {
   if (!value) return ''
   const filename = value.split('/').pop() || ''
   const basename = filename.replace(/\.(jpg|jpeg|png|webp)$/i, '')
-  return `/assets/doctors/${basename}.jpeg`
+  return withBase(`assets/doctors/${basename}.jpeg`)
 }
 
 function statusScore(doctor) {
