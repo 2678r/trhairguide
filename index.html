@@ -105,7 +105,7 @@
       }
 
       .hero {
-        padding: 28px;
+        padding: 36px;
       }
 
       .eyebrow {
@@ -163,7 +163,7 @@
       }
 
       .content-card {
-        padding: 24px;
+        padding: 28px;
       }
 
       .content-card h2 {
@@ -192,6 +192,39 @@
         background: var(--surface-muted);
         border-radius: var(--radius-md);
         padding: 20px;
+      }
+
+      .steps-grid {
+        margin-top: 20px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .step-card {
+        border: 1px solid var(--line);
+        background: var(--surface-muted);
+        border-radius: var(--radius-md);
+        padding: 22px;
+      }
+
+      .step-index {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--brand-soft);
+      }
+
+      .step-card h3 {
+        margin: 10px 0 0;
+        font-size: 22px;
+        letter-spacing: -0.03em;
+      }
+
+      .step-card p {
+        margin: 12px 0 0;
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--text-soft);
       }
 
       .role-card h3 {
@@ -307,6 +340,10 @@
           grid-template-columns: 1fr;
         }
 
+        .steps-grid {
+          grid-template-columns: 1fr;
+        }
+
         .lead {
           font-size: 16px;
         }
@@ -341,38 +378,46 @@
             <div class="card hero">
               <h1>土耳其植发透明指南</h1>
               <p class="hero-question">
-                你花了几万块钱做植发。<br />
-                <strong>真正做手术的人，</strong><br />
-                <strong>你真的知道是谁吗？</strong>
+                你花了几万块钱去做植发，<br />
+                却可能根本不知道：<br />
+                <strong>真正为你做手术的人是谁？</strong><br />
+                <strong>你的钱到底花在了哪里？</strong>
               </p>
               <p class="lead">
-                很多人手术后才突然意识到：<br />
-                自己了解的，只是营销话术。<br />
-                不是手术的真实执行。
+                土耳其是全球最热门的植发目的地。<br />
+                但在光鲜宣传背后，常常隐藏着模糊的团队分工、高比例的中介抽成，以及“医生监督”这类似是而非的说法。
+              </p>
+              <p class="lead">
+                很多患者手术后才突然意识到：<br />
+                自己真正了解的，只是营销话术，而不是手术的真实执行。
               </p>
             </div>
           </section>
 
           <section class="section">
             <div class="card content-card">
-              <h2>设计 → 取发 → 打孔 → 移植</h2>
+              <h2>一台植发手术通常包括这四步，每一步都不简单</h2>
               <p>
-                一台植发手术通常包括这四步。每一步都不简单，真正的差异往往就藏在这些步骤分别由谁完成、完成到什么程度。
+                真正的差异，往往就藏在这些步骤分别由谁完成、完成到什么程度。
               </p>
-              <div class="grid roles-grid">
-                <article class="role-card">
+              <div class="grid steps-grid">
+                <article class="step-card">
+                  <div class="step-index">Step 1</div>
                   <h3>设计</h3>
                   <p>决定发际线、区域分配和整体规划。设计如果失误，后面步骤再细也很难补回来。</p>
                 </article>
-                <article class="role-card">
+                <article class="step-card">
+                  <div class="step-index">Step 2</div>
                   <h3>取发</h3>
                   <p>关系到供体保护、毛囊完整性和未来修复空间，不只是“把毛囊拿出来”这么简单。</p>
                 </article>
-                <article class="role-card">
+                <article class="step-card">
+                  <div class="step-index">Step 3</div>
                   <h3>打孔</h3>
                   <p>决定角度、方向和密度布局，是自然度最关键的步骤之一。按法规，这一步必须由医生完成。</p>
                 </article>
-                <article class="role-card">
+                <article class="step-card">
+                  <div class="step-index">Step 4</div>
                   <h3>移植</h3>
                   <p>关系到毛囊摆放、成活率和最终视觉覆盖感，团队熟练度会直接影响结果。</p>
                 </article>
@@ -382,9 +427,9 @@
 
           <section class="section">
             <div class="card content-card">
-              <h2>把角色拆开来看</h2>
+              <h2>真正影响结果和费用的，往往是下面这些角色</h2>
               <p>
-                真正影响结果和费用的，往往不是宣传页写得多漂亮，而是下面这些角色各自承担什么工作。
+                不是谁声音最大，而是谁真正参与了关键步骤。
               </p>
               <div class="grid roles-grid">
                 <article class="role-card">
@@ -397,7 +442,7 @@
                 </article>
                 <article class="role-card">
                   <h3>麻醉师</h3>
-                  <p>如果使用镇静或更深麻醉，安全重点不只是舒适，而是谁负责麻醉和全程监测。</p>
+                  <p>如果使用镇静或更深麻醉，安全重点不只是舒适，而是谁负责监测。</p>
                 </article>
                 <article class="role-card">
                   <h3>销售 / 中介</h3>
@@ -409,7 +454,7 @@
 
           <section class="section">
             <div class="card content-card">
-              <h2>从这里开始</h2>
+              <h2>从这里开始自查</h2>
               <div class="cta-row">
                 <a class="button button-primary" href="doctors/">查看医生库</a>
                 <a class="button button-secondary" href="clinics/">查看诊所库</a>
@@ -447,13 +492,9 @@
               <ul class="source-list">
                 <li><a href="https://www.resmigazete.gov.tr/eskiler/2023/05/20230506-11.htm" target="_blank" rel="noreferrer"><strong>土耳其卫生部植发单位管理条例（2023）</strong></a></li>
                 <li><a href="https://www.resmigazete.gov.tr/eskiler/2025/09/20250912-2.htm" target="_blank" rel="noreferrer"><strong>土耳其卫生部植发单位管理条例修订版（2025）</strong></a></li>
-                <li><a href="https://sacekimmerkezi.saglik.gov.tr/" target="_blank" rel="noreferrer"><strong>合法植发中心官方查询入口</strong></a></li>
                 <li><a href="https://ishrs.org/" target="_blank" rel="noreferrer"><strong>ISHRS 官网</strong></a></li>
                 <li><a href="https://abhrs.org/certification/" target="_blank" rel="noreferrer"><strong>ABHRS 认证说明</strong></a></li>
               </ul>
-              <p class="mt-5 text-sm leading-8 text-stone-600">
-                本网站所有医生与诊所信息均基于以上公开来源整理，仅供信息参考，请以最新官方信息为准。
-              </p>
             </div>
           </section>
         </div>
