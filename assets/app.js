@@ -14,6 +14,23 @@ function withBase(path) {
   return `${getBasePath()}${cleanPath}`
 }
 
+function injectGoogleAnalytics() {
+  if (window.gtag || document.querySelector('script[data-ga="gtag-loader"]')) return
+
+  window.dataLayer = window.dataLayer || []
+  window.gtag = function gtag() {
+    window.dataLayer.push(arguments)
+  }
+  window.gtag('js', new Date())
+  window.gtag('config', 'G-TKD1Q50FLF')
+
+  const script = document.createElement('script')
+  script.async = true
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TKD1Q50FLF'
+  script.dataset.ga = 'gtag-loader'
+  document.head.appendChild(script)
+}
+
 function injectSharedFooter() {
   if (document.querySelector('footer.footer')) return
   const shell = document.querySelector('.min-h-screen, .shell')
@@ -388,6 +405,7 @@ function setupClinics() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  injectGoogleAnalytics()
   injectSharedFooter()
   const page = document.body.dataset.page
   if (page === 'home') setupHome()
