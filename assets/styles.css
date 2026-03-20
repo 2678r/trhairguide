@@ -320,15 +320,50 @@ main article li {
   line-height: 1.8;
 }
 
+main article {
+  border-radius: var(--radius-lg) !important;
+}
+
+main article > .inline-flex.rounded-full,
+main article > div.inline-flex.rounded-full {
+  border-color: rgba(15, 76, 129, 0.12) !important;
+  background: transparent !important;
+  color: var(--text-soft) !important;
+}
+
+main article > p,
+main article section p,
+main article section li {
+  max-width: 72ch;
+}
+
+main article section {
+  margin-top: 2rem;
+}
+
+main article section[class*="rounded-[1.5rem]"][class*="bg-stone-50"],
+main article div[class*="rounded-[1.5rem]"][class*="bg-stone-50"],
 main article blockquote,
 .source-callout,
 div.border-l-4 {
-  border-left-color: var(--brand-soft) !important;
-  background: var(--surface-muted) !important;
+  border-left: 4px solid var(--brand-soft) !important;
+  background: rgba(0, 196, 180, 0.05) !important;
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+}
+
+main article hr {
+  margin-top: 2.5rem !important;
+  margin-bottom: 2.5rem !important;
+}
+
+main article > div.mt-8:last-child {
+  margin-top: 2rem !important;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--line);
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  border-radius: var(--radius-lg);
 }
 
 .footer {

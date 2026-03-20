@@ -264,10 +264,16 @@ function setupClinics() {
       const statDoctorCount = document.getElementById('stat-doctor-count')
       const statHospitalCount = document.getElementById('stat-hospital-count')
       const statPriceCount = document.getElementById('stat-price-count')
+      const overviewDoctorCount = document.getElementById('overview-doctor-count')
+      const overviewHospitalCount = document.getElementById('overview-hospital-count')
+      const overviewPriceCount = document.getElementById('overview-price-count')
       if (statAllCount) statAllCount.textContent = clinics.length
       if (statDoctorCount) statDoctorCount.textContent = namedDoctorCount
       if (statHospitalCount) statHospitalCount.textContent = hospitalCount
       if (statPriceCount) statPriceCount.textContent = priceCount
+      if (overviewDoctorCount) overviewDoctorCount.textContent = namedDoctorCount
+      if (overviewHospitalCount) overviewHospitalCount.textContent = hospitalCount
+      if (overviewPriceCount) overviewPriceCount.textContent = priceCount
 
       const syncButtons = () => {
         const buttonMap = {
