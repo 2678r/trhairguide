@@ -190,6 +190,64 @@ function websiteHost(url) {
   return value.replace(/^https?:\/\//, '').replace(/\/$/, '')
 }
 
+function formatRating(value) {
+  const numeric = Number(value)
+  if (!Number.isFinite(numeric) || numeric <= 0) return ''
+  return numeric.toFixed(1)
+}
+
+function formatReviewCount(value) {
+  const numeric = Number(value)
+  if (!Number.isFinite(numeric) || numeric <= 0) return ''
+  return String(numeric)
+}
+
+function isLikelyUrl(value) {
+  const raw = normalize(value)
+  return /^https?:\/\//i.test(raw) || /^www\./i.test(raw)
+}
+
+function normalizeUrl(value) {
+  const raw = normalize(value)
+  if (!raw) return ''
+  if (/^https?:\/\//i.test(raw)) return raw
+  if (/^www\./i.test(raw)) return `https://${raw}`
+  return raw
+}
+
+function getGoogleLink(item) {
+  const raw = normalize(item.google_summary_cn)
+  if (!isLikelyUrl(raw)) return ''
+  return normalizeUrl(raw)
+}
+
+function getGoogleSummaryText(item) {
+  const raw = normalize(item.google_summary_cn)
+  if (!raw || isLikelyUrl(raw)) return ''
+  return raw
+}
+
+function hasGoogleSnapshot(item) {
+  return Boolean(formatRating(item.google_rating) || formatReviewCount(item.google_review_count) || getGoogleLink(item) || getGoogleSummaryText(item))
+}
+
+function renderGoogleSnapshot(item) {
+  const rating = formatRating(item.google_rating)
+  const count = Number(item.google_review_count)
+  const checkedAt = normalize(item.google_checked_at)
+  const googleLink = getGoogleLink(item)
+  const googleSummary = getGoogleSummaryText(item)
+  const parts = []
+  if (rating) parts.push(`Google ${rating} / 5`)
+  if (Number.isFinite(count) && count > 0) parts.push(`${count} 条评价`)
+  if (checkedAt && (rating || (Number.isFinite(count) && count > 0) || googleLink || googleSummary)) parts.push(`核对 ${checkedAt}`)
+  return parts.join(' · ')
+}
+
+function renderGoogleSummary(item, emptyText = '待更新：Google 评分、评价数量和摘要尚未整理。') {
+  return getGoogleSummaryText(item) || emptyText
+}
+
 function resolveDoctorPhoto(photo) {
   const value = normalize(photo)
   if (!value) return ''
@@ -265,6 +323,11 @@ function clinicSurgeryModeLabel(clinic) {
   return '执行模式未公开'
 }
 
+function clinicSurgeryModeCompactLabel(clinic) {
+  if (normalize(clinic.lead_doctor)) return '具名医生'
+  return '未公开'
+}
+
 function setupDoctors() {
   const grid = document.getElementById('doctor-grid')
   const count = document.getElementById('doctor-count')
@@ -299,6 +362,7 @@ function setupDoctors() {
             doctor.note_en,
             doctor.website,
             doctor.background_type_cn,
+            doctor.google_summary_cn,
           ]
             .filter(Boolean)
             .some((value) => String(value).toLowerCase().includes(q))
@@ -327,6 +391,8 @@ function setupDoctors() {
           const initials = (doctor.doctor_name_cn || doctor.doctor_name_en || 'TR').slice(0, 2)
           const status = normalize(doctor.ishrs_status).toLowerCase()
           const statusClass = status === 'fellow' ? 'pill-success' : status === 'member' ? 'pill-brand' : ''
+          const googleSnapshot = renderGoogleSnapshot(doctor) || 'Google 评分待更新'
+          const googleSummary = renderGoogleSummary(doctor)
           return `
             <article class="group overflow-hidden rounded-[2rem] border border-stone-200 bg-white shadow-soft transition hover:-translate-y-1 hover:border-stone-300">
               <div class="grid gap-0 lg:grid-cols-[260px_minmax(0,1fr)]">
@@ -372,6 +438,23 @@ function setupDoctors() {
                       </div>
                     </div>
 
+                    <details class="rounded-[1.5rem] border border-amber-200 bg-amber-50/50 p-4">
+                      <summary class="cursor-pointer list-none">
+                        <div class="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
+                          <div class="min-w-0">
+                            <div class="text-xs uppercase tracking-[0.18em] text-stone-400">Google 评价快照</div>
+                            <div class="mt-2 text-sm font-medium leading-7 text-stone-900">${googleSnapshot}</div>
+                            <div class="mt-1 text-sm leading-7 text-stone-600">${googleSummary}</div>
+                          </div>
+                          <div class="shrink-0 text-xs font-medium uppercase tracking-[0.16em] text-clay">查看摘要</div>
+                        </div>
+                      </summary>
+                      <div class="mt-4 border-t border-amber-200 pt-4 text-sm leading-7 text-stone-700">
+                        ${googleSummary}
+                        <p class="mt-3 text-xs leading-6 text-stone-500">Google 评分和评价数量仅为公开平台快照，不等同于医疗质量、医生参与度或结果保证。</p>
+                      </div>
+                    </details>
+
                     <div class="border-t border-stone-100 pt-4 text-sm">
                       <a href="${doctor.website || '#'}" ${doctor.website ? 'target="_blank" rel="noreferrer"' : ''} class="font-medium text-clay ${doctor.website ? 'hover:underline' : 'pointer-events-none text-stone-400'}">${doctor.website ? websiteHost(doctor.website) : '暂无官网'}</a>
                     </div>
@@ -396,47 +479,44 @@ function setupClinics() {
   const searchInput = document.getElementById('clinic-search')
   const sortSelect = document.getElementById('clinic-sort')
   const statAllBtn = document.getElementById('stat-all')
+  const statUpdatedBtn = document.getElementById('stat-updated')
+  const statHighRatingBtn = document.getElementById('stat-high-rating')
+  const statHighVolumeBtn = document.getElementById('stat-high-volume')
   const statDoctorBtn = document.getElementById('stat-doctor')
-  const statHospitalBtn = document.getElementById('stat-hospital')
-  const statPriceBtn = document.getElementById('stat-price')
   let activeStat = 'all'
 
   loadJson('/data/clinics.json')
     .then((clinics) => {
       total.textContent = clinics.length
+      const updatedCount = clinics.filter((clinic) => normalize(clinic.price_transparency) === 'package').length
+      const highRatingCount = clinics.filter((clinic) => Number(clinic.google_rating) >= 4.7).length
+      const highVolumeCount = clinics.filter((clinic) => Number(clinic.google_review_count) >= 1000).length
       const namedDoctorCount = clinics.filter((clinic) => normalize(clinic.lead_doctor) !== '').length
-      const hospitalCount = clinics.filter((clinic) => normalize(clinic.facility_type).toLowerCase() === 'hospital').length
-      const priceCount = clinics.filter((clinic) => normalize(clinic.price_transparency) !== '').length
 
       const statAllCount = document.getElementById('stat-all-count')
+      const statUpdatedCount = document.getElementById('stat-updated-count')
+      const statHighRatingCount = document.getElementById('stat-high-rating-count')
+      const statHighVolumeCount = document.getElementById('stat-high-volume-count')
       const statDoctorCount = document.getElementById('stat-doctor-count')
-      const statHospitalCount = document.getElementById('stat-hospital-count')
-      const statPriceCount = document.getElementById('stat-price-count')
-      const overviewDoctorCount = document.getElementById('overview-doctor-count')
-      const overviewHospitalCount = document.getElementById('overview-hospital-count')
-      const overviewPriceCount = document.getElementById('overview-price-count')
       if (statAllCount) statAllCount.textContent = clinics.length
+      if (statUpdatedCount) statUpdatedCount.textContent = updatedCount
+      if (statHighRatingCount) statHighRatingCount.textContent = highRatingCount
+      if (statHighVolumeCount) statHighVolumeCount.textContent = highVolumeCount
       if (statDoctorCount) statDoctorCount.textContent = namedDoctorCount
-      if (statHospitalCount) statHospitalCount.textContent = hospitalCount
-      if (statPriceCount) statPriceCount.textContent = priceCount
-      if (overviewDoctorCount) overviewDoctorCount.textContent = namedDoctorCount
-      if (overviewHospitalCount) overviewHospitalCount.textContent = hospitalCount
-      if (overviewPriceCount) overviewPriceCount.textContent = priceCount
 
       const syncButtons = () => {
         const buttonMap = {
           all: statAllBtn,
+          updated: statUpdatedBtn,
+          rating: statHighRatingBtn,
+          volume: statHighVolumeBtn,
           doctor: statDoctorBtn,
-          hospital: statHospitalBtn,
-          price: statPriceBtn,
         }
         Object.entries(buttonMap).forEach(([key, button]) => {
           if (!button) return
-          button.className = `clinic-filter-btn inline-flex w-full items-center justify-between rounded-[1.15rem] border px-4 py-3 text-left text-sm font-medium transition ${
-            activeStat === key
-              ? 'border-[#8b5e34] bg-[#8b5e34] text-white shadow-[0_14px_30px_rgba(139,94,52,0.22)]'
-              : 'border-[#dcc8b0] bg-[#f7ecdf] text-stone-800 hover:border-[#b99976] hover:bg-[#f2e2cf]'
-          }`
+          const isActive = activeStat === key
+          button.className = `clinic-filter-btn inline-flex w-full items-center justify-between rounded-[1.15rem] border px-4 py-3 text-left text-sm font-medium transition ${isActive ? 'is-active' : ''}`
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false')
         })
       }
 
@@ -446,7 +526,10 @@ function setupClinics() {
 
         let result = clinics.filter((clinic) => {
           const hasDoctor = normalize(clinic.lead_doctor) !== ''
-          const hasPrice = normalize(clinic.price_transparency) !== ''
+          const hasGoogle = hasGoogleSnapshot(clinic)
+          const hasPackagePrice = normalize(clinic.price_transparency) === 'package'
+          const hasHighRating = Number(clinic.google_rating) >= 4.7
+          const hasHighVolume = Number(clinic.google_review_count) >= 1000
 
           const matchSearch =
             !q ||
@@ -458,6 +541,7 @@ function setupClinics() {
               clinic.note,
               clinic.real_review,
               clinic.website,
+              clinic.google_summary_cn,
               clinicTypeLabel(clinic),
               clinicStructure(clinic),
             ]
@@ -466,9 +550,11 @@ function setupClinics() {
 
           const matchStat =
             activeStat === 'all' ||
+            (activeStat === 'updated' && hasPackagePrice) ||
+            (activeStat === 'rating' && hasHighRating) ||
+            (activeStat === 'volume' && hasHighVolume) ||
             (activeStat === 'doctor' && hasDoctor) ||
-            (activeStat === 'hospital' && normalize(clinic.facility_type).toLowerCase() === 'hospital') ||
-            (activeStat === 'price' && hasPrice)
+            false
 
           return matchSearch && matchStat
         })
@@ -477,8 +563,16 @@ function setupClinics() {
           if (sort === 'name') {
             return (a.clinic_name || a.official_name).localeCompare(b.clinic_name || b.official_name, 'zh-Hans-CN-u-co-pinyin')
           }
+          if (sort === 'rating') {
+            const ratingDiff = Number(b.google_rating || 0) - Number(a.google_rating || 0)
+            if (ratingDiff !== 0) return ratingDiff
+            return Number(b.google_review_count || 0) - Number(a.google_review_count || 0)
+          }
+          if (sort === 'reviews') {
+            return Number(b.google_review_count || 0) - Number(a.google_review_count || 0)
+          }
           if (sort === 'recent') {
-            return normalize(b.last_checked).localeCompare(normalize(a.last_checked))
+            return normalize(b.google_checked_at).localeCompare(normalize(a.google_checked_at))
           }
           return 0
         })
@@ -486,27 +580,66 @@ function setupClinics() {
         count.textContent = result.length
         tableBody.innerHTML = result
           .map((clinic) => {
+            const rating = formatRating(clinic.google_rating)
+            const reviewCount = formatReviewCount(clinic.google_review_count)
+            const googleLink = getGoogleLink(clinic)
+            const googleParts = []
+            if (rating) googleParts.push(`Google ${rating} / 5`)
+            if (reviewCount) googleParts.push(`${reviewCount} 条评价`)
+            if (googleLink) {
+              googleParts.push(
+                `<a href="${googleLink}" target="_blank" rel="noreferrer" class="inline-flex items-center rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs font-semibold tracking-[0.08em] text-sky-700 transition hover:border-sky-300 hover:bg-sky-100 hover:text-sky-800">Google 地址</a>`
+              )
+            }
+            if (clinic.website) {
+              googleParts.push(
+                `<a href="${clinic.website}" target="_blank" rel="noreferrer" class="inline-flex items-center rounded-full border border-sky-200 bg-sky-50 px-2.5 py-1 text-xs font-semibold tracking-[0.08em] text-sky-700 transition hover:border-sky-300 hover:bg-sky-100 hover:text-sky-800">官网</a>`
+              )
+            }
+            const googleInline =
+              googleParts.join('<span class="shrink-0 text-stone-300">·</span>') ||
+              '<span class="text-stone-500">Google 评分待更新</span>'
+            const doctorName = normalize(clinic.lead_doctor) ? formatLeadDoctorName(clinic.lead_doctor) : ''
+            const publicPrice = normalize(clinic.price_transparency) ? clinicPriceLabel(clinic) : ''
+            const noteText = normalize(clinic.note)
             return `
-              <tr class="border-b border-stone-200 align-top transition hover:bg-stone-50/70">
-                <td class="px-4 py-5 text-stone-900">
-                  <div class="font-semibold text-stone-900">${clinic.clinic_name || '—'}</div>
-                  <div class="mt-2 text-sm text-stone-500">${clinicTypeLabel(clinic)}</div>
+              <tr class="border-b border-stone-200 transition hover:bg-stone-50/70">
+                <td class="px-0 py-0 text-stone-900">
+                  <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3">
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-2 overflow-hidden whitespace-nowrap">
+                          <span class="truncate text-[17px] font-semibold tracking-[-0.02em] leading-6 text-stone-900" title="${clinic.clinic_name || '—'}">${clinic.clinic_name || '—'}</span>
+                          <span class="shrink-0 rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-[11px] font-medium text-sky-700">${clinicTypeLabel(clinic)}</span>
+                        </div>
+                        <div class="mt-2 border-t border-stone-200/80 pt-2">
+                          <div class="overflow-hidden rounded-full border border-sky-200 bg-sky-50/80 px-2.5 py-1 text-xs font-medium leading-5 text-stone-700">
+                          <div class="flex items-center gap-1.5 overflow-hidden whitespace-nowrap">
+                            ${googleInline}
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="shrink-0 text-xs font-semibold tracking-[0.08em] text-sky-700 transition group-open:rotate-180">展开</span>
+                    </summary>
+                    <div class="border-t border-stone-200 bg-stone-50/60 px-4 py-3">
+                      <div class="grid divide-stone-200 text-sm leading-6 text-stone-700 md:grid-cols-3 md:divide-x">
+                        <div class="py-1 md:pr-4">
+                          <div class="text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">医生</div>
+                          <div class="mt-1">${doctorName || '—'}</div>
+                        </div>
+                        <div class="border-t border-stone-200 pt-3 md:border-t-0 md:px-4 md:pt-1">
+                          <div class="text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">公开价格</div>
+                          <div class="mt-1">${publicPrice || '—'}</div>
+                        </div>
+                        <div class="border-t border-stone-200 pt-3 md:border-t-0 md:pl-4 md:pt-1">
+                          <div class="text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">备注</div>
+                          <div class="mt-1">${noteText || '—'}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </details>
                 </td>
-                <td class="px-4 py-5 text-stone-700 break-words">${formatLeadDoctorName(clinic.lead_doctor)}</td>
-                <td class="px-4 py-5 text-sm leading-7 text-stone-600 break-words">${clinicSurgeryModeLabel(clinic)}</td>
-                <td class="px-4 py-5 text-stone-700 whitespace-nowrap">
-                  <a
-                    href="${clinic.website || '#'}"
-                    ${clinic.website ? 'target="_blank" rel="noreferrer"' : ''}
-                    class="${
-                      clinic.website
-                        ? 'inline-flex items-center rounded-full border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-semibold tracking-[0.08em] text-sky-700 transition hover:border-sky-300 hover:bg-sky-100 hover:text-sky-800'
-                        : 'pointer-events-none text-stone-400'
-                    }"
-                  >${clinic.website ? '打开官网' : '—'}</a>
-                </td>
-                <td class="px-4 py-5"><span class="pill ${normalize(clinic.price_transparency) ? 'pill-success' : 'pill-brand'}">${clinicPriceLabel(clinic)}</span></td>
-                <td class="table-cell-note px-4 py-5 text-sm leading-7 text-stone-600 whitespace-pre-line break-words">${normalize(clinic.note) || '—'}</td>
               </tr>
             `
           })
@@ -518,9 +651,10 @@ function setupClinics() {
       ;[searchInput, sortSelect].forEach((el) => el.addEventListener('input', render))
       ;[
         ['all', statAllBtn],
+        ['updated', statUpdatedBtn],
+        ['rating', statHighRatingBtn],
+        ['volume', statHighVolumeBtn],
         ['doctor', statDoctorBtn],
-        ['hospital', statHospitalBtn],
-        ['price', statPriceBtn],
       ].forEach(([key, button]) => {
         if (!button) return
         button.addEventListener('click', () => {
@@ -536,7 +670,7 @@ function setupClinics() {
       if (tableBody) {
         tableBody.innerHTML = `
           <tr>
-            <td colspan="6" class="px-4 py-8 text-center text-sm text-red-600">
+            <td colspan="1" class="px-4 py-8 text-center text-sm text-red-600">
               诊所数据加载失败：${error.message}
             </td>
           </tr>

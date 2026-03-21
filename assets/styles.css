@@ -287,17 +287,18 @@ section.bg-white {
 
 button.clinic-filter-btn,
 button[id^="stat-"] {
-  border-color: var(--line) !important;
-  background: var(--surface-muted) !important;
-  color: var(--brand-deep) !important;
+  border-color: #c8dce7 !important;
+  background: #f2f8fb !important;
+  color: #0f4c81 !important;
 }
 
 button.clinic-filter-btn.is-active,
 button[id^="stat-"].is-active,
 button.clinic-filter-btn[aria-pressed="true"] {
-  border-color: rgba(0, 196, 180, 0.28) !important;
-  background: rgba(0, 196, 180, 0.12) !important;
-  box-shadow: 0 14px 28px rgba(0, 196, 180, 0.12);
+  border-color: #0f4c81 !important;
+  background: #0f4c81 !important;
+  color: #ffffff !important;
+  box-shadow: 0 14px 28px rgba(15, 76, 129, 0.22) !important;
 }
 
 input,
