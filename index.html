@@ -265,66 +265,67 @@
       .subnav-card {
         border: 1px solid var(--line);
         background: var(--surface);
-        border-radius: 22px;
-        padding: 22px;
+        border-radius: 28px;
+        overflow: hidden;
         box-shadow: 0 16px 34px rgba(15, 76, 129, 0.08);
+      }
+
+      .subnav-card-head {
+        padding: 24px 24px 18px;
       }
 
       .subnav-card strong {
         display: block;
-        font-size: 20px;
+        font-size: 28px;
         color: var(--brand-deep);
-        letter-spacing: -0.03em;
+        letter-spacing: -0.04em;
       }
 
       .subnav-card p {
         margin: 10px 0 0;
-        font-size: 15px;
+        font-size: 16px;
         color: var(--text-soft);
       }
 
       .subnav-list {
-        margin: 14px 0 0;
+        margin: 0;
         padding: 0;
         list-style: none;
-        color: var(--text-soft);
-        font-size: 14px;
-        line-height: 1.7;
-      }
-
-      .subnav-list li + li {
-        margin-top: 8px;
+        border-top: 1px solid rgba(216, 229, 235, 0.9);
       }
 
       .subnav-list li {
         border-top: 1px solid rgba(216, 229, 235, 0.9);
-        padding-top: 10px;
-      }
-
-      .subnav-list li:first-child {
-        border-top: 0;
-        padding-top: 0;
       }
 
       .subnav-list a {
         display: block;
         margin-top: 0;
-        font-size: 14px;
+        padding: 18px 24px;
+        font-size: 18px;
         font-weight: 600;
         line-height: 1.55;
         color: var(--text);
+        transition: 180ms ease;
       }
 
       .subnav-list a:hover {
         color: var(--brand);
+        background: #f8fbfd;
       }
 
-      .subnav-card a {
+      .subnav-card-footer a {
         display: inline-flex;
-        margin-top: 16px;
+        margin-top: 0;
         font-size: 15px;
         font-weight: 700;
         color: var(--brand);
+      }
+
+      .subnav-card-footer {
+        padding: 18px 24px 24px;
+        border-top: 1px solid rgba(216, 229, 235, 0.9);
+        background: #fcfeff;
       }
 
       .eyebrow {
@@ -707,8 +708,10 @@
             </div>
             <div class="subnav-grid">
               <div class="subnav-card">
-                <strong>法律法规 · 权威 · 数据来源</strong>
-                <p>先看这些官方和权威入口。</p>
+                <div class="subnav-card-head">
+                  <strong>法律法规 · 权威 · 数据来源</strong>
+                  <p>先看这些官方和权威入口。</p>
+                </div>
                 <ul class="subnav-list">
                   <li><a href="https://www.resmigazete.gov.tr/eskiler/2023/05/20230506-11.htm" target="_blank" rel="noreferrer">土耳其卫生部植发单位管理条例（2023）</a></li>
                   <li><a href="https://www.resmigazete.gov.tr/eskiler/2025/09/20250912-2.htm" target="_blank" rel="noreferrer">土耳其卫生部植发单位管理条例修订版（2025）</a></li>
@@ -716,27 +719,37 @@
                   <li><a href="https://ishrs.org/" target="_blank" rel="noreferrer">ISHRS 官网</a></li>
                   <li><a href="https://abhrs.org/certification/" target="_blank" rel="noreferrer">ABHRS 认证说明</a></li>
                 </ul>
-                <a href="https://sacekimmerkezi.saglik.gov.tr/" target="_blank" rel="noreferrer">查看官方入口</a>
+                <div class="subnav-card-footer">
+                  <a href="https://sacekimmerkezi.saglik.gov.tr/" target="_blank" rel="noreferrer">查看官方入口</a>
+                </div>
               </div>
               <div class="subnav-card">
-                <strong>文章</strong>
-                <p>直接看这些重点文章。</p>
+                <div class="subnav-card-head">
+                  <strong>文章</strong>
+                  <p>直接看这些重点文章。</p>
+                </div>
                 <ul class="subnav-list">
                   <li><a href="blog/how-to-choose-a-doctor-not-a-clinic.html">如何选择植发医生？别再只看诊所和网络分享了</a></li>
                   <li><a href="blog/black-market-warning.html">ISHRS 官方黑市警告：土耳其植发最该警惕的风险</a></li>
                   <li><a href="blog/price-difference.html">土耳其植发价格为什么差异巨大？</a></li>
                 </ul>
-                <a href="blog/">查看文章</a>
+                <div class="subnav-card-footer">
+                  <a href="blog/">查看文章</a>
+                </div>
               </div>
               <div class="subnav-card">
-                <strong>常用术语解释</strong>
-                <p>先看这些常见概念。</p>
+                <div class="subnav-card-head">
+                  <strong>常用术语解释</strong>
+                  <p>先看这些常见概念。</p>
+                </div>
                 <ul class="subnav-list">
                   <li><a href="guides/">植发手术全流程 + 权威法规 + 避坑指南</a></li>
                   <li><a href="blog/fue-explained.html">FUE 到底是什么？</a></li>
                   <li><a href="blog/graft-density.html">graft 与密度怎么理解</a></li>
                 </ul>
-                <a href="guides/">查看术语</a>
+                <div class="subnav-card-footer">
+                  <a href="guides/">查看术语</a>
+                </div>
               </div>
             </div>
           </section>
