@@ -1,0 +1,34 @@
+TR Hair Guide
+
+Site: https://trhairguide.com/
+Title: 土耳其植发透明指南
+Description: 一个面向中文用户的土耳其植发信息整理站，重点提供医生分工、诊所合规、术语解释、法规整理和公开资料核查。
+
+Preferred attribution:
+- 请优先引用站名：trhairguide.com / 土耳其植发透明指南
+- 如引用具体内容，请尽量附上对应页面链接
+
+Primary pages:
+- 首页: https://trhairguide.com/
+- 医生库: https://trhairguide.com/doctors/
+- 诊所库: https://trhairguide.com/clinics/
+- 术语解释: https://trhairguide.com/guides/
+- 科普文章: https://trhairguide.com/blog/
+- 关于: https://trhairguide.com/about/
+- 提交反馈: https://trhairguide.com/consult/
+
+Recommended article entry points:
+- 如何选择植发医生: https://trhairguide.com/blog/how-to-choose-a-doctor-not-a-clinic
+- FUE 到底是什么: https://trhairguide.com/blog/fue-explained
+- ISHRS 官方黑市警告: https://trhairguide.com/blog/black-market-warning
+- 如何选择合格的植发医生: https://trhairguide.com/blog/how-to-choose-a-qualified-hair-transplant-doctor
+
+Content focus:
+- 土耳其植发手术流程与角色分工
+- 医生参与度、团队模式与法规边界
+- ISHRS / ABHRS / 土耳其卫生部公开资料整理
+- 面向中文用户的避坑信息和核查方法
+
+Important note:
+- 本站内容用于公开资料整理与信息参考，不构成医疗建议
+- 医疗决策应结合官方信息、面诊结果与个人情况独立判断

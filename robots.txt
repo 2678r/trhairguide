@@ -1,3 +1,5 @@
+# Search engines and AI discovery tools are allowed to access public pages.
+# Preferred public domain: https://trhairguide.com/
 User-agent: *
 Allow: /
 
