@@ -35,6 +35,18 @@ function siteOrigin() {
   return 'https://trhairguide.com'
 }
 
+function upsertMeta(selector, attributes) {
+  let node = document.querySelector(selector)
+  if (!node) {
+    node = document.createElement('meta')
+    document.head.appendChild(node)
+  }
+  Object.entries(attributes).forEach(([key, value]) => {
+    node.setAttribute(key, value)
+  })
+  return node
+}
+
 function readMeta(selector, attr = 'content') {
   const node = document.querySelector(selector)
   return node ? normalize(node.getAttribute(attr)) : ''
@@ -48,6 +60,42 @@ function detectDateModified() {
   const text = document.body ? document.body.textContent || '' : ''
   const match = text.match(/更新于\s*(\d{4}-\d{2}-\d{2})/)
   return match ? match[1] : ''
+}
+
+function breadcrumbItemsForPath(pathname) {
+  const items = [{ name: '首页', url: `${siteOrigin()}/` }]
+
+  if (pathname === '/doctors/') {
+    items.push({ name: '医生库', url: `${siteOrigin()}/doctors/` })
+  } else if (pathname === '/clinics/') {
+    items.push({ name: '诊所库', url: `${siteOrigin()}/clinics/` })
+  } else if (pathname === '/guides/') {
+    items.push({ name: '术语解释', url: `${siteOrigin()}/guides/` })
+  } else if (pathname === '/blog/') {
+    items.push({ name: '科普文章', url: `${siteOrigin()}/blog/` })
+  } else if (pathname === '/about/') {
+    items.push({ name: '关于', url: `${siteOrigin()}/about/` })
+  } else if (pathname === '/consult/') {
+    items.push({ name: '提交反馈', url: `${siteOrigin()}/consult/` })
+  } else if (pathname.startsWith('/blog/') && pathname !== '/blog/') {
+    items.push({ name: '科普文章', url: `${siteOrigin()}/blog/` })
+  }
+
+  return items
+}
+
+function injectSocialMeta() {
+  const title = normalize(document.title)
+  const description =
+    readMeta('meta[name="description"]') ||
+    readMeta('meta[property="og:description"]')
+  const canonical = readMeta('link[rel="canonical"]', 'href') || window.location.href
+
+  upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: '土耳其植发透明指南' })
+  upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' })
+  upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: title })
+  upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description })
+  upsertMeta('meta[name="twitter:url"]', { name: 'twitter:url', content: canonical })
 }
 
 function injectStructuredData() {
@@ -72,6 +120,7 @@ function injectStructuredData() {
   }
 
   const graph = [organization]
+  const breadcrumbItems = breadcrumbItemsForPath(pathname)
 
   const addWebPage = (type) => {
     const page = {
@@ -85,7 +134,23 @@ function injectStructuredData() {
       about: { '@id': `${siteOrigin()}/#organization` },
     }
     if (dateModified) page.dateModified = dateModified
+    if (breadcrumbItems.length > 1) {
+      page.breadcrumb = { '@id': `${canonical}#breadcrumb` }
+    }
     graph.push(page)
+  }
+
+  if (breadcrumbItems.length > 1) {
+    graph.push({
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: breadcrumbItems.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    })
   }
 
   if (pathname === '/') {
@@ -120,7 +185,17 @@ function injectStructuredData() {
       publisher: { '@id': `${siteOrigin()}/#organization` },
     })
     addWebPage('ContactPage')
-  } else if ((pathname.startsWith('/blog/') && pathname.endsWith('.html')) || pathname === '/about/') {
+  } else if (pathname === '/about/') {
+    graph.push({
+      '@type': 'WebSite',
+      '@id': `${siteOrigin()}/#website`,
+      url: siteOrigin(),
+      name: '土耳其植发透明指南',
+      inLanguage: 'zh-CN',
+      publisher: { '@id': `${siteOrigin()}/#organization` },
+    })
+    addWebPage('AboutPage')
+  } else if (pathname.startsWith('/blog/') && pathname !== '/blog/') {
     graph.push({
       '@type': 'WebSite',
       '@id': `${siteOrigin()}/#website`,
@@ -135,6 +210,8 @@ function injectStructuredData() {
       mainEntityOfPage: { '@id': `${canonical}#webpage` },
       headline: headline || title,
       description,
+      articleSection: '土耳其植发科普文章',
+      about: { '@id': `${siteOrigin()}/#organization` },
       author: { '@id': `${siteOrigin()}/#organization` },
       publisher: { '@id': `${siteOrigin()}/#organization` },
       inLanguage: 'zh-CN',
@@ -663,6 +740,7 @@ function setupClinics() {
 
 document.addEventListener('DOMContentLoaded', () => {
   injectGoogleAnalytics()
+  injectSocialMeta()
   injectStructuredData()
   injectSharedFooter()
   const page = document.body.dataset.page
