@@ -363,11 +363,8 @@ function pageShell({ title, description, canonical, ogType = 'website', body, sc
             <div class="brand-subtitle">Turkey Hair Transplant Guide</div>
           </a>
           <nav class="nav">
-            <a href="/" class="nav-link">首页</a>
-            <a href="/sources/" class="nav-link">权威文章</a>
-            <a href="/guides/" class="nav-link">实用指南</a>
-            <a href="/travel/" class="nav-link">赴土贴士</a>
-            <a href="/clinics/" class="nav-link ${activeNav === 'clinics' ? 'nav-link-active' : ''}">诊所公开信息查询</a>
+            <a href="/" class="nav-link ${activeNav === 'clinics' ? '' : 'nav-link-active'}">攻略信息</a>
+            <a href="/clinics/" class="nav-link ${activeNav === 'clinics' ? 'nav-link-active' : ''}">工具查询</a>
           </nav>
         </div>
       </header>

@@ -1029,11 +1029,8 @@ function setupClinics() {
 function injectUnifiedNavigation() {
   const pathname = window.location.pathname.replace(/index\.html$/, '') || '/'
   const links = [
-    { href: '/', label: '首页', active: pathname === '/' },
-    { href: '/sources/', label: '权威文章', active: pathname.startsWith('/sources/') },
-    { href: '/guides/', label: '实用指南', active: pathname.startsWith('/guides/') },
-    { href: '/travel/', label: '赴土贴士', active: pathname.startsWith('/travel/') },
-    { href: '/clinics/', label: '诊所公开信息查询', active: pathname.startsWith('/clinics/') || pathname.startsWith('/doctors/') },
+    { href: '/', label: '攻略信息', active: !pathname.startsWith('/clinics/') && !pathname.startsWith('/doctors/') },
+    { href: '/clinics/', label: '工具查询', active: pathname.startsWith('/clinics/') || pathname.startsWith('/doctors/') },
   ]
 
   document.querySelectorAll('header nav').forEach((nav) => {
