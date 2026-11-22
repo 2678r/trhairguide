@@ -286,40 +286,6 @@ function injectSharedFooter() {
   shell.appendChild(footer)
 }
 
-function injectFloatingServiceAd() {
-  if (document.querySelector('[data-floating-service-ad]')) return
-
-  const serviceAd = document.createElement('aside')
-  serviceAd.className = 'floating-service-ad'
-  serviceAd.dataset.floatingServiceAd = '1'
-  serviceAd.setAttribute('aria-label', '伊斯坦布尔本地服务与代预约')
-  serviceAd.innerHTML = `
-    <div class="floating-service-ad__tag">伊斯坦布尔本地服务</div>
-    <strong>代预约 · 方案核查 · 中文陪同</strong>
-    <span>正规诊所对接，协助确认医生与档期</span>
-    <button type="button" class="floating-service-ad__button" data-copy-wechat="turkeyzhifa">
-      微信：<b>turkeyzhifa</b><em>复制</em>
-    </button>
-  `
-  const copyButton = serviceAd.querySelector('[data-copy-wechat]')
-  if (copyButton) {
-    copyButton.addEventListener('click', async (event) => {
-      event.stopPropagation()
-      if (typeof window.copyWechat === 'function') {
-        window.copyWechat('turkeyzhifa')
-        return
-      }
-      try {
-        await navigator.clipboard.writeText('turkeyzhifa')
-        copyButton.querySelector('em').textContent = '已复制'
-      } catch (error) {
-        window.prompt('请复制微信号：', 'turkeyzhifa')
-      }
-    })
-  }
-  document.body.appendChild(serviceAd)
-}
-
 async function loadJson(path) {
   if (path.includes('clinics.json') && window.__CLINICS_DATA__) {
     return window.__CLINICS_DATA__
@@ -1113,7 +1079,6 @@ document.addEventListener('DOMContentLoaded', () => {
   injectSocialMeta()
   injectStructuredData()
   injectSharedFooter()
-  injectFloatingServiceAd()
   const page = document.body.dataset.page
   if (page === 'home') setupHome()
   if (page === 'doctors') setupDoctors()
