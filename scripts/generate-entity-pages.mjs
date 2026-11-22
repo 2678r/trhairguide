@@ -359,18 +359,15 @@ function pageShell({ title, description, canonical, ogType = 'website', body, sc
       <header class="header">
         <div class="container header-inner">
           <a href="/">
-            <div class="brand-title">土耳其植发透明指南</div>
-            <div class="brand-subtitle">Transparent Hair Transplant Guide</div>
+            <div class="brand-title">土耳其植发指南</div>
+            <div class="brand-subtitle">Turkey Hair Transplant Guide</div>
           </a>
           <nav class="nav">
             <a href="/" class="nav-link">首页</a>
-            <a href="/doctors/" class="nav-link ${activeNav === 'doctors' ? 'nav-link-active' : ''}">医生库</a>
-            <a href="/clinics/" class="nav-link ${activeNav === 'clinics' ? 'nav-link-active' : ''}">诊所库</a>
-            <a href="/guides/" class="nav-link">全流程攻略</a>
-            <a href="/about/" class="nav-link">关于</a>
-            <button type="button" class="nav-wechat-btn" data-copy-wechat="turkeyzhifa">
-              <span>微信咨询:</span> <strong>turkeyzhifa</strong> <span class="copy-badge">复制</span>
-            </button>
+            <a href="/sources/" class="nav-link">权威文章</a>
+            <a href="/guides/" class="nav-link">实用指南</a>
+            <a href="/travel/" class="nav-link">赴土贴士</a>
+            <a href="/clinics/" class="nav-link ${activeNav === 'clinics' ? 'nav-link-active' : ''}">诊所公开信息查询</a>
           </nav>
         </div>
       </header>

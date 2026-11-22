@@ -1026,8 +1026,32 @@ function setupClinics() {
     })
 }
 
+function injectUnifiedNavigation() {
+  const pathname = window.location.pathname.replace(/index\.html$/, '') || '/'
+  const links = [
+    { href: '/', label: '首页', active: pathname === '/' },
+    { href: '/sources/', label: '权威文章', active: pathname.startsWith('/sources/') },
+    { href: '/guides/', label: '实用指南', active: pathname.startsWith('/guides/') },
+    { href: '/travel/', label: '赴土贴士', active: pathname.startsWith('/travel/') },
+    { href: '/clinics/', label: '诊所公开信息查询', active: pathname.startsWith('/clinics/') || pathname.startsWith('/doctors/') },
+  ]
+
+  document.querySelectorAll('header nav').forEach((nav) => {
+    const legacyNav = nav.classList.contains('nav')
+    nav.setAttribute('aria-label', '网站导航')
+    nav.style.display = 'flex'
+    nav.innerHTML = links
+      .map(({ href, label, active }) => {
+        const className = legacyNav ? `nav-link${active ? ' nav-link-active' : ''}` : active ? 'active' : ''
+        return `<a href="${href}" class="${className}">${label}</a>`
+      })
+      .join('')
+  })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   applyBrandName()
+  injectUnifiedNavigation()
   injectGoogleAnalytics()
   injectSocialMeta()
   injectStructuredData()
