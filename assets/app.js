@@ -746,7 +746,6 @@ function setupDoctors() {
 
                 <div class="border-t border-stone-100 pt-4">
                   <div class="flex flex-wrap gap-3">
-                    <a href="${profilePath}" class="button button-primary">查看资料页</a>
                     <a href="${doctor.website || '#'}" ${doctor.website ? 'target="_blank" rel="noreferrer"' : ''} class="${doctor.website ? 'button button-secondary' : 'button pointer-events-none bg-stone-200 text-stone-400'}">${doctor.website ? '官网地址' : '暂无官网地址'}</a>
                   </div>
                 </div>
@@ -1056,7 +1055,8 @@ function injectUnifiedNavigation() {
   const pathname = window.location.pathname.replace(/index\.html$/, '') || '/'
   const links = [
     { href: '/', label: '攻略信息', active: !pathname.startsWith('/clinics/') && !pathname.startsWith('/doctors/') },
-    { href: '/clinics/', label: '工具查询', active: pathname.startsWith('/clinics/') || pathname.startsWith('/doctors/') },
+    { href: '/clinics/', label: '诊所查询', active: pathname.startsWith('/clinics/') },
+    { href: '/doctors/', label: 'ISHRS 医生', active: pathname.startsWith('/doctors/') },
   ]
 
   document.querySelectorAll('header nav').forEach((nav) => {
@@ -1082,8 +1082,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page
   if (page === 'home') setupHome()
   if (page === 'doctors') setupDoctors()
-  if (page === 'clinics') {
-    setupClinics()
-    setupIshrsDoctorDirectory()
-  }
+  if (page === 'clinics') setupClinics()
 })

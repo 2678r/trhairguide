@@ -111,55 +111,6 @@ function normalizeDate(value) {
   return `${year}-${month.padStart(2, '0')}-${(day || '01').padStart(2, '0')}`
 }
 
-function renderTopSponsorBanner() {
-  return `
-    <aside class="sponsor-banner" aria-label="专属咨询服务">
-      <div class="sponsor-banner-inner">
-        <div class="sponsor-banner-left">
-          <div class="sponsor-tag">✦ 读者专属协助 · 伊斯坦布尔本地服务</div>
-          <h3 class="sponsor-banner-title">土耳其植发中立问诊 · 正规诊所与医生代预约 · 本地翻译陪同</h3>
-          <p class="sponsor-banner-desc">常驻伊斯坦布尔，提供客观资质核查、术前方案独立把关、中立代预约与地接陪同，避开营销套路与中介溢价。</p>
-        </div>
-        <div class="sponsor-banner-action">
-          <div class="sponsor-wechat-box">微信: <strong>turkeyzhifa</strong></div>
-          <button type="button" class="copy-wechat-btn" data-copy-wechat="turkeyzhifa">复制微信号</button>
-        </div>
-      </div>
-    </aside>`
-}
-
-function renderBottomSponsorCard() {
-  return `
-    <section class="sponsor-card-bottom" aria-label="服务预约与咨询">
-      <div class="sponsor-bottom-header">
-        <div>
-          <h3 class="sponsor-bottom-title">需要土耳其植发方案评估或中立代预约？</h3>
-          <p class="sponsor-bottom-subtitle">避开中介包装与流水线技师操作，获取具名医生真实报价与伊斯坦布尔本地全程中文协助。</p>
-        </div>
-      </div>
-      <div class="sponsor-features-grid">
-        <div class="sponsor-feature-item">
-          <strong><span>✓</span> 独立资质核实</strong>
-          <p>核查机构卫生部执照、医生 ISHRS/ABHRS 真实资质，确认打孔与取发是否由医生本人主刀。</p>
-        </div>
-        <div class="sponsor-feature-item">
-          <strong><span>✓</span> 官方代预约与底价</strong>
-          <p>直连医院与医生官方通道，避免国内第三方中介加价，协助争取中文翻译支持与最优直客档期。</p>
-        </div>
-        <div class="sponsor-feature-item">
-          <strong><span>✓</span> 本地接待与全程陪同</strong>
-          <p>常驻伊斯坦布尔本地，提供接送协调、术前面诊翻译沟通、术中陪同及术后消炎清洗跟进。</p>
-        </div>
-      </div>
-      <div class="sponsor-bottom-action">
-        <div class="sponsor-bottom-note">添加微信：<strong>turkeyzhifa</strong>（点击右侧一键复制，添加时请备注：植发咨询）</div>
-        <div class="sponsor-bottom-btn-group">
-          <button type="button" class="copy-wechat-btn" data-copy-wechat="turkeyzhifa">复制微信号 turkeyzhifa</button>
-        </div>
-      </div>
-    </section>`
-}
-
 function pageShell({ title, description, canonical, ogType = 'website', body, schema, activeNav = '' }) {
   return `<!doctype html>
 <html lang="zh-CN">
@@ -429,8 +380,6 @@ function buildDoctorPage(doctor, slug) {
             <span>${escapeHtml(englishName)}</span>
           </div>
 
-          ${renderTopSponsorBanner()}
-
           <section class="entity-hero">
             <div class="entity-kicker">Doctor Profile · 医生图鉴资料</div>
             <h1 class="entity-title">${escapeHtml(name)}</h1>
@@ -452,7 +401,6 @@ function buildDoctorPage(doctor, slug) {
               <div class="entity-links">
                 <a href="/doctors/" class="entity-button entity-button-primary">返回医生库</a>
                 ${doctor.website ? `<a href="${ensureUrl(doctor.website)}" target="_blank" rel="noreferrer" class="entity-button entity-button-secondary">访问官网</a>` : ''}
-                <button type="button" class="entity-button entity-button-secondary copy-wechat-btn" data-copy-wechat="turkeyzhifa">代预约/问诊咨询</button>
               </div>
             </article>
             <aside class="entity-card">
@@ -475,8 +423,6 @@ function buildDoctorPage(doctor, slug) {
               </ul>
             </article>
           </section>
-
-          ${renderBottomSponsorCard()}
 
           <section class="entity-grid">
             <article class="entity-card">
@@ -537,8 +483,6 @@ function buildClinicPage(clinic, slug) {
             <span>${escapeHtml(englishName)}</span>
           </div>
 
-          ${renderTopSponsorBanner()}
-
           <section class="entity-hero">
             <div class="entity-kicker">Clinic Profile · 机构图鉴资料</div>
             <h1 class="entity-title">${escapeHtml(name)}</h1>
@@ -561,7 +505,6 @@ function buildClinicPage(clinic, slug) {
                 <a href="/clinics/" class="entity-button entity-button-primary">返回诊所库</a>
                 ${clinic.website ? `<a href="${ensureUrl(clinic.website)}" target="_blank" rel="noreferrer" class="entity-button entity-button-secondary">访问官网</a>` : ''}
                 ${googleValue && isUrl(googleValue) ? `<a href="${ensureUrl(googleValue)}" target="_blank" rel="noreferrer" class="entity-button entity-button-secondary">查看 Google Maps</a>` : ''}
-                <button type="button" class="entity-button entity-button-secondary copy-wechat-btn" data-copy-wechat="turkeyzhifa">代预约/查底价</button>
               </div>
             </article>
             <article class="entity-card">
@@ -584,11 +527,8 @@ function buildClinicPage(clinic, slug) {
             <article class="entity-card">
               <h2 class="entity-section-title">防坑提醒</h2>
               <p>伊斯坦布尔许多知名机构存在多种档位套餐。同一家机构，医生亲手打孔与技师团队打孔价格可能相差 2-3 倍。</p>
-              <p>如果需要核实该机构近期实际接待反馈与真实底价，可在微信联系 <strong>turkeyzhifa</strong> 本地咨询。</p>
             </article>
           </section>
-
-          ${renderBottomSponsorCard()}
 
           <section class="entity-grid">
             <article class="entity-card">
