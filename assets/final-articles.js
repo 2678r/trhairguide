@@ -4,7 +4,8 @@ const FINAL_ARTICLES = {
   '04': { title: '植发咨询前需要准备什么？', file: 'data/04.txt' },
   '05': { title: '植发后的医嘱：如何保护移植毛囊？', file: 'data/05.txt' },
   '06': { title: '植发不是增加发量：为什么供区决定最终效果？', file: 'data/06.txt' },
-  '07': { title: '不要看案例广告：好诊所和糟糕诊所拿出来的照片都可能无懈可击', file: 'data/07.txt' }
+  '07': { title: '不要看案例广告：好诊所和糟糕诊所拿出来的照片都可能无懈可击', file: 'data/07.txt' },
+  '08': { title: '如何选择土耳其植发诊所：先确认医生、团队与预算', file: 'data/08.txt' }
 }
 
 function escapeHtml(value) {
