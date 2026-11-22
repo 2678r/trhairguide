@@ -1,10 +1,10 @@
 const FINAL_ARTICLES = {
-  '01': { title: '土耳其卫生部规定：哪些人员可以进行植发手术？分别做什么？', file: '01-土耳其卫生部植发部门管理条例.md' },
-  '03': { title: '咨询时不要被营销名称蒙蔽', file: '03-咨询时不要被营销名称蒙蔽.md' },
-  '04': { title: '植发咨询前需要准备什么？', file: '04-植发咨询注意事项.md' },
-  '05': { title: '植发后的医嘱：如何保护移植毛囊？', file: '05-植发后的医嘱.md' },
-  '06': { title: '植发不是增加发量：为什么供区决定最终效果？', file: '06-植发不是增加发量-为什么供区决定最终效果.md' },
-  '07': { title: '不要看案例广告：好诊所和糟糕诊所拿出来的照片都可能无懈可击', file: '07-不要看案例广告.md' }
+  '01': { title: '土耳其卫生部规定：哪些人员可以进行植发手术？分别做什么？', file: 'data/01.txt' },
+  '03': { title: '咨询时不要被营销名称蒙蔽', file: 'data/03.txt' },
+  '04': { title: '植发咨询前需要准备什么？', file: 'data/04.txt' },
+  '05': { title: '植发后的医嘱：如何保护移植毛囊？', file: 'data/05.txt' },
+  '06': { title: '植发不是增加发量：为什么供区决定最终效果？', file: 'data/06.txt' },
+  '07': { title: '不要看案例广告：好诊所和糟糕诊所拿出来的照片都可能无懈可击', file: 'data/07.txt' }
 }
 
 function escapeHtml(value) {
@@ -74,7 +74,7 @@ async function renderFinalArticle() {
   const id = new URLSearchParams(window.location.search).get('id')
   const article = FINAL_ARTICLES[id]
   if (!article) { container.innerHTML = '<h1>文章未找到</h1><p>请从首页选择已发布文章。</p>'; return }
-  const sourceUrl = new URL(`../content/04-定稿/${article.file}`, window.location.href)
+  const sourceUrl = new URL(article.file, window.location.href)
   try {
     const response = await fetch(sourceUrl)
     if (!response.ok) throw new Error('not found')
