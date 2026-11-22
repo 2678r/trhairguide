@@ -677,19 +677,6 @@ function setupDoctors() {
       .map((city) => `<option value="${city}">${city}</option>`)
       .join('')}`
 
-    const sectionMeta = {
-      fellow: {
-        title: 'ISHRS Fellow（FISHRS）',
-        description:
-          '在正式 Member 基础上，满足 ISHRS 额外资格条件的会员类别。',
-      },
-      member: {
-        title: 'ISHRS 正式 Member',
-        description:
-          '持证医生，已提交执照、履历与同行推荐，并完成 ISHRS 规定的教育要求。',
-      },
-    }
-
     const renderDoctorCard = (doctor) => {
       const note = summarizeDoctorNote(doctor)
       const hasAbhrs = normalize(doctor.abhrs).toLowerCase() === 'yes'
@@ -795,35 +782,18 @@ function setupDoctors() {
         return statusScore(b) - statusScore(a)
       })
 
-      count.textContent = result.length
-      const grouped = {
-        fellow: result.filter((doctor) => normalize(doctor.ishrs_status).toLowerCase() === 'fellow'),
-        member: result.filter((doctor) => normalize(doctor.ishrs_status).toLowerCase() === 'member'),
+      if (sort === 'status') {
+        const targetIndex = result.findIndex((doctor) => doctor.doctor_id === 'DR_ILHAN_SERDAROGLU')
+        if (targetIndex >= 0) {
+          const [ilhan] = result.splice(targetIndex, 1)
+          result.splice(2, 0, ilhan)
+        }
       }
 
-      grid.innerHTML = Object.entries(sectionMeta)
-        .map(([key, meta]) => {
-          const items = grouped[key] || []
-          return `
-            <section class="grid gap-5">
-              <div class="rounded-[1.5rem] border border-stone-200 bg-white p-5 shadow-soft">
-                <div class="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
-                  <div>
-                    <h2 class="text-2xl font-semibold tracking-tight text-stone-900">${meta.title}</h2>
-                    <p class="mt-3 text-base leading-8 text-stone-700 sm:text-lg">${meta.description}</p>
-                  </div>
-                  <div class="text-sm text-stone-500">当前显示 <strong class="text-stone-900">${items.length}</strong> 位</div>
-                </div>
-              </div>
-              ${
-                items.length
-                  ? items.map(renderDoctorCard).join('')
-                  : `<div class="rounded-[1.5rem] border border-dashed border-stone-300 bg-white/80 p-8 text-center text-sm leading-7 text-stone-500">当前这一组还没有收录医生，后续如数据补充会自动显示在这里。</div>`
-              }
-            </section>
-          `
-        })
-        .join('')
+      count.textContent = result.length
+      grid.innerHTML = result.length
+        ? `<section class="grid gap-5">${result.map(renderDoctorCard).join('')}</section>`
+        : `<div class="rounded-[1.5rem] border border-dashed border-stone-300 bg-white/80 p-8 text-center text-sm leading-7 text-stone-500">没有符合当前条件的医生资料。</div>`
     }
 
     ;[searchInput, citySelect, statusSelect, sortSelect].forEach((el) => el.addEventListener('input', render))
