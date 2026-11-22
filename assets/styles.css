@@ -1003,3 +1003,13 @@ body .min-h-screen > main .border-\[\#0066cc\] {
   font-size: 0.95rem;
   line-height: 1.6;
 }
+
+/* Final article Markdown rendering */
+.src-main .src-article ol { margin: 0 0 20px; padding-left: 22px; color: #53665c; font-size: 14px; line-height: 1.7; }
+.src-main .src-article ol li { padding: 5px 0; }
+.src-main .src-article a { color: var(--src-green); text-decoration: underline; text-underline-offset: 3px; }
+.final-article-image { display: block; max-width: 100%; height: auto; margin: 17px auto 22px; border: 1px solid var(--src-line); }
+.final-table-wrap { overflow-x: auto; margin: 18px 0 22px; }
+.final-table-wrap table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.65; }
+.final-table-wrap th, .final-table-wrap td { padding: 10px 12px; border: 1px solid var(--src-line); text-align: left; vertical-align: top; }
+.final-table-wrap th { color: #315747; background: var(--src-mint); }
