@@ -1013,3 +1013,15 @@ body .min-h-screen > main .border-\[\#0066cc\] {
 .final-table-wrap table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.65; }
 .final-table-wrap th, .final-table-wrap td { padding: 10px 12px; border: 1px solid var(--src-line); text-align: left; vertical-align: top; }
 .final-table-wrap th { color: #315747; background: var(--src-mint); }
+
+/* Clinic directory: make the public data scannable at a glance */
+.directory-search-row { grid-template-columns: minmax(0, 1fr) 205px auto; }
+.directory-site .directory-sort-button { min-height: 46px; padding: 0 15px; border: 1px solid var(--src-green) !important; border-radius: 0 !important; background: var(--src-green) !important; color: #fff !important; font: inherit; font-size: 13px; font-weight: 750; cursor: pointer; white-space: nowrap; }
+.directory-list-head { display: grid; grid-template-columns: minmax(260px, 1fr) 120px 116px 116px 54px; gap: 18px; }
+.directory-clinic summary { grid-template-columns: minmax(260px, 1fr) 120px 116px 116px 54px; gap: 18px; }
+.directory-clinic-name a { overflow: visible; text-overflow: clip; white-space: normal; }
+.directory-clinic-name small { display: block; margin-top: 3px; overflow: hidden; color: #7d8b84; font-size: 10px; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+.directory-clinic-rating, .directory-clinic-reviews { display: flex; flex-direction: column; gap: 2px; color: #475f54; font-size: 13px; }
+.directory-clinic-rating b, .directory-clinic-reviews b { color: #294b3e; font-size: 14px; }
+.directory-clinic-rating small, .directory-clinic-reviews small { color: #7d8b84; font-size: 10px; }
+@media (max-width: 760px) { .directory-search-row { grid-template-columns: 1fr; }.directory-site .directory-sort-button { width: 100%; }.directory-list-head { display: none; }.directory-clinic summary { grid-template-columns: minmax(0, 1fr) 68px; gap: 9px; }.directory-clinic-type, .directory-clinic-rating { display: none; }.directory-clinic-reviews { grid-column: 1; flex-direction: row; align-items: baseline; margin-top: -10px; }.directory-clinic-reviews small { font-size: 11px; }.directory-expand { grid-column: 2; grid-row: 1 / span 2; }.directory-clinic-name small { max-width: calc(100vw - 125px); } }

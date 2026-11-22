@@ -873,12 +873,14 @@ function setupClinics() {
   const total = document.getElementById('clinic-total')
   const searchInput = document.getElementById('clinic-search')
   const sortSelect = document.getElementById('clinic-sort')
+  const reviewSortButton = document.getElementById('clinic-review-sort')
   const statAllBtn = document.getElementById('stat-all')
   const statUpdatedBtn = document.getElementById('stat-updated')
   const statHighRatingBtn = document.getElementById('stat-high-rating')
   const statHighVolumeBtn = document.getElementById('stat-high-volume')
   const statDoctorBtn = document.getElementById('stat-doctor')
   let activeStat = 'all'
+  let reviewSortDirection = 'desc'
 
   loadJson('/data/clinics.json')
     .then((clinics) => {
@@ -969,7 +971,9 @@ function setupClinics() {
             return Number(b.google_review_count || 0) - Number(a.google_review_count || 0)
           }
           if (sort === 'reviews') {
-            return Number(b.google_review_count || 0) - Number(a.google_review_count || 0)
+            return reviewSortDirection === 'asc'
+              ? Number(a.google_review_count || 0) - Number(b.google_review_count || 0)
+              : Number(b.google_review_count || 0) - Number(a.google_review_count || 0)
           }
           if (sort === 'recent') {
             return normalize(b.google_checked_at).localeCompare(normalize(a.google_checked_at))
@@ -988,14 +992,35 @@ function setupClinics() {
             const publicPrice = normalize(clinic.price_transparency) ? clinicPriceLabel(clinic) : ''
             const noteText = normalize(clinic.note)
             const profilePath = clinicProfilePath(clinic, clinicSlugMap)
-            return `<article><details class="directory-clinic"><summary><div class="directory-clinic-name"><a href="${profilePath}" title="${clinic.clinic_name || '—'}">${clinic.clinic_name || '—'}</a></div><span class="directory-clinic-type">${clinicTypeLabel(clinic)}</span><span class="directory-clinic-rating">${ratingText}</span><span class="directory-expand">展开</span></summary><div class="directory-detail"><div><div class="directory-detail-label">具名医生</div><p>${doctorName || '未公开'}</p></div><div><div class="directory-detail-label">公开套餐信息</div><p>${publicPrice || '未公开'}</p></div><div><div class="directory-detail-label">备注</div><p>${noteText || '—'}</p></div><div class="directory-actions"><a href="${profilePath}">查看公开资料</a>${googleLink ? `<a href="${googleLink}" target="_blank" rel="noreferrer">Google 地图</a>` : ''}${clinic.website ? `<a href="${clinic.website}" target="_blank" rel="noreferrer">官方网站</a>` : ''}</div></div></details></article>`
+            const name = normalize(clinic.clinic_name) || normalize(clinic.name_zh) || normalize(clinic.name_en) || normalize(clinic.official_name) || '未公开名称'
+            const officialName = normalize(clinic.official_name)
+            const ratingValue = rating ? `${rating} / 5` : '未收录'
+            const reviewsValue = reviewCount ? `${reviewCount} 条` : '未收录'
+            return `<article><details class="directory-clinic"><summary><div class="directory-clinic-name"><a href="${profilePath}" title="${name}">${name}</a>${officialName && officialName !== name ? `<small>${officialName}</small>` : ''}</div><span class="directory-clinic-type">${clinicTypeLabel(clinic)}</span><span class="directory-clinic-rating"><b>${ratingValue}</b><small>Google 评分</small></span><span class="directory-clinic-reviews"><b>${reviewsValue}</b><small>Google 评价</small></span><span class="directory-expand">查看</span></summary><div class="directory-detail"><div><div class="directory-detail-label">具名医生</div><p>${doctorName || '未公开'}</p></div><div><div class="directory-detail-label">公开套餐信息</div><p>${publicPrice || '未公开'}</p></div><div><div class="directory-detail-label">备注</div><p>${noteText || '—'}</p></div><div class="directory-actions"><a href="${profilePath}">查看公开资料</a>${googleLink ? `<a href="${googleLink}" target="_blank" rel="noreferrer">Google 地图</a>` : ''}${clinic.website ? `<a href="${clinic.website}" target="_blank" rel="noreferrer">官方网站</a>` : ''}</div></div></details></article>`
           })
           .join('')
 
         syncButtons()
+        if (reviewSortButton) {
+          const isReviews = sort === 'reviews'
+          reviewSortButton.classList.toggle('is-active', isReviews)
+          reviewSortButton.setAttribute('aria-pressed', isReviews ? 'true' : 'false')
+          reviewSortButton.textContent = `评价数${reviewSortDirection === 'desc' ? '最多 ↓' : '最少 ↑'}`
+        }
       }
 
       ;[searchInput, sortSelect].forEach((el) => el.addEventListener('input', render))
+      if (reviewSortButton) {
+        reviewSortButton.addEventListener('click', () => {
+          if (sortSelect.value !== 'reviews') {
+            sortSelect.value = 'reviews'
+            reviewSortDirection = 'desc'
+          } else {
+            reviewSortDirection = reviewSortDirection === 'desc' ? 'asc' : 'desc'
+          }
+          render()
+        })
+      }
       ;[
         ['all', statAllBtn],
         ['updated', statUpdatedBtn],
