@@ -13,6 +13,7 @@ Primary pages:
 - 医生库: https://trhairguide.com/doctors/
 - 诊所库: https://trhairguide.com/clinics/
 - 术语解释: https://trhairguide.com/guides/
+- 供区与植发效果: https://trhairguide.com/guides/donor-area-limits/
 - 科普文章: https://trhairguide.com/blog/
 - HIV植发: https://trhairguide.com/hiv/
 - 关于: https://trhairguide.com/about/
