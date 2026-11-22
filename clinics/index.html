@@ -3,188 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="伊斯坦布尔植发诊所名单：查看土耳其卫生部合法诊所、Google 评分、评价数、官网地址和具名医生信息，先做第一轮筛选。"
-    />
+    <meta name="description" content="伊斯坦布尔植发机构公开信息查询：按机构名称、类型、公开医生与 Google 资料筛选。" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://trhairguide.com/clinics/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="伊斯坦布尔植发诊所名单 | 合法机构、评分、官网与评价数" />
-    <meta property="og:description" content="查看土耳其卫生部合法植发诊所、Google 评分、评价数、官网地址和具名医生信息，先完成伊斯坦布尔植发诊所的第一轮筛选。" />
-    <meta property="og:url" content="https://trhairguide.com/clinics/" />
-    <title>伊斯坦布尔植发诊所名单 | 合法机构、评分、官网与评价数</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: { sand: '#f6f0e7', ink: '#1f1a14', clay: '#8b5e34', line: '#e4d8c8' },
-            boxShadow: { soft: '0 20px 50px rgba(46, 31, 17, 0.08)' },
-          },
-        },
-      }
-    </script>
-    <link rel="stylesheet" href="/assets/styles.css?v=20260319b" />
+    <title>诊所公开信息查询｜土耳其植发指南</title>
+    <link rel="stylesheet" href="../assets/styles.css?v=20261122e" />
   </head>
-  <body data-page="clinics" class="bg-sand text-ink">
-    <div class="min-h-screen">
-      <header class="border-b border-stone-200/80 bg-white/80 backdrop-blur">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <a href="/" class="flex flex-col">
-            <span class="text-2xl font-semibold tracking-tight">土耳其植发透明指南</span>
-            <span class="text-xs uppercase tracking-[0.28em] text-stone-500">Transparent Hair Transplant Guide</span>
-          </a>
-          <nav class="hidden gap-6 text-sm text-stone-600 md:flex">
-            <a href="/" class="nav-link">首页</a>
-            <a href="/doctors/" class="nav-link">医生库</a>
-            <a href="/clinics/" class="nav-link nav-link-active">诊所库</a>
-            <a href="/guides/" class="nav-link">术语解释</a>
-            <a href="/blog/" class="nav-link">科普文章</a>
-                        <a href="/about/" class="nav-link">关于</a>
-            <a href="/hiv/" class="nav-link">HIV植发</a>
-          </nav>
-        </div>
-      </header>
-
-      <main class="mx-auto max-w-[96rem] px-4 pb-16 pt-10 sm:px-6 lg:px-8">
-        <section class="page-hero rounded-[2rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-10">
-          <div class="page-kicker">Legal Clinics List</div>
-          <h1 class="text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl">伊斯坦布尔全部合法植发诊所名单</h1>
-          <div class="mt-6 rounded-[1.6rem] border border-amber-200 bg-amber-50/70 p-5 lg:p-6">
-            <div class="text-sm font-semibold uppercase tracking-[0.14em] text-stone-500">重要提醒</div>
-            <p class="mt-3 text-base leading-8 text-stone-700">
-              本页诊所除少数提供医生打孔手术套餐，大多数并没有明确说明；因此在本站里，默认按<strong>团队套餐</strong>理解。
-            </p>
-            <ol class="mt-4 grid gap-3 text-sm leading-7 text-stone-700">
-              <li>1. 优先通过官网联系英文客服。英文客服通常更能提供及时、完整的官方服务信息。</li>
-              <li>2. 货比三家不吃亏。通过官方渠道询问是否可以打折，多方比较价格和评价。因为基础配置大多差不多，基本都以技师团队为主。</li>
-              <li>3. 建议把沟通记录、报价和关键分工问题自行整理保存，方便后续比较。</li>
-            </ol>
+  <body data-page="clinics">
+    <div class="src-site directory-site">
+      <header class="src-header"><div class="src-shell"><a href="../" class="src-brand"><span></span><b>土耳其植发指南<small>TURKEY HAIR TRANSPLANT GUIDE</small></b></a><nav><a href="../">首页</a><a href="../guides/">植发攻略</a><a href="../sources/">权威文章</a><a href="../travel/">赴土贴士</a><a class="active" href="./">诊所公开信息查询</a></nav></div></header>
+      <main class="src-shell directory-main">
+        <div class="directory-heading"><p class="src-kicker">PUBLIC CLINIC DIRECTORY</p><h1>诊所公开信息查询</h1><p>按机构公开名称、机构类型、具名医生、Google 资料和官网，完成第一轮核对。</p></div>
+        <div class="directory-note"><strong>查询前先确认实际手术机构</strong><p>营销品牌不一定等于实际医疗机构。付款前请向对方索取法定机构名称、手术地址、负责医生姓名与当天团队分工，并与公开资料逐项核对。</p><a href="../sources/turkiye-hair-transplant-regulation/">阅读法规译读</a></div>
+        <section class="directory-controls" aria-label="筛选诊所">
+          <div class="directory-filter-row">
+            <button id="stat-all" type="button" class="clinic-filter-btn"><span>全部机构</span><b id="stat-all-count">—</b></button>
+            <button id="stat-doctor" type="button" class="clinic-filter-btn"><span>含具名医生</span><b id="stat-doctor-count">—</b></button>
+            <button id="stat-high-rating" type="button" class="clinic-filter-btn"><span>评分 4.7+</span><b id="stat-high-rating-count">—</b></button>
+            <button id="stat-high-volume" type="button" class="clinic-filter-btn"><span>评价 1000+</span><b id="stat-high-volume-count">—</b></button>
+            <button id="stat-updated" type="button" class="clinic-filter-btn"><span>公开套餐信息</span><b id="stat-updated-count">—</b></button>
           </div>
+          <div class="directory-search-row"><input id="clinic-search" type="search" placeholder="搜索机构名称、医生、机构类型或备注" /><select id="clinic-sort" aria-label="排序方式"><option value="rating" selected>按 Google 评分</option><option value="reviews">按评价数量</option><option value="name">按机构名称</option><option value="recent">按核对日期</option></select></div>
+          <p class="directory-result">显示 <strong id="clinic-count">—</strong> / <strong id="clinic-total">—</strong> 家机构</p>
         </section>
-
-        <section class="mt-8 rounded-[1.75rem] border border-stone-200 bg-white p-5 shadow-soft">
-          <div class="grid gap-3 lg:grid-cols-5">
-            <button id="stat-all" type="button" class="clinic-filter-btn inline-flex w-full items-center justify-between rounded-[1.15rem] border px-4 py-3 text-left text-sm font-medium transition">
-              <span>全部机构</span>
-              <span id="stat-all-count">—</span>
-            </button>
-            <button id="stat-updated" type="button" class="clinic-filter-btn inline-flex w-full items-center justify-between rounded-[1.15rem] border px-4 py-3 text-left text-sm font-medium transition">
-              <span>套餐价</span>
-              <span id="stat-updated-count">—</span>
-            </button>
-            <button id="stat-high-rating" type="button" class="clinic-filter-btn inline-flex w-full items-center justify-between rounded-[1.15rem] border px-4 py-3 text-left text-sm font-medium transition">
-              <span>高评分 4.7+</span>
-              <span id="stat-high-rating-count">—</span>
-            </button>
-            <button id="stat-high-volume" type="button" class="clinic-filter-btn inline-flex w-full items-center justify-between rounded-[1.15rem] border px-4 py-3 text-left text-sm font-medium transition">
-              <span>评价数 1000+</span>
-              <span id="stat-high-volume-count">—</span>
-            </button>
-            <button id="stat-doctor" type="button" class="clinic-filter-btn inline-flex w-full items-center justify-between rounded-[1.15rem] border px-4 py-3 text-left text-sm font-medium transition">
-              <span>具名医生</span>
-              <span id="stat-doctor-count">—</span>
-            </button>
-          </div>
-          <div class="mt-4 grid gap-3 xl:grid-cols-[minmax(0,1.1fr)_minmax(220px,0.32fr)]">
-            <input id="clinic-search" type="search" placeholder="搜索机构 / 医生 / 备注 / 官网" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white" />
-            <select id="clinic-sort" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white">
-              <option value="name">按名称排序</option>
-              <option value="rating" selected>按评分排序</option>
-              <option value="reviews">按评价数排序</option>
-              <option value="recent">按核对时间排序</option>
-            </select>
-          </div>
-          <div class="mt-4 flex flex-wrap gap-3 text-sm text-stone-500">
-            <span>当前显示 <strong id="clinic-count" class="text-stone-900">—</strong> / <strong id="clinic-total" class="text-stone-900">—</strong> 家机构</span>
-            <span>数据库总更新时间 <strong class="text-stone-900">2026-03</strong></span>
-          </div>
-        </section>
-
-        <section class="mt-8 overflow-hidden rounded-[1.75rem] border border-stone-200 bg-white shadow-soft">
-          <div class="max-h-[82vh] overflow-auto">
-            <table class="w-full table-fixed border-collapse text-sm">
-              <thead class="bg-stone-50 text-left text-xs uppercase tracking-[0.18em] text-stone-500">
-                <tr>
-                  <th class="sticky top-0 w-full border-b border-stone-200 px-4 py-4">
-                    <div class="flex items-center justify-between gap-4">
-                      <div class="grid min-w-0 flex-1 gap-3 xl:grid-cols-[minmax(260px,320px)_minmax(90px,110px)_minmax(140px,170px)_minmax(96px,120px)_auto_auto] xl:items-center">
-                        <span>诊所名称</span>
-                        <span>诊所类型</span>
-                        <span>Google评分</span>
-                        <span>评价数</span>
-                        <span>Google地址</span>
-                        <span>官网</span>
-                      </div>
-                      <span class="shrink-0 text-right">操作</span>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody id="clinic-table-body"></tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="mt-8 rounded-[1.75rem] border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-stone-50 p-5 shadow-soft">
-          <div class="inline-flex rounded-full border border-sky-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
-            Direct Contact Guide
-          </div>
-          <div class="mt-4 max-w-4xl">
-            <h2 class="text-2xl font-semibold tracking-tight text-stone-900">官网直联流程</h2>
-            <p class="mt-3 text-base leading-8 text-stone-700">
-              这部分不是理论说明，而是给你直接拿去用的联系流程。先联系官网英文客服，再问清楚医生参与度、套餐内容和直客优惠。
-            </p>
-          </div>
-          <div class="mt-4 grid gap-4 lg:grid-cols-5">
-            <div class="rounded-[1.25rem] border border-sky-200 bg-white p-4">
-              <div class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-700 text-xs font-semibold text-white">1</div>
-              <div class="mt-3 text-sm font-semibold text-stone-900">找到官网</div>
-              <p class="mt-2 text-sm leading-7 text-stone-600">在诊所库表格中点击“官网”链接，优先使用英文客服。</p>
-            </div>
-            <div class="rounded-[1.25rem] border border-sky-200 bg-white p-4">
-              <div class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-700 text-xs font-semibold text-white">2</div>
-              <div class="mt-3 text-sm font-semibold text-stone-900">打开 WhatsApp</div>
-              <p class="mt-2 text-sm leading-7 text-stone-600">直接点击官网上的 WhatsApp 图标，或搜索诊所官方号码。</p>
-            </div>
-            <div class="rounded-[1.25rem] border border-sky-200 bg-white p-4">
-              <div class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-700 text-xs font-semibold text-white">3</div>
-              <div class="mt-3 text-sm font-semibold text-stone-900">用英文简单沟通</div>
-              <p class="mt-2 text-sm leading-7 text-stone-600">先问价格、医生是否亲自设计和打孔、套餐包含内容，以及有没有直客优惠。</p>
-            </div>
-            <div class="rounded-[1.25rem] border border-sky-200 bg-white p-4">
-              <div class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-700 text-xs font-semibold text-white">4</div>
-              <div class="mt-3 text-sm font-semibold text-stone-900">问关键问题</div>
-              <p class="mt-2 text-sm leading-7 text-stone-600">一定要问清设计和打孔由谁做、团队是否固定、一天做几台、是否有直客优惠。</p>
-            </div>
-            <div class="rounded-[1.25rem] border border-sky-200 bg-white p-4">
-              <div class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-700 text-xs font-semibold text-white">5</div>
-              <div class="mt-3 text-sm font-semibold text-stone-900">对比多家</div>
-              <p class="mt-2 text-sm leading-7 text-stone-600">建议至少联系 3-5 家，再比较医生参与度、价格和服务后决定。</p>
-            </div>
-          </div>
-          <div class="mt-5 rounded-[1.25rem] border border-sky-200 bg-white p-4">
-            <div class="text-sm font-semibold text-stone-900">英文沟通模板</div>
-            <pre class="mt-3 overflow-auto whitespace-pre-wrap text-sm leading-7 text-stone-600">Hi, I'm interested in a hair transplant. Could you please provide:
-- The current package price for FUE/DHI
-- Whether the doctor will personally do the design and punching
-- What's included (accommodation, transfers, aftercare)
-- Any direct client discount available?
-
-Thank you!</pre>
-          </div>
-          <div class="mt-4 rounded-[1.35rem] border border-sky-300 bg-gradient-to-r from-sky-100 via-white to-sky-50 p-5">
-            <div class="inline-flex rounded-full bg-sky-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">小贴士</div>
-            <p class="mt-3 text-base font-semibold leading-8 text-stone-900">
-              直接联系医院通常能省 <span class="text-sky-700">15%-25%</span> 的中介差价，且服务更透明。
-            </p>
-          </div>
-        </section>
+        <section class="directory-list-wrap" aria-label="诊所公开名单"><div class="directory-list-head"><span>机构公开名称与资料</span><span>点击展开</span></div><div id="clinic-table-body" class="directory-list"></div></section>
+        <section class="directory-help"><p>本地服务</p><h2>需要核对营销品牌背后的实际手术机构？</h2><span>微信 turkeyzhifa · 代预约、本地服务与资料核查</span><button type="button" class="copy-wechat" data-copy-wechat="turkeyzhifa">复制微信号</button></section>
       </main>
-
+      <footer class="src-footer"><div class="src-shell">信息来自公开资料整理，仅供信息参考；医疗决定请结合官方信息与面诊结果独立判断。</div></footer>
     </div>
-
-    <script src="/assets/app.js?v=20260406a" defer></script>
+    <script src="../assets/app.js?v=20261122e" defer></script><script src="../assets/sponsor.js?v=20261122e" defer></script>
   </body>
 </html>

@@ -45,6 +45,19 @@ function injectGoogleAnalytics() {
   document.head.appendChild(script)
 }
 
+function applyBrandName() {
+  if (!document.body) return
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
+  const nodes = []
+  while (walker.nextNode()) nodes.push(walker.currentNode)
+  nodes.forEach((node) => {
+    if (node.nodeValue && node.nodeValue.includes('土耳其植发透明指南')) {
+      node.nodeValue = node.nodeValue.replaceAll('土耳其植发透明指南', '土耳其植发指南')
+    }
+  })
+  document.title = document.title.replace('土耳其植发透明指南', '土耳其植发指南')
+}
+
 function siteOrigin() {
   return 'https://trhairguide.com'
 }
@@ -67,7 +80,7 @@ function readMeta(selector, attr = 'content') {
 }
 
 function stripTitleSuffix(title) {
-  return normalize(title).replace(/\s*\|\s*土耳其植发透明指南\s*$/, '').trim()
+  return normalize(title).replace(/\s*\|\s*土耳其植发(?:透明)?指南\s*$/, '').trim()
 }
 
 function detectDateModified() {
@@ -85,6 +98,10 @@ function breadcrumbItemsForPath(pathname) {
     items.push({ name: '诊所库', url: `${siteOrigin()}/clinics/` })
   } else if (pathname === '/guides/') {
     items.push({ name: '术语解释', url: `${siteOrigin()}/guides/` })
+  } else if (pathname === '/travel/') {
+    items.push({ name: '赴土贴士', url: `${siteOrigin()}/travel/` })
+  } else if (pathname === '/sources/') {
+    items.push({ name: '权威译读', url: `${siteOrigin()}/sources/` })
   } else if (pathname === '/blog/') {
     items.push({ name: '科普文章', url: `${siteOrigin()}/blog/` })
   } else if (pathname === '/about/') {
@@ -105,7 +122,7 @@ function injectSocialMeta() {
     readMeta('meta[property="og:description"]')
   const canonical = readMeta('link[rel="canonical"]', 'href') || window.location.href
 
-  upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: '土耳其植发透明指南' })
+  upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: '土耳其植发指南' })
   upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' })
   upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: title })
   upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description })
@@ -129,7 +146,7 @@ function injectStructuredData() {
   const organization = {
     '@type': 'Organization',
     '@id': `${siteOrigin()}/#organization`,
-    name: '土耳其植发透明指南',
+    name: '土耳其植发指南',
     url: siteOrigin(),
   }
 
@@ -172,7 +189,7 @@ function injectStructuredData() {
       '@type': 'WebSite',
       '@id': `${siteOrigin()}/#website`,
       url: siteOrigin(),
-      name: '土耳其植发透明指南',
+      name: '土耳其植发指南',
       description:
         description || '中立整理土耳其植发医生主导比例、法规和避坑信息。',
       inLanguage: 'zh-CN',
@@ -184,7 +201,7 @@ function injectStructuredData() {
       '@type': 'WebSite',
       '@id': `${siteOrigin()}/#website`,
       url: siteOrigin(),
-      name: '土耳其植发透明指南',
+      name: '土耳其植发指南',
       inLanguage: 'zh-CN',
       publisher: { '@id': `${siteOrigin()}/#organization` },
     })
@@ -194,7 +211,7 @@ function injectStructuredData() {
       '@type': 'WebSite',
       '@id': `${siteOrigin()}/#website`,
       url: siteOrigin(),
-      name: '土耳其植发透明指南',
+      name: '土耳其植发指南',
       inLanguage: 'zh-CN',
       publisher: { '@id': `${siteOrigin()}/#organization` },
     })
@@ -204,7 +221,7 @@ function injectStructuredData() {
       '@type': 'WebSite',
       '@id': `${siteOrigin()}/#website`,
       url: siteOrigin(),
-      name: '土耳其植发透明指南',
+      name: '土耳其植发指南',
       inLanguage: 'zh-CN',
       publisher: { '@id': `${siteOrigin()}/#organization` },
     })
@@ -214,7 +231,7 @@ function injectStructuredData() {
       '@type': 'WebSite',
       '@id': `${siteOrigin()}/#website`,
       url: siteOrigin(),
-      name: '土耳其植发透明指南',
+      name: '土耳其植发指南',
       inLanguage: 'zh-CN',
       publisher: { '@id': `${siteOrigin()}/#organization` },
     })
@@ -239,7 +256,7 @@ function injectStructuredData() {
       '@type': 'WebSite',
       '@id': `${siteOrigin()}/#website`,
       url: siteOrigin(),
-      name: '土耳其植发透明指南',
+      name: '土耳其植发指南',
       inLanguage: 'zh-CN',
       publisher: { '@id': `${siteOrigin()}/#organization` },
     })
@@ -269,10 +286,56 @@ function injectSharedFooter() {
   shell.appendChild(footer)
 }
 
+function injectFloatingServiceAd() {
+  if (document.querySelector('[data-floating-service-ad]')) return
+
+  const serviceAd = document.createElement('aside')
+  serviceAd.className = 'floating-service-ad'
+  serviceAd.dataset.floatingServiceAd = '1'
+  serviceAd.setAttribute('aria-label', '伊斯坦布尔本地服务与代预约')
+  serviceAd.innerHTML = `
+    <div class="floating-service-ad__tag">伊斯坦布尔本地服务</div>
+    <strong>代预约 · 方案核查 · 中文陪同</strong>
+    <span>正规诊所对接，协助确认医生与档期</span>
+    <button type="button" class="floating-service-ad__button" data-copy-wechat="turkeyzhifa">
+      微信：<b>turkeyzhifa</b><em>复制</em>
+    </button>
+  `
+  const copyButton = serviceAd.querySelector('[data-copy-wechat]')
+  if (copyButton) {
+    copyButton.addEventListener('click', async (event) => {
+      event.stopPropagation()
+      if (typeof window.copyWechat === 'function') {
+        window.copyWechat('turkeyzhifa')
+        return
+      }
+      try {
+        await navigator.clipboard.writeText('turkeyzhifa')
+        copyButton.querySelector('em').textContent = '已复制'
+      } catch (error) {
+        window.prompt('请复制微信号：', 'turkeyzhifa')
+      }
+    })
+  }
+  document.body.appendChild(serviceAd)
+}
+
 async function loadJson(path) {
-  const response = await fetch(withBase(path))
-  if (!response.ok) throw new Error(`Failed to load ${path}`)
-  return response.json()
+  if (path.includes('clinics.json') && window.__CLINICS_DATA__) {
+    return window.__CLINICS_DATA__
+  }
+  if (path.includes('doctors.json') && window.__DOCTORS_DATA__) {
+    return window.__DOCTORS_DATA__
+  }
+  try {
+    const response = await fetch(withBase(path))
+    if (!response.ok) throw new Error(`Failed to load ${path}`)
+    return await response.json()
+  } catch (err) {
+    if (path.includes('clinics.json') && window.__CLINICS_DATA__) return window.__CLINICS_DATA__
+    if (path.includes('doctors.json') && window.__DOCTORS_DATA__) return window.__DOCTORS_DATA__
+    throw err
+  }
 }
 
 function websiteHost(url) {
@@ -400,12 +463,214 @@ function formatLeadDoctorName(value) {
 }
 
 function setupHome() {
-  Promise.all([loadJson('/data/doctors.json'), loadJson('/data/clinics.json')]).then(([doctors, clinics]) => {
-    const doctorsEl = document.querySelector('[data-home-doctors]')
-    const clinicsEl = document.querySelector('[data-home-clinics]')
-    if (doctorsEl) doctorsEl.textContent = doctors.length
-    if (clinicsEl) clinicsEl.textContent = clinics.length
-  })
+  const grid = document.getElementById('clinic-grid')
+  const countEl = document.getElementById('db-count')
+  const totalEl = document.getElementById('db-total')
+  const searchInput = document.getElementById('sidebar-search')
+  const typeSelect = document.getElementById('sidebar-type')
+  const sortSelect = document.getElementById('sidebar-sort')
+  const resetBtn = document.getElementById('sidebar-reset-btn')
+  const filterBtns = document.querySelectorAll('.db-quick-filter-btn')
+
+  if (!grid) return
+
+  let activeFilter = 'all'
+
+  loadJson('/data/clinics.json')
+    .then((clinics) => {
+      const clinicSlugMap = buildUniqueSlugMap(
+        clinics,
+        (clinic) => clinic.name_en || clinic.clinic_name || clinic.official_name || clinic.clinic_id,
+        (clinic) => clinic.clinic_id
+      )
+
+      if (totalEl) totalEl.textContent = clinics.length
+
+      // 统计各项核心数据
+      const doctorCount = clinics.filter((c) => normalize(c.lead_doctor) !== '').length
+      const priceCount = clinics.filter((c) => normalize(c.price_transparency) === 'package').length
+      const ratingCount = clinics.filter((c) => Number(c.google_rating) >= 4.7).length
+      const volumeCount = clinics.filter((c) => Number(c.google_review_count) >= 1000).length
+
+      const countAll = document.getElementById('count-all')
+      const countDoctor = document.getElementById('count-doctor')
+      const countPrice = document.getElementById('count-price')
+      const countRating = document.getElementById('count-rating')
+      const countVolume = document.getElementById('count-volume')
+
+      if (countAll) countAll.textContent = clinics.length
+      if (countDoctor) countDoctor.textContent = doctorCount
+      if (countPrice) countPrice.textContent = priceCount
+      if (countRating) countRating.textContent = ratingCount
+      if (countVolume) countVolume.textContent = volumeCount
+
+      const syncFilterButtons = () => {
+        filterBtns.forEach((btn) => {
+          const filter = btn.dataset.filter
+          if (filter === activeFilter) {
+            btn.classList.add('is-active')
+          } else {
+            btn.classList.remove('is-active')
+          }
+        })
+      }
+
+      const render = () => {
+        const q = searchInput ? searchInput.value.trim().toLowerCase() : ''
+        const selectedType = typeSelect ? typeSelect.value : 'all'
+        const selectedSort = sortSelect ? sortSelect.value : 'rating'
+
+        let result = clinics.filter((clinic) => {
+          const hasDoctor = normalize(clinic.lead_doctor) !== ''
+          const hasPackagePrice = normalize(clinic.price_transparency) === 'package'
+          const hasHighRating = Number(clinic.google_rating) >= 4.7
+          const hasHighVolume = Number(clinic.google_review_count) >= 1000
+
+          const matchSearch =
+            !q ||
+            [
+              clinic.clinic_id,
+              clinic.clinic_name,
+              clinic.official_name,
+              clinic.lead_doctor,
+              clinic.note,
+              clinic.real_review,
+              clinic.website,
+              clinic.google_summary_cn,
+              clinicTypeLabel(clinic),
+            ]
+              .filter(Boolean)
+              .some((value) => String(value).toLowerCase().includes(q))
+
+          const matchQuick =
+            activeFilter === 'all' ||
+            (activeFilter === 'doctor' && hasDoctor) ||
+            (activeFilter === 'price' && hasPackagePrice) ||
+            (activeFilter === 'rating' && hasHighRating) ||
+            (activeFilter === 'volume' && hasHighVolume)
+
+          const cType = normalize(clinic.facility_type).toLowerCase()
+          const matchType = selectedType === 'all' || cType === selectedType
+
+          return matchSearch && matchQuick && matchType
+        })
+
+        // 排序
+        result = result.sort((a, b) => {
+          if (selectedSort === 'name') {
+            return (a.clinic_name || a.official_name).localeCompare(b.clinic_name || b.official_name, 'zh-Hans-CN-u-co-pinyin')
+          }
+          if (selectedSort === 'rating') {
+            const ratingDiff = Number(b.google_rating || 0) - Number(a.google_rating || 0)
+            if (ratingDiff !== 0) return ratingDiff
+            return Number(b.google_review_count || 0) - Number(a.google_review_count || 0)
+          }
+          if (selectedSort === 'reviews') {
+            return Number(b.google_review_count || 0) - Number(a.google_review_count || 0)
+          }
+          if (selectedSort === 'recent') {
+            return normalize(b.google_checked_at).localeCompare(normalize(a.google_checked_at))
+          }
+          return 0
+        })
+
+        if (countEl) countEl.textContent = result.length
+
+        if (result.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1 / -1; padding: 48px 20px; text-align: center; background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 18px; color: #64748b;">
+              <p style="font-size: 16px; font-weight: 600; color: #0b3558;">未找到符合当前筛选条件的机构</p>
+              <p style="font-size: 13px; margin-top: 6px;">可尝试清空关键词或点击左侧“重置筛选”查看全部 230 家合规机构。</p>
+            </div>
+          `
+          return
+        }
+
+        grid.innerHTML = result
+          .map((clinic) => {
+            const rating = formatRating(clinic.google_rating)
+            const reviewCount = formatReviewCount(clinic.google_review_count)
+            const googleLink = getGoogleLink(clinic)
+            const doctorName = normalize(clinic.lead_doctor) ? formatLeadDoctorName(clinic.lead_doctor) : ''
+            const hasDoctor = Boolean(doctorName)
+            const hasPackagePrice = normalize(clinic.price_transparency) === 'package'
+            const noteText = normalize(clinic.note)
+            const profilePath = clinicProfilePath(clinic, clinicSlugMap)
+
+            return `
+              <article class="db-clinic-card">
+                <div>
+                  <div class="db-card-top">
+                    <h3 class="db-card-name">
+                      <a href="${profilePath}">${clinic.clinic_name || clinic.official_name}</a>
+                    </h3>
+                  </div>
+                  <div class="db-card-badges">
+                    <span class="db-badge db-badge-type">${clinicTypeLabel(clinic)}</span>
+                    <span class="db-badge db-badge-verified">✓ 卫生部合规</span>
+                    ${hasPackagePrice ? '<span class="db-badge db-badge-price">公开套餐价</span>' : ''}
+                    ${hasDoctor ? '<span class="db-badge db-badge-doctor">含具名医生</span>' : ''}
+                  </div>
+                </div>
+
+                <div class="db-card-metrics">
+                  <span class="db-card-rating">⭐ ${rating ? rating : '暂无评分'}</span>
+                  <span class="db-card-reviews">${reviewCount ? reviewCount + ' 条评价' : '评价待核对'}</span>
+                </div>
+
+                <div class="db-card-doctor-line">
+                  <span>👨‍⚕️</span>
+                  <span><strong>主导/医生：</strong>${doctorName ? doctorName : '未具名（护士/技术团队执行）'}</span>
+                </div>
+
+                ${noteText ? `<div class="db-card-note">${noteText}</div>` : ''}
+
+                <div class="db-card-actions">
+                  <div class="db-card-actions-left">
+                    <a href="${profilePath}" class="db-btn-detail">查看资料页 →</a>
+                    ${googleLink ? `<a href="${googleLink}" target="_blank" rel="noreferrer" class="db-link-icon">📍地图</a>` : ''}
+                    ${clinic.website ? `<a href="${clinic.website}" target="_blank" rel="noreferrer" class="db-link-icon">🌐官网</a>` : ''}
+                  </div>
+                  <button type="button" class="copy-wechat-btn" style="padding: 4px 10px; font-size: 11px;" data-copy-wechat="turkeyzhifa">代预约</button>
+                </div>
+              </article>
+            `
+          })
+          .join('')
+      }
+
+      if (searchInput) searchInput.addEventListener('input', render)
+      if (typeSelect) typeSelect.addEventListener('change', render)
+      if (sortSelect) sortSelect.addEventListener('change', render)
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          activeFilter = btn.dataset.filter || 'all'
+          syncFilterButtons()
+          render()
+        })
+      })
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (searchInput) searchInput.value = ''
+          if (typeSelect) typeSelect.value = 'all'
+          if (sortSelect) sortSelect.value = 'rating'
+          activeFilter = 'all'
+          syncFilterButtons()
+          render()
+        })
+      }
+
+      syncFilterButtons()
+      render()
+    })
+    .catch((err) => {
+      console.error(err)
+      if (grid) {
+        grid.innerHTML = `<div style="grid-column: 1 / -1; padding: 30px; text-align: center; color: #dc2626;">诊所数据库加载失败：${err.message}</div>`
+      }
+    })
 }
 
 function clinicSurgeryModeLabel(clinic) {
@@ -650,7 +915,7 @@ function setupClinics() {
         Object.entries(buttonMap).forEach(([key, button]) => {
           if (!button) return
           const isActive = activeStat === key
-          button.className = `clinic-filter-btn inline-flex w-full items-center justify-between rounded-[1.15rem] border px-4 py-3 text-left text-sm font-medium transition ${isActive ? 'is-active' : ''}`
+          button.className = `clinic-filter-btn ${isActive ? 'is-active' : ''}`
           button.setAttribute('aria-pressed', isActive ? 'true' : 'false')
         })
       }
@@ -718,71 +983,12 @@ function setupClinics() {
             const rating = formatRating(clinic.google_rating)
             const reviewCount = formatReviewCount(clinic.google_review_count)
             const googleLink = getGoogleLink(clinic)
-            const ratingText = rating ? `评分 ${rating}/5` : '评分待更新'
-            const reviewText = reviewCount ? `${reviewCount} 条评价` : '评价数待更新'
-            const googleButton = googleLink
-              ? `<a href="${googleLink}" target="_blank" rel="noreferrer" class="text-xs font-medium leading-5 text-clay hover:underline">Google地址</a>`
-              : `<span class="text-xs font-medium leading-5 text-stone-400">Google地址</span>`
-            const websiteButton = clinic.website
-              ? `<a href="${clinic.website}" target="_blank" rel="noreferrer" class="text-xs font-medium leading-5 text-clay hover:underline">官网</a>`
-              : `<span class="text-xs font-medium leading-5 text-stone-400">官网</span>`
+            const ratingText = rating ? `${rating} / 5 · ${reviewCount || '评价待更新'}` : '评分待更新'
             const doctorName = normalize(clinic.lead_doctor) ? formatLeadDoctorName(clinic.lead_doctor) : ''
             const publicPrice = normalize(clinic.price_transparency) ? clinicPriceLabel(clinic) : ''
             const noteText = normalize(clinic.note)
             const profilePath = clinicProfilePath(clinic, clinicSlugMap)
-            return `
-              <tr class="border-b border-stone-200 transition hover:bg-stone-50/70">
-                <td class="px-0 py-0 text-stone-900">
-                  <details class="group">
-                    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3">
-                      <div class="min-w-0 flex-1">
-                        <div class="grid min-w-0 gap-3 xl:grid-cols-[minmax(260px,320px)_minmax(90px,110px)_minmax(140px,170px)_minmax(96px,120px)_auto_auto] xl:items-center">
-                          <div class="min-w-0">
-                            <a href="${profilePath}" class="block truncate text-[17px] font-semibold tracking-[-0.02em] leading-6 text-stone-900 hover:text-[#0f4c81]" title="${clinic.clinic_name || '—'}">${clinic.clinic_name || '—'}</a>
-                          </div>
-                          <div>
-                            <span class="inline-flex shrink-0 rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-[11px] font-medium text-sky-700">${clinicTypeLabel(clinic)}</span>
-                          </div>
-                          <div class="min-w-0">
-                            <span class="block truncate text-xs font-medium leading-5 text-stone-700" title="${ratingText}">${ratingText}</span>
-                          </div>
-                          <div class="min-w-0">
-                            <span class="block truncate text-xs font-medium leading-5 text-stone-700" title="${reviewText}">${reviewText}</span>
-                          </div>
-                          <div>
-                            ${googleButton}
-                          </div>
-                          <div>
-                            ${websiteButton}
-                          </div>
-                        </div>
-                      </div>
-                      <span class="shrink-0 text-xs font-semibold tracking-[0.08em] text-sky-700 transition group-open:rotate-180">展开</span>
-                    </summary>
-                    <div class="border-t border-stone-200 bg-stone-50/60 px-4 py-3">
-                      <div class="grid divide-stone-200 text-sm leading-6 text-stone-700 md:grid-cols-3 md:divide-x">
-                        <div class="py-1 md:pr-4">
-                          <div class="text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">医生</div>
-                          <div class="mt-1">${doctorName || '—'}</div>
-                        </div>
-                        <div class="border-t border-stone-200 pt-3 md:border-t-0 md:px-4 md:pt-1">
-                          <div class="text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">公开价格</div>
-                          <div class="mt-1">${publicPrice || '—'}</div>
-                        </div>
-                        <div class="border-t border-stone-200 pt-3 md:border-t-0 md:pl-4 md:pt-1">
-                          <div class="text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">备注</div>
-                          <div class="mt-1">${noteText || '—'}</div>
-                        </div>
-                      </div>
-                      <div class="mt-4 flex flex-wrap gap-3">
-                        <a href="${profilePath}" class="inline-flex items-center rounded-full bg-[#0f4c81] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-95">查看资料页</a>
-                        ${clinic.website ? `<a href="${clinic.website}" target="_blank" rel="noreferrer" class="inline-flex items-center rounded-full border border-stone-300 bg-white px-4 py-2 text-xs font-semibold text-stone-700 transition hover:bg-stone-100">访问官网</a>` : ''}
-                      </div>
-                    </div>
-                  </details>
-                </td>
-              </tr>
-            `
+            return `<article><details class="directory-clinic"><summary><div class="directory-clinic-name"><a href="${profilePath}" title="${clinic.clinic_name || '—'}">${clinic.clinic_name || '—'}</a></div><span class="directory-clinic-type">${clinicTypeLabel(clinic)}</span><span class="directory-clinic-rating">${ratingText}</span><span class="directory-expand">展开</span></summary><div class="directory-detail"><div><div class="directory-detail-label">具名医生</div><p>${doctorName || '未公开'}</p></div><div><div class="directory-detail-label">公开套餐信息</div><p>${publicPrice || '未公开'}</p></div><div><div class="directory-detail-label">备注</div><p>${noteText || '—'}</p></div><div class="directory-actions"><a href="${profilePath}">查看公开资料</a>${googleLink ? `<a href="${googleLink}" target="_blank" rel="noreferrer">Google 地图</a>` : ''}${clinic.website ? `<a href="${clinic.website}" target="_blank" rel="noreferrer">官方网站</a>` : ''}</div></div></details></article>`
           })
           .join('')
 
@@ -821,10 +1027,12 @@ function setupClinics() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  applyBrandName()
   injectGoogleAnalytics()
   injectSocialMeta()
   injectStructuredData()
   injectSharedFooter()
+  injectFloatingServiceAd()
   const page = document.body.dataset.page
   if (page === 'home') setupHome()
   if (page === 'doctors') setupDoctors()

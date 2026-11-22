@@ -111,7 +111,56 @@ function normalizeDate(value) {
   return `${year}-${month.padStart(2, '0')}-${(day || '01').padStart(2, '0')}`
 }
 
-function pageShell({ title, description, canonical, ogType = 'website', body, schema }) {
+function renderTopSponsorBanner() {
+  return `
+    <aside class="sponsor-banner" aria-label="专属咨询服务">
+      <div class="sponsor-banner-inner">
+        <div class="sponsor-banner-left">
+          <div class="sponsor-tag">✦ 读者专属协助 · 伊斯坦布尔本地服务</div>
+          <h3 class="sponsor-banner-title">土耳其植发中立问诊 · 正规诊所与医生代预约 · 本地翻译陪同</h3>
+          <p class="sponsor-banner-desc">常驻伊斯坦布尔，提供客观资质核查、术前方案独立把关、中立代预约与地接陪同，避开营销套路与中介溢价。</p>
+        </div>
+        <div class="sponsor-banner-action">
+          <div class="sponsor-wechat-box">微信: <strong>turkeyzhifa</strong></div>
+          <button type="button" class="copy-wechat-btn" data-copy-wechat="turkeyzhifa">复制微信号</button>
+        </div>
+      </div>
+    </aside>`
+}
+
+function renderBottomSponsorCard() {
+  return `
+    <section class="sponsor-card-bottom" aria-label="服务预约与咨询">
+      <div class="sponsor-bottom-header">
+        <div>
+          <h3 class="sponsor-bottom-title">需要土耳其植发方案评估或中立代预约？</h3>
+          <p class="sponsor-bottom-subtitle">避开中介包装与流水线技师操作，获取具名医生真实报价与伊斯坦布尔本地全程中文协助。</p>
+        </div>
+      </div>
+      <div class="sponsor-features-grid">
+        <div class="sponsor-feature-item">
+          <strong><span>✓</span> 独立资质核实</strong>
+          <p>核查机构卫生部执照、医生 ISHRS/ABHRS 真实资质，确认打孔与取发是否由医生本人主刀。</p>
+        </div>
+        <div class="sponsor-feature-item">
+          <strong><span>✓</span> 官方代预约与底价</strong>
+          <p>直连医院与医生官方通道，避免国内第三方中介加价，协助争取中文翻译支持与最优直客档期。</p>
+        </div>
+        <div class="sponsor-feature-item">
+          <strong><span>✓</span> 本地接待与全程陪同</strong>
+          <p>常驻伊斯坦布尔本地，提供接送协调、术前面诊翻译沟通、术中陪同及术后消炎清洗跟进。</p>
+        </div>
+      </div>
+      <div class="sponsor-bottom-action">
+        <div class="sponsor-bottom-note">添加微信：<strong>turkeyzhifa</strong>（点击右侧一键复制，添加时请备注：植发咨询）</div>
+        <div class="sponsor-bottom-btn-group">
+          <button type="button" class="copy-wechat-btn" data-copy-wechat="turkeyzhifa">复制微信号 turkeyzhifa</button>
+        </div>
+      </div>
+    </section>`
+}
+
+function pageShell({ title, description, canonical, ogType = 'website', body, schema, activeNav = '' }) {
   return `<!doctype html>
 <html lang="zh-CN">
   <head>
@@ -129,123 +178,160 @@ function pageShell({ title, description, canonical, ogType = 'website', body, sc
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     <title>${escapeHtml(title)}</title>
-    <link rel="stylesheet" href="/assets/styles.css?v=20260406a" />
+    <link rel="stylesheet" href="/assets/styles.css?v=20261109" />
+    <link rel="stylesheet" href="/assets/sponsor.css?v=20261109" />
     <style>
       .entity-main {
-        padding: 28px 0 64px;
+        padding: 24px 0 64px;
       }
       .entity-shell {
         width: min(1180px, calc(100% - 32px));
         margin: 0 auto;
       }
-      .entity-hero,
-      .entity-card {
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.94);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow);
+      .entity-breadcrumbs {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--text-soft);
+        margin-bottom: 16px;
+      }
+      .entity-breadcrumbs a {
+        color: var(--brand);
+        text-decoration: none;
+      }
+      .entity-breadcrumbs a:hover {
+        text-decoration: underline;
       }
       .entity-hero {
+        border: 1px solid var(--line);
+        background: #ffffff;
+        border-radius: var(--radius-lg);
         padding: 28px;
-      }
-      .entity-grid {
-        display: grid;
-        gap: 18px;
-        margin-top: 24px;
-        grid-template-columns: 1.15fr 0.85fr;
-      }
-      .entity-card {
-        padding: 24px;
+        box-shadow: var(--shadow);
       }
       .entity-kicker {
         display: inline-flex;
-        padding: 8px 12px;
+        padding: 4px 12px;
         border-radius: 999px;
         background: rgba(15, 76, 129, 0.08);
         color: var(--brand);
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 700;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
       }
       .entity-title {
-        margin: 18px 0 0;
-        font-size: clamp(34px, 5vw, 54px);
-        line-height: 1.02;
-        letter-spacing: -0.05em;
+        margin: 14px 0 0;
+        font-size: clamp(30px, 4.4vw, 46px);
+        line-height: 1.1;
+        letter-spacing: -0.04em;
         color: var(--brand-deep);
       }
       .entity-subtitle {
-        margin-top: 16px;
-        max-width: 760px;
-        font-size: 18px;
-        line-height: 1.8;
+        margin-top: 12px;
+        max-width: 820px;
+        font-size: 16px;
+        line-height: 1.7;
         color: var(--text-soft);
       }
       .entity-meta {
-        margin-top: 24px;
+        margin-top: 22px;
         display: grid;
-        gap: 14px;
+        gap: 12px;
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
       .entity-pill {
         border: 1px solid var(--line);
         border-radius: var(--radius-md);
         background: var(--surface-muted);
-        padding: 16px;
+        padding: 14px 16px;
       }
       .entity-pill strong {
         display: block;
-        font-size: 24px;
+        font-size: 20px;
         color: var(--brand-deep);
       }
       .entity-pill span {
         display: block;
-        margin-top: 6px;
-        font-size: 13px;
-        line-height: 1.7;
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 1.6;
         color: var(--text-soft);
       }
+      .entity-grid {
+        display: grid;
+        gap: 18px;
+        margin-top: 20px;
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+      .entity-card {
+        border: 1px solid var(--line);
+        background: #ffffff;
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        box-shadow: 0 10px 24px rgba(15, 76, 129, 0.05);
+      }
       .entity-section-title {
-        margin: 0;
-        font-size: 28px;
-        letter-spacing: -0.04em;
+        margin: 0 0 16px;
+        font-size: 20px;
+        letter-spacing: -0.03em;
+        color: var(--brand-deep);
+      }
+      .entity-spec-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f4f7;
+        font-size: 14px;
+      }
+      .entity-spec-row:last-child {
+        border-bottom: none;
+      }
+      .entity-spec-label {
+        color: var(--text-soft);
+      }
+      .entity-spec-val {
+        font-weight: 600;
         color: var(--brand-deep);
       }
       .entity-card p,
       .entity-card li {
-        font-size: 15px;
-        line-height: 1.9;
+        font-size: 14.5px;
+        line-height: 1.8;
         color: var(--text-soft);
       }
       .entity-card p + p {
-        margin-top: 14px;
+        margin-top: 12px;
       }
       .entity-list {
-        margin: 16px 0 0;
+        margin: 14px 0 0;
         padding-left: 20px;
+      }
+      .entity-list li + li {
+        margin-top: 8px;
       }
       .entity-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
         margin-top: 20px;
       }
       .entity-button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 48px;
-        padding: 0 20px;
+        min-height: 44px;
+        padding: 0 18px;
         border-radius: 999px;
-        font-size: 14px;
+        font-size: 13.5px;
         font-weight: 700;
         transition: 180ms ease;
       }
       .entity-button-primary {
         background: var(--brand-soft);
         color: var(--brand-deep);
-        box-shadow: 0 18px 34px rgba(0, 196, 180, 0.24);
+        box-shadow: 0 12px 24px rgba(0, 196, 180, 0.2);
       }
       .entity-button-secondary {
         border: 1px solid var(--line);
@@ -254,18 +340,10 @@ function pageShell({ title, description, canonical, ogType = 'website', body, sc
       }
       .entity-photo {
         width: 100%;
-        border-radius: var(--radius-lg);
+        border-radius: var(--radius-md);
         object-fit: cover;
         aspect-ratio: 4 / 4.3;
         background: #e8eff3;
-      }
-      .entity-breadcrumbs {
-        margin-top: 20px;
-        font-size: 14px;
-        color: var(--text-soft);
-      }
-      .entity-breadcrumbs a {
-        color: var(--brand);
       }
       @media (max-width: 920px) {
         .entity-grid,
@@ -277,8 +355,42 @@ function pageShell({ title, description, canonical, ogType = 'website', body, sc
     <script type="application/ld+json">${JSON.stringify(schema)}</script>
   </head>
   <body>
-${body}
-    <script src="/assets/app.js?v=20260406a" defer></script>
+    <div class="shell">
+      <header class="header">
+        <div class="container header-inner">
+          <a href="/">
+            <div class="brand-title">土耳其植发透明指南</div>
+            <div class="brand-subtitle">Transparent Hair Transplant Guide</div>
+          </a>
+          <nav class="nav">
+            <a href="/" class="nav-link">首页</a>
+            <a href="/doctors/" class="nav-link ${activeNav === 'doctors' ? 'nav-link-active' : ''}">医生库</a>
+            <a href="/clinics/" class="nav-link ${activeNav === 'clinics' ? 'nav-link-active' : ''}">诊所库</a>
+            <a href="/guides/" class="nav-link">全流程攻略</a>
+            <a href="/about/" class="nav-link">关于</a>
+            <button type="button" class="nav-wechat-btn" data-copy-wechat="turkeyzhifa">
+              <span>微信咨询:</span> <strong>turkeyzhifa</strong> <span class="copy-badge">复制</span>
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <main class="entity-main">
+        <div class="entity-shell">
+          ${body}
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="card footer-card">
+            <p>免责声明：本网站基于公开资料整理，仅供信息参考与术语解读，不构成医疗建议。所有医疗决定请结合官方信息、面诊结果与个人情况独立判断。咨询代预约与本地协调微信：turkeyzhifa</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="/assets/app.js?v=20261109" defer></script>
+    <script src="/assets/sponsor.js?v=20261109" defer></script>
   </body>
 </html>`
 }
@@ -316,89 +428,80 @@ function buildDoctorPage(doctor, slug) {
   }
   if (verifiedDate) schema['@graph'][1].dateModified = verifiedDate
 
-  return pageShell({
-    title,
-    description,
-    canonical,
-    body: `    <div class="shell">
-      <header class="header">
-        <div class="container header-inner">
-          <a href="/">
-            <div class="brand-title">土耳其植发透明指南</div>
-            <div class="brand-subtitle">Transparent Hair Transplant Guide</div>
-          </a>
-          <nav class="nav">
-            <a href="/">首页</a>
-            <a href="/doctors/" class="nav-link-active">医生库</a>
-            <a href="/clinics/">诊所库</a>
-            <a href="/guides/">术语解释</a>
-            <a href="/blog/">科普文章</a>
-            <a href="/about/">关于</a>
-          </nav>
-        </div>
-      </header>
+  const body = `
+          <div class="entity-breadcrumbs">
+            <a href="/">首页</a> <span>/</span>
+            <a href="/doctors/">医生库</a> <span>/</span>
+            <span>${escapeHtml(englishName)}</span>
+          </div>
 
-      <main class="entity-main">
-        <div class="entity-shell">
+          ${renderTopSponsorBanner()}
+
           <section class="entity-hero">
-            <div class="entity-kicker">Doctor Profile</div>
+            <div class="entity-kicker">Doctor Profile · 医生图鉴资料</div>
             <h1 class="entity-title">${escapeHtml(name)}</h1>
-            <div class="entity-subtitle">${escapeHtml(englishName)} · ${escapeHtml(doctor.city_cn || doctor.city || '土耳其')} · ${escapeHtml(formatDoctorStatus(doctor))}。适合在联系医生前，先快速核对资质、背景、擅长方向和手术模式。</div>
+            <div class="entity-subtitle">${escapeHtml(englishName)} · ${escapeHtml(doctor.city_cn || doctor.city || '土耳其')} · ${escapeHtml(formatDoctorStatus(doctor))}。适合在联系医生前快速核对资质级别、背景、擅长方向和手术模式。</div>
             <div class="entity-meta">
               <div class="entity-pill"><strong>${escapeHtml(formatDoctorStatus(doctor))}</strong><span>ISHRS 会员级别</span></div>
               <div class="entity-pill"><strong>${escapeHtml(formatAbhrs(doctor))}</strong><span>是否公开 ABHRS</span></div>
               <div class="entity-pill"><strong>${escapeHtml(doctor.surgery_model_cn || doctor.surgery_model || '未标注')}</strong><span>公开手术模式</span></div>
             </div>
-            <div class="entity-breadcrumbs"><a href="/">首页</a> / <a href="/doctors/">医生库</a> / ${escapeHtml(englishName)}</div>
           </section>
 
           <section class="entity-grid">
             <article class="entity-card">
-              <h2 class="entity-section-title">核心资料</h2>
-              <p>城市：${escapeHtml(doctor.city_cn || doctor.city || '未标注')}</p>
-              <p>背景：${escapeHtml(doctor.background_type_cn || doctor.background_type_en || '未标注')}</p>
-              <p>专长：${escapeHtml(doctor.specialty_cn || doctor.specialty_en || '未标注')}</p>
-              <p>最后核对：${escapeHtml(doctor.last_verified || '未标注')}</p>
+              <h2 class="entity-section-title">核心档案与参数</h2>
+              <div class="entity-spec-row"><span class="entity-spec-label">执业城市</span><span class="entity-spec-val">${escapeHtml(doctor.city_cn || doctor.city || '未标注')}</span></div>
+              <div class="entity-spec-row"><span class="entity-spec-label">专业背景</span><span class="entity-spec-val">${escapeHtml(doctor.background_type_cn || doctor.background_type_en || '未标注')}</span></div>
+              <div class="entity-spec-row"><span class="entity-spec-label">擅长技术</span><span class="entity-spec-val">${escapeHtml(doctor.specialty_cn || doctor.specialty_en || '未标注')}</span></div>
+              <div class="entity-spec-row"><span class="entity-spec-label">最后核对</span><span class="entity-spec-val">${escapeHtml(doctor.last_verified || '未标注')}</span></div>
               <div class="entity-links">
                 <a href="/doctors/" class="entity-button entity-button-primary">返回医生库</a>
-                ${doctor.website ? `<a href="${ensureUrl(doctor.website)}" target="_blank" rel="noreferrer" class="entity-button entity-button-secondary">官网</a>` : ''}
+                ${doctor.website ? `<a href="${ensureUrl(doctor.website)}" target="_blank" rel="noreferrer" class="entity-button entity-button-secondary">访问官网</a>` : ''}
+                <button type="button" class="entity-button entity-button-secondary copy-wechat-btn" data-copy-wechat="turkeyzhifa">代预约/问诊咨询</button>
               </div>
             </article>
             <aside class="entity-card">
-              ${photo ? `<img class="entity-photo" src="${photo}" alt="${escapeHtml(englishName)}" />` : `<div class="entity-photo"></div>`}
+              ${photo ? `<img class="entity-photo" src="${photo}" alt="${escapeHtml(englishName)}" />` : `<div class="entity-photo" style="display:flex;align-items:center;justify-content:center;color:#8a9ba8;font-size:18px;">暂无照片</div>`}
             </aside>
           </section>
 
           <section class="entity-grid">
             <article class="entity-card">
-              <h2 class="entity-section-title">公开备注</h2>
+              <h2 class="entity-section-title">公开特点与学术备注</h2>
               ${noteHtml}
             </article>
             <article class="entity-card">
-              <h2 class="entity-section-title">联系前先确认</h2>
+              <h2 class="entity-section-title">面诊/联系前必查 4 问</h2>
               <ul class="entity-list">
-                <li>关键步骤里，设计、打孔、取发分别由谁完成。</li>
-                <li>一天做几台手术，团队是否固定。</li>
-                <li>是否可以提供术前评估流程与书面说明。</li>
-                <li>是否有更多公开案例、修复案例或特定适应症经验。</li>
+                <li><strong>关键步骤分工</strong>：发际线设计、打孔（开通道）、取发到底由谁亲手完成。</li>
+                <li><strong>手术排期密度</strong>：医生一天做几台手术，团队助手是否稳定长期配合。</li>
+                <li><strong>书面评估方案</strong>：是否能在术前提供详细的供区密度、种植株数书面预估。</li>
+                <li><strong>案例与修复经验</strong>：是否有类似脱发等级的真实长期案例或高难度修复案例。</li>
               </ul>
             </article>
           </section>
 
+          ${renderBottomSponsorCard()}
+
           <section class="entity-grid">
             <article class="entity-card">
-              <h2 class="entity-section-title">继续阅读</h2>
+              <h2 class="entity-section-title">相关攻略推荐</h2>
               <div class="entity-links">
-                <a href="/blog/how-to-choose-a-doctor-not-a-clinic" class="entity-button entity-button-secondary">如何选择植发医生</a>
-                <a href="/blog/how-to-evaluate-doctors" class="entity-button entity-button-secondary">如何判断医生资质</a>
+                <a href="/guides/" class="entity-button entity-button-secondary">植发全流程与避坑指南</a>
+                <a href="/blog/how-to-choose-a-doctor-not-a-clinic" class="entity-button entity-button-secondary">如何选择植发医生而非流水线诊所</a>
                 <a href="/blog/price-difference" class="entity-button entity-button-secondary">土耳其植发价格为什么差异巨大</a>
               </div>
             </article>
-          </section>
-        </div>
-      </main>
-    </div>`,
+          </section>`
+
+  return pageShell({
+    title,
+    description,
+    canonical,
+    body,
     schema,
+    activeNav: 'doctors',
   })
 }
 
@@ -433,85 +536,84 @@ function buildClinicPage(clinic, slug) {
     ],
   }
 
+  const body = `
+          <div class="entity-breadcrumbs">
+            <a href="/">首页</a> <span>/</span>
+            <a href="/clinics/">诊所库</a> <span>/</span>
+            <span>${escapeHtml(englishName)}</span>
+          </div>
+
+          ${renderTopSponsorBanner()}
+
+          <section class="entity-hero">
+            <div class="entity-kicker">Clinic Profile · 机构图鉴资料</div>
+            <h1 class="entity-title">${escapeHtml(name)}</h1>
+            <div class="entity-subtitle">${escapeHtml(englishName)} · ${escapeHtml(formatFacilityType(clinic.facility_type))}。适合在联系机构前，先核对评分、评价数、公开备注、官网与医生分工信息。</div>
+            <div class="entity-meta">
+              <div class="entity-pill"><strong>${escapeHtml(rating ? rating + ' / 5.0' : '待更新')}</strong><span>Google 真实评分</span></div>
+              <div class="entity-pill"><strong>${escapeHtml(reviews ? reviews + ' 条' : '待更新')}</strong><span>Google 评价总量</span></div>
+              <div class="entity-pill"><strong>${escapeHtml(clinic.google_checked_at || clinic.last_checked || '未标注')}</strong><span>最近核对时间</span></div>
+            </div>
+          </section>
+
+          <section class="entity-grid">
+            <article class="entity-card">
+              <h2 class="entity-section-title">机构核心资料</h2>
+              <div class="entity-spec-row"><span class="entity-spec-label">注册名称</span><span class="entity-spec-val">${escapeHtml(clinic.official_name || '未标注')}</span></div>
+              <div class="entity-spec-row"><span class="entity-spec-label">机构性质</span><span class="entity-spec-val">${escapeHtml(formatFacilityType(clinic.facility_type))}</span></div>
+              <div class="entity-spec-row"><span class="entity-spec-label">具名医生</span><span class="entity-spec-val">${escapeHtml(clinic.lead_doctor || '未公开具体医生')}</span></div>
+              <div class="entity-spec-row"><span class="entity-spec-label">价格透明度</span><span class="entity-spec-val">${escapeHtml(clinic.price_transparency ? '有公开套餐价' : '需单独问诊')}</span></div>
+              <div class="entity-links">
+                <a href="/clinics/" class="entity-button entity-button-primary">返回诊所库</a>
+                ${clinic.website ? `<a href="${ensureUrl(clinic.website)}" target="_blank" rel="noreferrer" class="entity-button entity-button-secondary">访问官网</a>` : ''}
+                ${googleValue && isUrl(googleValue) ? `<a href="${ensureUrl(googleValue)}" target="_blank" rel="noreferrer" class="entity-button entity-button-secondary">查看 Google Maps</a>` : ''}
+                <button type="button" class="entity-button entity-button-secondary copy-wechat-btn" data-copy-wechat="turkeyzhifa">代预约/查底价</button>
+              </div>
+            </article>
+            <article class="entity-card">
+              <h2 class="entity-section-title">公开备注与价格线索</h2>
+              ${noteHtml}
+              ${googleValue && !isUrl(googleValue) ? `<p style="margin-top:12px;"><strong>评价快照摘要：</strong>${escapeHtml(googleValue)}</p>` : ''}
+            </article>
+          </section>
+
+          <section class="entity-grid">
+            <article class="entity-card">
+              <h2 class="entity-section-title">联系前必查 4 问</h2>
+              <ul class="entity-list">
+                <li><strong>具体主刀人员</strong>：客服报价是“医生打孔套餐”还是“技师团队套餐”。</li>
+                <li><strong>关键操作分工</strong>：发际线设计、打孔、取发、植入分别由谁负责。</li>
+                <li><strong>每日接诊量</strong>：该机构一天安排几台手术，是否属于流水线批量排班。</li>
+                <li><strong>全包套餐明细</strong>：费用是否包含术后洗护、药品、翻译及复查质保。</li>
+              </ul>
+            </article>
+            <article class="entity-card">
+              <h2 class="entity-section-title">防坑提醒</h2>
+              <p>伊斯坦布尔许多知名机构存在多种档位套餐。同一家机构，医生亲手打孔与技师团队打孔价格可能相差 2-3 倍。</p>
+              <p>如果需要核实该机构近期实际接待反馈与真实底价，可在微信联系 <strong>turkeyzhifa</strong> 本地咨询。</p>
+            </article>
+          </section>
+
+          ${renderBottomSponsorCard()}
+
+          <section class="entity-grid">
+            <article class="entity-card">
+              <h2 class="entity-section-title">相关攻略推荐</h2>
+              <div class="entity-links">
+                <a href="/guides/" class="entity-button entity-button-secondary">植发全流程避坑指南</a>
+                <a href="/blog/clinic-compliance-checklist" class="entity-button entity-button-secondary">如何验证诊所卫生部执照</a>
+                <a href="/blog/price-difference" class="entity-button entity-button-secondary">土耳其植发价格为什么差异巨大</a>
+              </div>
+            </article>
+          </section>`
+
   return pageShell({
     title,
     description,
     canonical,
-    body: `    <div class="shell">
-      <header class="header">
-        <div class="container header-inner">
-          <a href="/">
-            <div class="brand-title">土耳其植发透明指南</div>
-            <div class="brand-subtitle">Transparent Hair Transplant Guide</div>
-          </a>
-          <nav class="nav">
-            <a href="/">首页</a>
-            <a href="/doctors/">医生库</a>
-            <a href="/clinics/" class="nav-link-active">诊所库</a>
-            <a href="/guides/">术语解释</a>
-            <a href="/blog/">科普文章</a>
-            <a href="/about/">关于</a>
-          </nav>
-        </div>
-      </header>
-
-      <main class="entity-main">
-        <div class="entity-shell">
-          <section class="entity-hero">
-            <div class="entity-kicker">Clinic Profile</div>
-            <h1 class="entity-title">${escapeHtml(name)}</h1>
-            <div class="entity-subtitle">${escapeHtml(englishName)} · ${escapeHtml(formatFacilityType(clinic.facility_type))}。适合在联系机构前，先核对评分、评价数、公开备注、官网与医生信息。</div>
-            <div class="entity-meta">
-              <div class="entity-pill"><strong>${escapeHtml(rating || '待更新')}</strong><span>Google 评分</span></div>
-              <div class="entity-pill"><strong>${escapeHtml(reviews || '待更新')}</strong><span>Google 评价数</span></div>
-              <div class="entity-pill"><strong>${escapeHtml(clinic.google_checked_at || clinic.last_checked || '未标注')}</strong><span>最近核对时间</span></div>
-            </div>
-            <div class="entity-breadcrumbs"><a href="/">首页</a> / <a href="/clinics/">诊所库</a> / ${escapeHtml(englishName)}</div>
-          </section>
-
-          <section class="entity-grid">
-            <article class="entity-card">
-              <h2 class="entity-section-title">核心资料</h2>
-              <p>官方名称：${escapeHtml(clinic.official_name || '未标注')}</p>
-              <p>机构类型：${escapeHtml(formatFacilityType(clinic.facility_type))}</p>
-              <p>具名医生：${escapeHtml(clinic.lead_doctor || '未具名')}</p>
-              <p>公开价格：${escapeHtml(clinic.price_transparency ? '有套餐价' : '需咨询')}</p>
-              <div class="entity-links">
-                <a href="/clinics/" class="entity-button entity-button-primary">返回诊所库</a>
-                ${clinic.website ? `<a href="${ensureUrl(clinic.website)}" target="_blank" rel="noreferrer" class="entity-button entity-button-secondary">官网</a>` : ''}
-                ${googleValue && isUrl(googleValue) ? `<a href="${ensureUrl(googleValue)}" target="_blank" rel="noreferrer" class="entity-button entity-button-secondary">Google 摘要</a>` : ''}
-              </div>
-            </article>
-            <article class="entity-card">
-              <h2 class="entity-section-title">公开备注</h2>
-              ${noteHtml}
-              ${googleValue && !isUrl(googleValue) ? `<p>${escapeHtml(googleValue)}</p>` : ''}
-            </article>
-          </section>
-
-          <section class="entity-grid">
-            <article class="entity-card">
-              <h2 class="entity-section-title">联系前先确认</h2>
-              <ul class="entity-list">
-                <li>客服回复里是否明确说明接待流程、术前照片评估和检查要求。</li>
-                <li>发际线设计、打孔、取发、植入分别由谁完成。</li>
-                <li>一天做几台手术，是否固定团队，是否可提供医生姓名。</li>
-                <li>套餐包含哪些项目，术后复查和并发症处理如何安排。</li>
-              </ul>
-            </article>
-            <article class="entity-card">
-              <h2 class="entity-section-title">继续阅读</h2>
-              <div class="entity-links">
-                <a href="/blog/price-difference" class="entity-button entity-button-secondary">土耳其植发价格</a>
-                <a href="/blog/clinic-compliance-checklist" class="entity-button entity-button-secondary">如何验证诊所是否合规</a>
-                <a href="/blog/clinic-transparency-reality" class="entity-button entity-button-secondary">诊所透明度现实</a>
-              </div>
-            </article>
-          </section>
-        </div>
-      </main>
-    </div>`,
+    body,
     schema,
+    activeNav: 'clinics',
   })
 }
 

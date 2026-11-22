@@ -25,105 +25,148 @@
         },
       }
     </script>
-    <link rel="stylesheet" href="/assets/styles.css?v=20260319b" />
+    <link rel="stylesheet" href="/assets/styles.css?v=20261109" />
+    <link rel="stylesheet" href="/assets/sponsor.css?v=20261109" />
   </head>
   <body data-page="doctors" class="bg-sand text-ink">
     <div class="min-h-screen">
-      <header class="border-b border-stone-200/80 bg-white/80 backdrop-blur">
+      <header class="border-b border-stone-200/80 bg-white/80 backdrop-blur sticky top-0 z-30">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <a href="/" class="flex flex-col">
             <span class="text-2xl font-semibold tracking-tight">土耳其植发透明指南</span>
             <span class="text-xs uppercase tracking-[0.28em] text-stone-500">Transparent Hair Transplant Guide</span>
           </a>
-          <nav class="hidden gap-6 text-sm text-stone-600 md:flex">
+          <nav class="hidden gap-6 text-sm text-stone-600 md:flex items-center">
             <a href="/" class="nav-link">首页</a>
             <a href="/doctors/" class="nav-link nav-link-active">医生库</a>
             <a href="/clinics/" class="nav-link">诊所库</a>
-            <a href="/guides/" class="nav-link">术语解释</a>
-            <a href="/blog/" class="nav-link">科普文章</a>
-                        <a href="/about/" class="nav-link">关于</a>
-            <a href="/hiv/" class="nav-link">HIV植发</a>
+            <a href="/guides/" class="nav-link">全流程攻略</a>
+            <a href="/about/" class="nav-link">关于</a>
+            <button type="button" class="nav-wechat-btn" data-copy-wechat="turkeyzhifa">
+              <span>微信咨询:</span> <strong>turkeyzhifa</strong> <span class="copy-badge">复制</span>
+            </button>
           </nav>
         </div>
       </header>
 
-      <main class="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+      <main class="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+        <!-- 顶部专属协助横幅 -->
+        <aside class="sponsor-banner" aria-label="专属咨询服务">
+          <div class="sponsor-banner-inner">
+            <div class="sponsor-banner-left">
+              <div class="sponsor-tag">✦ 读者专属协助 · 伊斯坦布尔本地服务</div>
+              <h3 class="sponsor-banner-title">土耳其植发中立问诊 · 正规诊所与医生代预约 · 本地翻译陪同</h3>
+              <p class="sponsor-banner-desc">常驻伊斯坦布尔，提供客观资质核查、术前方案独立把关、中立代预约与地接陪同，避开营销套路与中介溢价。</p>
+            </div>
+            <div class="sponsor-banner-action">
+              <div class="sponsor-wechat-box">微信: <strong>turkeyzhifa</strong></div>
+              <button type="button" class="copy-wechat-btn" data-copy-wechat="turkeyzhifa">复制微信号</button>
+            </div>
+          </div>
+        </aside>
+
         <section class="page-hero overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-6 shadow-soft lg:p-10">
           <div class="page-kicker">
-            ISHRS 精品医生库
+            ISHRS 精品医生图鉴
           </div>
-          <h1 class="mt-6 text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">ISHRS 精品医生库</h1>
+          <h1 class="mt-6 text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">土耳其植发医生数据库</h1>
           <p class="mt-5 max-w-4xl text-base leading-8 text-stone-600">
-            本页共搜集 <strong>13</strong> 名土耳其植发医生，并按 <strong>ISHRS Fellow</strong>、<strong>正式会员</strong> 两类分组展示。资料来源于
-            <a href="https://ishrs.org/find-a-doctor/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">ISHRS 官网</a>、
-            <a href="https://abhrs.org/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">ABHRS 官网</a>
-            及医生公开履历。建议先看会员级别，再看 ABHRS 认证，最后看手术模式。
-          </p>
-          <p class="mt-4 max-w-4xl text-base leading-8 text-stone-600">
-            ISHRS 与 ABHRS 仍是目前植发领域最有代表性的国际专业体系。中国目前也有 3 位相关医生在杭州第一人民医院，具体可在对应官网进一步核查。
-          </p>
-          <p class="mt-4 max-w-4xl text-base leading-8 text-stone-600">
-            另外需要特别注意：除以上正式会员（Member）与研究员（Fellow）外，其他机构或个人宣传中原则上不应随意使用 <strong>ISHRS</strong> 名义。这也是国际植发协会对会员身份使用边界的基本要求，最稳妥的做法仍然是回到官网核查。
+            本页共收录土耳其具名权威植发医生，按 <strong>ISHRS Fellow</strong> 与 <strong>正式会员</strong> 分类。资料来源于
+            <a href="https://ishrs.org/find-a-doctor/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">ISHRS 官方</a>、
+            <a href="https://abhrs.org/" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">ABHRS 官方</a>
+            及公开学术履历。建议先核对会员级别，再看是否公开 ABHRS 认证，最后确认手术是否由医生亲手打孔。
           </p>
           <div class="mt-6 grid gap-3 lg:grid-cols-2">
             <div class="rounded-[1.5rem] border border-emerald-200 bg-emerald-50/60 p-4">
-              <div class="text-sm font-semibold text-stone-900">ISHRS Fellow</div>
-              <p class="mt-3 text-base leading-8 text-stone-700">FISHRS（Fellow Member，会士）：ISHRS 授予的最高荣誉级别。这些医生不仅拥有丰富的手术经验，还在教学、研究或学会贡献方面有突出表现，是植发领域公认的顶尖专家。</p>
+              <div class="text-sm font-semibold text-stone-900">1. ISHRS Fellow（会士 / FISHRS）</div>
+              <p class="mt-2 text-sm leading-7 text-stone-700">ISHRS 授予的最高学术与临床荣誉级别。这些医生拥有极为丰富的手术经验并在国际植发学会、教学或研究中有突出贡献，属于公认的顶尖专家。</p>
             </div>
             <div class="rounded-[1.5rem] border border-amber-200 bg-amber-50/60 p-4">
-              <div class="text-sm font-semibold text-stone-900">正式会员</div>
-              <p class="mt-3 text-base leading-8 text-stone-700">Member（正式会员）：ISHRS 的核心会员级别。这些医生已完成系统的植发专业教育培训，并获得同行推荐，具备扎实的专业知识和临床能力，属于较为优秀的植发医生群体。</p>
+              <div class="text-sm font-semibold text-stone-900">2. ISHRS Member（正式会员）</div>
+              <p class="mt-2 text-sm leading-7 text-stone-700">完成了系统的植发专业培训并获同行推荐，具备扎实的医学理论和临床能力，属于正规规范的植发外科医生群体。</p>
             </div>
-          </div>
-          <div class="mt-4 rounded-[1.5rem] border border-clay/20 bg-clay/5 p-5">
-            <p class="text-base leading-8 text-stone-800">
-              总结说明：<strong>FISHRS</strong> 是 ISHRS 里最顶尖的医生，<strong>Member</strong> 也是经过严格教育要求和同行认可的优秀医生。看到这些头衔时，可以作为选择医生的重要参考之一。
-            </p>
           </div>
           <div class="mt-6 grid gap-4 lg:grid-cols-2">
             <div class="rounded-[1.5rem] border border-stone-200 bg-stone-50 p-5">
-              <div class="text-sm font-semibold uppercase tracking-[0.14em] text-stone-500">个人模式</div>
-              <p class="mt-3 text-sm leading-7 text-stone-700">
-                通常是一位医生加长期合作的助手团队，每天只做 1-2 台手术，整体更偏“求精不求多”。确定后往往需要更细的行程沟通和专业植发翻译，如果你需要，我这边可以后台协助联系。
+              <div class="text-sm font-semibold uppercase tracking-[0.14em] text-stone-500">个人精细模式</div>
+              <p class="mt-2 text-sm leading-7 text-stone-700">
+                医生亲自负责发际线设计与核心打孔通道，每天严格限制只做 1-2 台手术，质量控制更稳。确定后通常需要提前 1-3 个月锁定档期，并配备专业中文翻译。
               </p>
             </div>
             <div class="rounded-[1.5rem] border border-stone-200 bg-stone-50 p-5">
-              <div class="text-sm font-semibold uppercase tracking-[0.14em] text-stone-500">诊所模式</div>
-              <p class="mt-3 text-sm leading-7 text-stone-700">
-                通常是一位医生配一个助手团队，或多个团队进行规模化运作。优点是客服、接待和语言支持通常更成熟，但沟通时一定要问清每个操作环节具体由谁负责，尤其是设计、打孔和植入。
+              <div class="text-sm font-semibold uppercase tracking-[0.14em] text-stone-500">诊所团队模式</div>
+              <p class="mt-2 text-sm leading-7 text-stone-700">
+                知名医生坐镇指导或仅做画线，主要操作由技师团队完成。价格通常更加亲民，但沟通时务必问清打孔等外科环节具体由谁操刀。
               </p>
             </div>
           </div>
         </section>
 
+        <!-- 工具化筛选器 -->
         <section class="mt-8 rounded-[1.75rem] border border-stone-200 bg-white p-5 shadow-soft">
           <div class="grid gap-3 lg:grid-cols-[minmax(0,1.15fr)_repeat(3,minmax(160px,0.3fr))]">
-            <input id="doctor-search" type="search" placeholder="搜索医生 / 专长 / 备注 / 城市" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white" />
+            <input id="doctor-search" type="search" placeholder="搜索医生姓名 / 擅长技术 / 城市 / 备注" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white" />
             <select id="doctor-city" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white"></select>
             <select id="doctor-status" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white">
               <option value="all">全部级别</option>
-              <option value="fellow">仅看 Fellow</option>
+              <option value="fellow">仅看 Fellow (会士)</option>
               <option value="member">仅看正式会员</option>
             </select>
             <select id="doctor-sort" class="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-stone-400 focus:bg-white">
-              <option value="status">按资质排序</option>
-              <option value="name">按姓名排序</option>
+              <option value="status">按资质等级排序</option>
+              <option value="name">按姓名拼音排序</option>
               <option value="city">按城市排序</option>
             </select>
           </div>
           <div class="mt-4 flex flex-wrap gap-3 text-sm text-stone-500">
-            <span>当前显示 <strong id="doctor-count" class="text-stone-900">—</strong> 位医生</span>
-            <span>数据库总更新时间 <strong class="text-stone-900">2026-03</strong></span>
+            <span>当前筛选显示 <strong id="doctor-count" class="text-stone-900">—</strong> 位医生</span>
+            <span>官方资质核对周期 <strong class="text-stone-900">2026-03</strong></span>
           </div>
-          <p class="mt-4 text-sm leading-7 text-stone-600">
-            价格因毛囊数量和手术模式而异，建议直接联系医生获取最新报价。
-          </p>
         </section>
 
         <section id="doctor-grid" class="mt-8 grid gap-8"></section>
+
+        <!-- 底部落地服务卡片 -->
+        <section class="sponsor-card-bottom" aria-label="服务预约与咨询">
+          <div class="sponsor-bottom-header">
+            <div>
+              <h3 class="sponsor-bottom-title">需要锁定医生面诊档期或评估脱发方案？</h3>
+              <p class="sponsor-bottom-subtitle">避开中介包装与流水线技师操作，获取具名医生真实报价与伊斯坦布尔本地全程中文协助。</p>
+            </div>
+          </div>
+          <div class="sponsor-features-grid">
+            <div class="sponsor-feature-item">
+              <strong><span>✓</span> 独立资质核查</strong>
+              <p>核查机构卫生部执照、医生 ISHRS/ABHRS 真实资质，确认打孔与取发是否由医生本人主刀。</p>
+            </div>
+            <div class="sponsor-feature-item">
+              <strong><span>✓</span> 官方代预约与底价</strong>
+              <p>直连医院与医生官方通道，避免国内第三方中介加价，协助争取中文翻译支持与最优直客档期。</p>
+            </div>
+            <div class="sponsor-feature-item">
+              <strong><span>✓</span> 本地接待与全程陪同</strong>
+              <p>常驻伊斯坦布尔本地，提供接送协调、术前面诊翻译沟通、术中陪同及术后消炎清洗跟进。</p>
+            </div>
+          </div>
+          <div class="sponsor-bottom-action">
+            <div class="sponsor-bottom-note">添加微信：<strong>turkeyzhifa</strong>（点击右侧一键复制，添加时请备注：植发咨询）</div>
+            <div class="sponsor-bottom-btn-group">
+              <button type="button" class="copy-wechat-btn" data-copy-wechat="turkeyzhifa">复制微信号 turkeyzhifa</button>
+            </div>
+          </div>
+        </section>
       </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="card footer-card">
+            <p>免责声明：本网站基于公开资料整理，仅供信息参考与术语解读，不构成医疗建议。所有医疗决定请结合官方信息、面诊结果与个人情况独立判断。咨询代预约与本地协调微信：turkeyzhifa</p>
+          </div>
+        </div>
+      </footer>
     </div>
 
-    <script src="/assets/app.js?v=20260406a" defer></script>
+    <script src="/assets/app.js?v=20261109" defer></script>
+    <script src="/assets/sponsor.js?v=20261109" defer></script>
   </body>
 </html>
