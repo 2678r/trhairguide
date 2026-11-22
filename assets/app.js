@@ -1051,6 +1051,41 @@ function setupClinics() {
     })
 }
 
+function setupIshrsDoctorDirectory() {
+  const list = document.getElementById('ishrs-doctor-list')
+  if (!list) return
+
+  loadJson('/data/doctors.json')
+    .then((doctors) => {
+      const doctorSlugMap = buildUniqueSlugMap(
+        doctors,
+        (doctor) => doctor.doctor_name_en || doctor.doctor_name_cn || doctor.doctor_id,
+        (doctor) => doctor.doctor_id
+      )
+      const listed = doctors
+        .filter((doctor) => ['fellow', 'member'].includes(normalize(doctor.ishrs_status).toLowerCase()))
+        .sort((a, b) => statusScore(b) - statusScore(a) || normalize(a.doctor_name_en).localeCompare(normalize(b.doctor_name_en)))
+
+      if (!listed.length) {
+        list.innerHTML = '<p class="directory-expert-loading">暂未收录可展示的 ISHRS 公开资料。</p>'
+        return
+      }
+
+      list.innerHTML = listed
+        .map((doctor) => {
+          const fellow = normalize(doctor.ishrs_status).toLowerCase() === 'fellow'
+          const abhrs = normalize(doctor.abhrs).toLowerCase() === 'yes'
+          const name = doctor.doctor_name_cn || doctor.doctor_name_en || '未公开姓名'
+          const profilePath = doctorProfilePath(doctor, doctorSlugMap)
+          return `<article class="directory-expert-card"><div><span class="directory-expert-status ${fellow ? 'is-fellow' : ''}">${fellow ? 'ISHRS Fellow' : 'ISHRS 会员'}</span><h3>${name}</h3><p>${doctor.doctor_name_en && doctor.doctor_name_en !== name ? doctor.doctor_name_en : ''}</p></div><div class="directory-expert-meta"><span>${doctor.city_cn || doctor.city || '城市未标注'}</span><span>${doctor.background_type_cn || doctor.background_type_en || '专业背景未标注'}</span>${abhrs ? '<span>ABHRS 认证</span>' : ''}</div><a href="${profilePath}">查看公开资料</a></article>`
+        })
+        .join('')
+    })
+    .catch(() => {
+      list.innerHTML = '<p class="directory-expert-loading">医生资料暂时无法加载。</p>'
+    })
+}
+
 function injectUnifiedNavigation() {
   const pathname = window.location.pathname.replace(/index\.html$/, '') || '/'
   const links = [
@@ -1082,5 +1117,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page
   if (page === 'home') setupHome()
   if (page === 'doctors') setupDoctors()
-  if (page === 'clinics') setupClinics()
+  if (page === 'clinics') {
+    setupClinics()
+    setupIshrsDoctorDirectory()
+  }
 })
