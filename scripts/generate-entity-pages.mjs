@@ -130,7 +130,6 @@ function pageShell({ title, description, canonical, ogType = 'website', body, sc
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     <title>${escapeHtml(title)}</title>
     <link rel="stylesheet" href="/assets/styles.css?v=20261109" />
-    <link rel="stylesheet" href="/assets/sponsor.css?v=20261109" />
     <style>
       .entity-main {
         padding: 24px 0 64px;
@@ -329,13 +328,12 @@ function pageShell({ title, description, canonical, ogType = 'website', body, sc
       <footer class="footer">
         <div class="container">
           <div class="card footer-card">
-            <p>免责声明：本网站基于公开资料整理，仅供信息参考与术语解读，不构成医疗建议。所有医疗决定请结合官方信息、面诊结果与个人情况独立判断。咨询代预约与本地协调微信：turkeyzhifa</p>
+            <p>免责声明：本网站基于公开资料整理，仅供信息参考与术语解读，不构成医疗建议。所有医疗决定请结合官方信息、面诊结果与个人情况独立判断。</p>
           </div>
         </div>
       </footer>
     </div>
-    <script src="/assets/app.js?v=20261109" defer></script>
-    <script src="/assets/sponsor.js?v=20261109" defer></script>
+    <script src="/assets/app.js?v=20261122k" defer></script>
   </body>
 </html>`
 }

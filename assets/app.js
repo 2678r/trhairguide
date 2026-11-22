@@ -597,7 +597,6 @@ function setupHome() {
                     ${googleLink ? `<a href="${googleLink}" target="_blank" rel="noreferrer" class="db-link-icon">📍地图</a>` : ''}
                     ${clinic.website ? `<a href="${clinic.website}" target="_blank" rel="noreferrer" class="db-link-icon">🌐官网</a>` : ''}
                   </div>
-                  <button type="button" class="copy-wechat-btn" style="padding: 4px 10px; font-size: 11px;" data-copy-wechat="turkeyzhifa">代预约</button>
                 </div>
               </article>
             `
