@@ -714,14 +714,14 @@ function setupDoctors() {
 
     const sectionMeta = {
       fellow: {
-        title: '1｜ISHRS Fellow 会员',
+        title: 'ISHRS Fellow（FISHRS）',
         description:
-          'FISHRS（Fellow Member，会士）：ISHRS 授予的最高荣誉级别。这些医生不仅拥有丰富的手术经验，还在教学、研究或学会贡献方面有突出表现，是植发领域公认的顶尖专家。',
+          '在正式 Member 基础上，满足 ISHRS 额外资格条件的会员类别。',
       },
       member: {
-        title: '2｜正式会员',
+        title: 'ISHRS 正式 Member',
         description:
-          'Member（正式会员）：ISHRS 的核心会员级别。这些医生已完成系统的植发专业教育培训，并获得同行推荐，具备扎实的专业知识和临床能力，属于较为优秀的植发医生群体。',
+          '持证医生，已提交执照、履历与同行推荐，并完成 ISHRS 规定的教育要求。',
       },
     }
 
@@ -749,7 +749,7 @@ function setupDoctors() {
                     <p class="mt-1 text-sm text-stone-500">${doctor.doctor_name_cn || ''}</p>
                     <div class="mt-3 flex flex-wrap gap-2">
                       <span class="pill ${statusClass}">${formatDoctorStatus(doctor)}</span>
-                      <span class="pill ${hasAbhrs ? 'pill-brand' : ''}">${hasAbhrs ? 'ABHRS 认证' : '无 ABHRS'}</span>
+                      ${hasAbhrs ? '<span class="pill pill-brand">ABHRS 认证</span>' : ''}
                       <span class="pill">${doctor.city_cn || doctor.city || '未标注城市'}</span>
                     </div>
                   </div>
