@@ -15,6 +15,7 @@ const articles = [
   ['08', 'how-to-choose-a-clinic', '如何选择土耳其植发诊所：先确认医生、团队与预算', '医生参与、团队模式、预算区间与咨询窗口，应该怎样逐项核对？'],
   ['09', 'who-performs-your-hair-transplant', '土耳其植发怎么选诊所？先问清楚：谁来给你做手术', '先分清实际手术机构，再确认当天为你做手术的人和团队。'],
   ['10', 'follicular-units-and-visual-density', '3000 个毛囊单位到底有多少？为什么同样数量，效果差很大？', '毛囊单位、原生密度、植入密度与视觉浓密感，应该怎样分清？'],
+  ['11', 'realistic-hair-transplant-expectations', '植发效果应该期待到什么程度？不是每个人都能做出广告里的浓密感', '自身资源、脱发进程与毛发条件，如何决定植发效果的现实边界？'],
 ]
 
 const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char])
