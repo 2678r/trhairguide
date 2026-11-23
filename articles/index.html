@@ -11,10 +11,14 @@
   <body data-page="article">
     <div class="src-site">
       <header class="src-header"><div class="src-shell"><a href="../" class="src-brand"><span></span><b>土耳其植发指南<small>TURKEY HAIR TRANSPLANT GUIDE</small></b></a><nav><a class="active" href="../">攻略信息</a><a href="../clinics/">工具查询</a></nav></div></header>
-      <main class="src-shell src-main"><article class="src-article" id="article-content" aria-live="polite"><p>正在加载文章…</p></article></main>
+      <main class="src-shell src-main"><article class="src-article" id="article-content" aria-live="polite"><h1>文章已迁移</h1><p>请从首页进入已发布文章。</p></article></main>
       <footer class="src-footer"><div class="src-shell">资料更正、信息补充与版权联系：<a href="mailto:contact@trhairguide.com">contact@trhairguide.com</a></div></footer>
     </div>
-    <script src="../assets/final-articles.js?v=20261122a" defer></script>
+    <script>
+      const paths = { '01': 'turkiye-hair-transplant-regulation', '03': 'fue-dhi-marketing-terms', '04': 'hair-transplant-consultation', '05': 'post-hair-transplant-care', '06': 'donor-area-and-results', '07': 'do-not-trust-case-ads', '08': 'how-to-choose-a-clinic', '09': 'who-performs-your-hair-transplant' }
+      const id = new URLSearchParams(location.search).get('id')
+      if (paths[id]) location.replace(`/articles/${paths[id]}/`)
+    </script>
     <script src="../assets/app.js?v=20261122l" defer></script>
   </body>
 </html>

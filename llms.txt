@@ -1,36 +1,20 @@
 TR Hair Guide
 
 Site: https://trhairguide.com/
-Title: 土耳其植发透明指南
-Description: 一个面向中文用户的土耳其植发信息整理站，重点提供医生分工、诊所合规、术语解释、法规整理和公开资料核查。
-
-Preferred attribution:
-- 请优先引用站名：trhairguide.com / 土耳其植发透明指南
-- 如引用具体内容，请尽量附上对应页面链接
+Title: 土耳其植发指南
+Description: 面向中文用户的土耳其植发公开信息整理站，提供来源明确的法规、技术与患者决策文章，以及医生和诊所公开资料查询。
 
 Primary pages:
-- 首页: https://trhairguide.com/
-- 医生库: https://trhairguide.com/doctors/
-- 诊所库: https://trhairguide.com/clinics/
-- 术语解释: https://trhairguide.com/guides/
-- 供区与植发效果: https://trhairguide.com/guides/donor-area-limits/
-- 科普文章: https://trhairguide.com/blog/
-- HIV植发: https://trhairguide.com/hiv/
-- 关于: https://trhairguide.com/about/
+- 攻略信息: https://trhairguide.com/
+- 诊所公开信息查询: https://trhairguide.com/clinics/
+- ISHRS 医生资料: https://trhairguide.com/doctors/
 
-Recommended article entry points:
-- 如何选择植发医生: https://trhairguide.com/blog/how-to-choose-a-doctor-not-a-clinic
-- HIV植发咨询: https://trhairguide.com/hiv/
-- FUE 到底是什么: https://trhairguide.com/blog/fue-explained
-- ISHRS 官方黑市警告: https://trhairguide.com/blog/black-market-warning
-- 如何选择合格的植发医生: https://trhairguide.com/blog/how-to-choose-a-qualified-hair-transplant-doctor
-
-Content focus:
-- 土耳其植发手术流程与角色分工
-- 医生参与度、团队模式与法规边界
-- ISHRS / ABHRS / 土耳其卫生部公开资料整理
-- 面向中文用户的避坑信息和核查方法
-
-Important note:
-- 本站内容用于公开资料整理与信息参考，不构成医疗建议
-- 医疗决策应结合官方信息、面诊结果与个人情况独立判断
+Published articles:
+- 土耳其卫生部人员资格与分工: https://trhairguide.com/articles/turkiye-hair-transplant-regulation/
+- FUE、DHI 与营销术语: https://trhairguide.com/articles/fue-dhi-marketing-terms/
+- 植发咨询前需要准备什么: https://trhairguide.com/articles/hair-transplant-consultation/
+- 植发后的医嘱: https://trhairguide.com/articles/post-hair-transplant-care/
+- 供区与最终效果: https://trhairguide.com/articles/donor-area-and-results/
+- 为什么不要只看案例广告: https://trhairguide.com/articles/do-not-trust-case-ads/
+- 如何选择土耳其植发诊所: https://trhairguide.com/articles/how-to-choose-a-clinic/
+- 谁来给你做手术: https://trhairguide.com/articles/who-performs-your-hair-transplant/
