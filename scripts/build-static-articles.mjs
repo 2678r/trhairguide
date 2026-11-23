@@ -18,6 +18,14 @@ const articles = [
   ['11', 'realistic-hair-transplant-expectations', '植发效果应该期待到什么程度？不是每个人都能做出广告里的浓密感', '自身资源、脱发进程与毛发条件，如何决定植发效果的现实边界？'],
 ]
 
+const articleGroups = [
+  { label: '植发基础', ids: ['06', '10', '11'] },
+  { label: '法规与安全', ids: ['01'] },
+  { label: '技术解释', ids: ['03'] },
+  { label: '选择诊所', ids: ['08', '09'] },
+  { label: '咨询与术后', ids: ['04', '05'] },
+]
+
 const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char])
 const inline = (value) => escapeHtml(value)
   .replace(/!\[([^\]]*)\]\(\.\/([^)]+)\)/g, '<img class="final-article-image" src="/articles/data/$2" alt="$1" />')
@@ -59,6 +67,22 @@ function markdownHtml(markdown) {
   return blocks.join('\n')
 }
 
+function readingLibrary(activeId) {
+  const byId = new Map(articles.map(([id, slug, title]) => [id, { slug, title }]))
+  const sections = articleGroups.map(({ label, ids }) => {
+    const links = ids.map((id) => {
+      const article = byId.get(id)
+      if (!article) return ''
+      const current = id === activeId ? ' is-current' : ''
+      const marker = id === activeId ? '<span aria-hidden="true">正在阅读</span>' : ''
+      return `<a class="article-library-link${current}" href="/articles/${article.slug}/">${article.title}${marker}</a>`
+    }).join('')
+    return `<section class="article-library-group"><h2>${label}</h2>${links}</section>`
+  }).join('')
+
+  return `<button class="article-library-toggle" type="button" data-article-library-toggle aria-expanded="false" aria-controls="article-reading-library">阅读目录</button><aside class="article-reading-library" id="article-reading-library" aria-label="文章阅读目录"><p>阅读目录</p>${sections}</aside>`
+}
+
 for (const [id, slug, title, description] of articles) {
   const markdown = await readFile(path.join(root, `articles/data/${id}.txt`), 'utf8')
   const url = `${origin}/articles/${slug}/`
@@ -70,7 +94,7 @@ for (const [id, slug, title, description] of articles) {
 <title>${escapeHtml(title)}｜土耳其植发指南</title><link rel="stylesheet" href="/assets/styles.css?v=20261122j" />
 <style>.static-article blockquote{margin:28px 0;padding:18px 22px;border-left:3px solid #1e5347;background:#f4f8f3;color:#28443b;font-size:18px;line-height:1.8}.static-article h1{margin-bottom:28px}.static-article h2{margin-top:44px}.static-article h3{margin-top:30px}</style><script type="application/ld+json">${schema}</script></head>
 <body data-page="article"><div class="src-site"><header class="src-header"><div class="src-shell"><a href="/" class="src-brand"><span></span><b>土耳其植发指南<small>TURKEY HAIR TRANSPLANT GUIDE</small></b></a><nav><a href="/">攻略信息</a><a href="/clinics/">诊所查询</a><a href="/doctors/">ISHRS 医生</a></nav></div></header>
-<main class="src-shell src-main"><article class="src-article static-article">${markdownHtml(markdown)}</article></main><footer class="src-footer"><div class="src-shell">资料更正、信息补充与版权联系：<a href="mailto:contact@trhairguide.com">contact@trhairguide.com</a></div></footer></div><script src="/assets/app.js?v=20261122l" defer></script></body></html>`
+<main class="src-shell src-main article-main"><div class="article-reader-layout">${readingLibrary(id)}<article class="src-article static-article">${markdownHtml(markdown)}</article></div></main><footer class="src-footer"><div class="src-shell">资料更正、信息补充与版权联系：<a href="mailto:contact@trhairguide.com">contact@trhairguide.com</a></div></footer></div><script src="/assets/app.js?v=20261122l" defer></script></body></html>`
   const directory = path.join(root, 'articles', slug)
   await mkdir(directory, { recursive: true })
   await writeFile(path.join(directory, 'index.html'), html)

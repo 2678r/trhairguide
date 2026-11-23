@@ -1041,6 +1041,24 @@ function injectUnifiedNavigation() {
   })
 }
 
+function setupArticleReadingLibrary() {
+  const toggle = document.querySelector('[data-article-library-toggle]')
+  const library = document.getElementById('article-reading-library')
+  if (!toggle || !library) return
+
+  toggle.addEventListener('click', () => {
+    const open = library.classList.toggle('is-open')
+    toggle.setAttribute('aria-expanded', String(open))
+  })
+
+  library.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      library.classList.remove('is-open')
+      toggle.setAttribute('aria-expanded', 'false')
+    })
+  })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   applyBrandName()
   injectUnifiedNavigation()
@@ -1048,6 +1066,7 @@ document.addEventListener('DOMContentLoaded', () => {
   injectSocialMeta()
   injectStructuredData()
   injectSharedFooter()
+  setupArticleReadingLibrary()
   const page = document.body.dataset.page
   if (page === 'home') setupHome()
   if (page === 'doctors') setupDoctors()
